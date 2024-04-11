@@ -1,0 +1,65 @@
+.tabs {
+    text-decoration: none;
+    margin-right: 30%;
+    gap: 25px;
+}
+
+#login {
+  text-decoration: none;
+  color: #A0A0A0;
+  font-family: Inter;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 18.15px;
+  text-align: left;
+}
+
+.form {
+    margin-top: 10px;
+}
+
+.signup {
+    font-family: Poppins;
+    font-size: larger;
+    font-weight: 700;
+    line-height: 108px;
+    text-align: left;
+    margin-left: 10%;
+    margin-top: 5px;
+}
+
+span {
+    font-family: Hanken Grotesk;
+    font: 20px;
+    font-weight: 500;
+    line-height: 26.06px;
+    text-align: left;
+    color: #445262;
+    padding-bottom: 20px;
+}
+
+input {
+    background: #E0E0E0;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 200;
+}
+
+.svg {
+    margin-top: -650px;
+    margin-left: 1000px;
+}
+
+.policy {
+    font-family: Hanken Grotesk;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 19.54px;
+    color: #767676;
+    margin-top: 12px;
+}
+
+.policy span {
+    font-weight: 400;
+}
