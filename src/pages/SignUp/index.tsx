@@ -7,8 +7,9 @@ import SideSvg from '../../assets/svg/sideangle'
 const SignUp = () => {
   return (
     <>
+    <div className='container w-[100%]'>
       <Header />
-      <div className="container min-vh-50 d-flex justify-content-center align-items-center form">
+      <div className="min-vh-50 d-flex justify-content-center align-items-center form">
         <div>
           <span>Personal Information</span>
           <form className='pt-3'>
@@ -47,6 +48,7 @@ const SignUp = () => {
           I agree to the <span>Privacy Policy</span> and give my permission to process my<br></br>
           personal data for the purpose specified in this Privacy Policy
         </p>
+      </div>
       </div>
     </>
   )

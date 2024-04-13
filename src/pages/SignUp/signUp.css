@@ -61,17 +61,6 @@ input:hover {
     margin-left: 1000px;
 }
 
-/* .write1 {
-    background-color: red;
-    width: 268px;
-    height: 60px;
-    margin-top: -55%;
-    left: 1144px;
-    gap: 0px;
-    opacity: 0px;
-
-} */
-
 
 .policy {
     font-family: Hanken Grotesk;
@@ -94,11 +83,11 @@ input:hover {
     }
 
     .form {
-        width: 70%;
+        width: 100%;
     }
 
     .privacy {
-        margin-top: 120%;
+        margin-top: 170%;
     }
 
     input {
@@ -113,16 +102,6 @@ input:hover {
       font-size: 12px; 
       margin-top: 12px;
     }
-
-    .svg {
-        position: relative;
-        width: 100%;
-        height: 200px; 
-        background-image: url('../../assets/svg/sideangle.tsx');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-      }
 
       .svg > svg {
         display: none; 

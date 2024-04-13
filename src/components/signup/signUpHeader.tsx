@@ -13,8 +13,8 @@ export const Header = () => {
 
     return (
         <>
-
-            <Navbar light expand="md" className="position-relative d-flex justify-content-between w-[120%] bg-white nav">
+          <div className='container'>
+            <Navbar light expand="md" className="position-relative d-flex justify-content-between w-[120%] bg-white">
                 <NavbarBrand href="/">
                     <div className="w-[100%] h-22 my-10 pt-4 px-5">
                         <LogoSvg />
@@ -54,6 +54,7 @@ export const Header = () => {
             <span>6</span>
             <span>7</span> */}
             </div>
+          </div> 
         </>
     );
 };
