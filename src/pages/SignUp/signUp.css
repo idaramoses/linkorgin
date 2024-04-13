@@ -1,5 +1,11 @@
+.nav {
+ background-color: red;
+ width: 100%;
+}
+
 .tabs {
-    text-decoration: none;
+    height: 5px;
+    margin-left: 20%;
     margin-right: 30%;
     gap: 25px;
 }
@@ -46,10 +52,26 @@ input {
     font-size: 200;
 }
 
+input:hover {
+    border: blue;
+}
+
 .svg {
-    margin-top: -650px;
+    margin-top: -669px;
     margin-left: 1000px;
 }
+
+/* .write1 {
+    background-color: red;
+    width: 268px;
+    height: 60px;
+    margin-top: -55%;
+    left: 1144px;
+    gap: 0px;
+    opacity: 0px;
+
+} */
+
 
 .policy {
     font-family: Hanken Grotesk;
@@ -63,3 +85,47 @@ input {
 .policy span {
     font-weight: 400;
 }
+
+
+/* Add responsive styles for smaller screens */
+@media screen and (max-width: 768px) {
+    .container {
+      padding: 0 20px; 
+    }
+
+    .form {
+        width: 70%;
+    }
+
+    .privacy {
+        margin-top: 120%;
+    }
+
+    input {
+        width: 100%;
+    }
+  
+   .box {
+    width: 4%;
+   }
+  
+    .policy {
+      font-size: 12px; 
+      margin-top: 12px;
+    }
+
+    .svg {
+        position: relative;
+        width: 100%;
+        height: 200px; 
+        background-image: url('../../assets/svg/sideangle.tsx');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .svg > svg {
+        display: none; 
+      }
+  }
+  

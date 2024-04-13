@@ -24,15 +24,15 @@ const SignUp = () => {
             </div>
             <div className="d-flex flex-column w-5 mb-3">
               <label htmlFor="">Date of Birth</label>
-              <input className="w-5" type="text" placeholder='10-06-1900' />
+              <input className="w-5 input" type="text" placeholder='10-06-1900' />
             </div>
-            <div className="d-flex flex-column mb-3">
+            <div className="d-flex flex-column w-5 mb-3">
               <label htmlFor="">Email</label>
-              <input type="email" placeholder='Your Email will be used to sign into your account' />
+              <input className="w-5" type="email" placeholder='Your Email will be used to sign into your account' />
             </div>
-            <div className="d-flex flex-column">
+            <div className="d-flex flex-column w-5">
               <label htmlFor="">Phone No</label>
-              <input type="code" placeholder='xxxxxxxx' />
+              <input className="w-5" type="text" placeholder='xxxxxxxx' />
             </div>
             <Button />
           </form>
@@ -40,13 +40,9 @@ const SignUp = () => {
       </div>
       <div className="svg">
         <SideSvg width={439} height={664} />
-         <div >
-          <p>Hey!</p>
-          <p>I'm excited to know you</p>
-         </div>
       </div>
-      <div className='d-flex justify-content-center pt-5'>
-        <input type='checkbox' />
+      <div className='d-flex justify-content-center pt-5 privacy'>
+        <input className='box' type='checkbox' />
         <p className='pt-3 px-2 policy'>
           I agree to the <span>Privacy Policy</span> and give my permission to process my<br></br>
           personal data for the purpose specified in this Privacy Policy

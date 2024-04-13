@@ -1,23 +1,49 @@
-import LineSvg from '../../assets/svg/line'
-import LogoSvg from '../../assets/svg/logo'
-import '../../pages/SignUp/signUp.css'
+import { useState } from 'react';
+import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
+import LineSvg from '../../assets/svg/line';
+import LogoSvg from '../../assets/svg/logo';
+import '../../pages/SignUp/signUp.css';
 
 export const Header = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleNavbar = () => {
+        setIsOpen(!isOpen);
+    };
+
     return (
         <>
-            <div className="position-relative d-flex justify-content-between w-15 h-13 bg-white">
-                <div className="w-82 h-33 my-10 pt-5 px-5">
-                    <LogoSvg />
-                </div>
-                <div className="d-flex pt-5 py-9 ml-5 tabs">
-                    <p>About Us</p>
-                    <p>Our Services</p>
-                    <p>Blog</p>
-                    <p>Contact Us</p>
-                    <LineSvg />
-                    <p id='login'>Login</p>
-                </div>
-            </div>
+
+            <Navbar light expand="md" className="position-relative d-flex justify-content-between w-[120%] bg-white nav">
+                <NavbarBrand href="/">
+                    <div className="w-[100%] h-22 my-10 pt-4 px-5">
+                        <LogoSvg />
+                    </div>
+                </NavbarBrand>
+
+                <NavbarToggler onClick={toggleNavbar} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="ml-auto d-flex pt-3 py-2 ml-2 tabs" navbar>
+                        <NavItem>
+                            <NavLink href="#">About Us</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="#">Our Services</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="#">Blog</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="#">Contact Us</NavLink>
+                        </NavItem>
+                        <LineSvg />
+                        <NavItem>
+                            <NavLink href="#" id="login">Login</NavLink>
+                        </NavItem>
+                    </Nav>
+                </Collapse>
+            </Navbar>
+
             <div className="py-7 pt-5 d-flex signup">
                 <h1>Sign Up</h1>
                 {/* <span>1</span>
@@ -29,5 +55,7 @@ export const Header = () => {
             <span>7</span> */}
             </div>
         </>
-    )
-}
+    );
+};
+
+export default Header;
