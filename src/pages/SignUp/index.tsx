@@ -7,9 +7,9 @@ import SideSvg from '../../assets/svg/sideangle'
 const SignUp = () => {
   return (
     <>
-    <div className='container w-[100%]'>
+    <div className='w-[120%] bg-white'>
       <Header />
-      <div className="min-vh-50 d-flex justify-content-center align-items-center form">
+      <div className="min-vh-50 d-flex bg-white justify-content-center align-items-center form">
         <div>
           <span>Personal Information</span>
           <form className='pt-3'>

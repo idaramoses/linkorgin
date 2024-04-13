@@ -1,6 +1,5 @@
 .nav {
- background-color: red;
- width: 100%;
+  width: 200%;
 }
 
 .tabs {
@@ -83,7 +82,8 @@ input:hover {
     }
 
     .form {
-        width: 100%;
+        width: 90%;
+        margin-left: 5%;
     }
 
     .privacy {
@@ -103,6 +103,10 @@ input:hover {
       margin-top: 12px;
     }
 
+    .logo {
+        padding: 10px 0px;
+        margin-right: -40px;
+    }
       .svg > svg {
         display: none; 
       }
