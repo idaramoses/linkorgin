@@ -4,6 +4,8 @@ import LineSvg from '../../assets/svg/line';
 import LogoSvg from '../../assets/svg/logo';
 import '../../pages/SignUp/signUp.css';
 
+
+
 export const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -23,7 +25,7 @@ export const Header = () => {
 
                 <NavbarToggler onClick={toggleNavbar} />
                 <Collapse isOpen={isOpen} navbar>
-                    <Nav className="ml-auto d-flex pt-3 py-2 ml-2 tabs" navbar>
+                    <Nav className="d-flex pt-3 py-2 mx-auto" navbar>
                         <NavItem>
                             <NavLink href="#">About Us</NavLink>
                         </NavItem>
@@ -36,7 +38,7 @@ export const Header = () => {
                         <NavItem>
                             <NavLink href="#">Contact Us</NavLink>
                         </NavItem>
-                        <LineSvg />
+                        <LineSvg style={{ margin: "10px"}} />
                         <NavItem>
                             <NavLink href="#" id="login">Login</NavLink>
                         </NavItem>
@@ -44,7 +46,7 @@ export const Header = () => {
                 </Collapse>
             </Navbar>
 
-            <div className="py-7 pt-5 d-flex signup">
+            <div className="py-7 pt-5 d-flex justify-content-between signup">
                 <h1>Sign Up</h1>
                 {/* <span>1</span>
             <span>2</span>

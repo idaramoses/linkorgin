@@ -4,7 +4,7 @@ import { Button } from "../../components/signup/button"
 import SideSvg from '../../assets/svg/sideangle'
 
 
-const SignUp = () => {
+const PersonalInformation = () => {
   return (
     <>
     <div className='w-[120%] bg-white'>
@@ -54,4 +54,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default PersonalInformation;
