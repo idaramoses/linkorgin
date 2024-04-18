@@ -56,7 +56,7 @@ class AuthService {
 
   static async login(email: string, password: string): Promise<AuthResponse> {
     try {
-      const response = await axios.post(`https://saudit-jheg.onrender.com/auth/login/`, {
+      const response = await axios.post(`https://linked-origin-server.vercel.app/api/v1/auth/user-login`, {
         email,
         password
       });
@@ -99,7 +99,7 @@ class AuthService {
 
   static async register(userData: User): Promise<AuthResponse> {
     try {
-      const response = await axios.post('https://saudit-jheg.onrender.com/auth/signup/', userData);
+      const response = await axios.post('https://linked-origin-server.vercel.app/api/v1/users/register-new-user', userData);
 
       const { token, user } = response.data;
       toast.success('Registered  Successfully', {

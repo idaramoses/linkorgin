@@ -5,6 +5,7 @@ import HomeScreen from "pages/HomeScreen";
 import Signup from "pages/Signup";
 import Register from "pages/Register";
 import LoginPage from "pages/Login";
+import Dashboard from "pages/Dashboard";
 
 
 const ProjectRoutes = () => {
@@ -26,6 +27,10 @@ const ProjectRoutes = () => {
     {
       path: "/auth/register",
       element: <Register />,
+    },
+    {
+      path: "/dashboard/welcome",
+      element: <Dashboard />,
     },
   
   ]);
