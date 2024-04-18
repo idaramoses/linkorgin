@@ -25,7 +25,7 @@ const StepComponent: React.FC<StepProps> = ({ currentStep }) => {
                             <div className="flex flex-row">Hey!<br/>
                                 I’m excited to know you    
                                 <img
-                                    src="images/step1.svg"
+                                    src="/images/step1.svg"
                                     alt="istockphoto127"
                                     className="h-10 w-10"
                                 />
@@ -42,7 +42,7 @@ const StepComponent: React.FC<StepProps> = ({ currentStep }) => {
                         <div className="absolute 0 right-[20%] top-[35%] ">
                             <div className="flex flex-row gap-0 w-44"><div>A little bit  <br/> about your immigration journey</div> 
                                 <img
-                                    src="images/step2.svg"
+                                    src="/images/step2.svg"
                                     alt="istockphoto127"
                                     className="h-10 w-10"
                                 />
@@ -59,7 +59,7 @@ const StepComponent: React.FC<StepProps> = ({ currentStep }) => {
                        <div className="absolute 0 right-[20%] top-[55%]">
                            <div className="flex flex-row">How great<br/> do you speak 
                                <img
-                                   src="images/step3.svg"
+                                   src="/images/step3.svg"
                                    alt="istockphoto127"
                                    className="h-10 w-10"
                                />
@@ -77,7 +77,7 @@ const StepComponent: React.FC<StepProps> = ({ currentStep }) => {
                        <div className="absolute 0 right-[20%] top-[45%]">
                            <div className="flex flex-row">Just a little about <br/> your education
                                <img
-                                   src="images/step4.svg"
+                                   src="/images/step4.svg"
                                    alt="istockphoto127"
                                    className="h-10 w-10"
                                />
@@ -95,7 +95,7 @@ const StepComponent: React.FC<StepProps> = ({ currentStep }) => {
                        <div className="absolute 0 right-[20%] top-[55%]">
                            <div className="flex flex-row">We hope help you <br/> Get more confortable
                                <img
-                                   src="images/step5.svg"
+                                   src="/images/step5.svg"
                                    alt="istockphoto127"
                                    className="h-10 w-10"
                                />
@@ -113,7 +113,7 @@ const StepComponent: React.FC<StepProps> = ({ currentStep }) => {
                        <div className="absolute 0 right-[20%] top-[35%]">
                            <div className="flex flex-row">Ain’t no life without<br/>a social life
                                <img
-                                   src="images/step6.svg"
+                                   src="/images/step6.svg"
                                    alt="istockphoto127"
                                    className="h-10 w-10"
                                />
@@ -131,7 +131,7 @@ const StepComponent: React.FC<StepProps> = ({ currentStep }) => {
                        <div className="absolute 0 right-[20%] bottom-[35%]">
                            <div className="flex flex-row">Great job!<br/>Any support needs?<br/>Tell us
                                <img
-                                   src="images/step7.svg"
+                                   src="/images/step7.svg"
                                    alt="istockphoto127"
                                    className="h-10 w-10"
                                />

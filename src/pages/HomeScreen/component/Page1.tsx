@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Input, Img, Text, Heading, Button } from "../../../components";
 import { NavLink } from "react-router-dom";
+import HomeScreenRowcloseOne from "components/HomeScreenRowcloseOne";
 
 interface Page1Props {
   togglePage: () => void;
@@ -19,7 +20,18 @@ function Page1({ togglePage }: Page1Props){
     const handleCloseMenu = () => {
       setMenuOpen(false);
     };
-    
+    const items = [
+        { id: 1, name: 'Government',icon:'images/img_home.svg' },
+        { id: 2, name: 'Community',icon:'images/img_settings.svg'  },
+        { id: 3, name: 'Educational' ,icon:'images/img_thumbs_up.svg' },
+        { id: 4, name: 'Healthcare',icon:'images/img_group_55.svg'  },
+        { id: 5, name: 'Legal & Immigration service' ,icon:'images/img_group_52.svg' },
+        { id: 6, name: 'Cultural & Recreational Activities',icon:'images/img_thumbs_up_white_a700.svg'  },
+        { id: 7, name: 'Finance',icon:'images/img_settings_white_a700.svg'  },
+        { id: 8, name: 'Social',icon:'images/img_group_59.svg'  },
+        { id: 9, name: 'Investment' ,icon:'images/img_group_57.svg' },
+        
+      ];
     return (
       <>
         <Helmet>
@@ -29,22 +41,22 @@ function Page1({ togglePage }: Page1Props){
         <div className="w-full bg-white-A700">
           <div className="flex flex-col items-center">
             <div className="flex flex-col items-center self-stretch">
-            <div className="h-screen   relative  bg-[url(/public/images/img_mask_group_829x1512.png)] bg-cover bg-no-repeat w-full md:pb-5 rounded-bl-[50px] rounded-br-[50px]">
-              <div className="absolute h-full w-full inset-0 bg-black-900 opacity-30 rounded-bl-[50px] rounded-br-[50px]"></div>
+            <div className="h-screen   relative  bg-[url(/public/images/img_mask_group_829x1512.png)] bg-cover bg-no-repeat w-full md:pb-5 rounded-bl-[50px] md:rounded-bl-none rounded-br-[50px] md:rounded-br-none">
+              <div className="absolute h-full w-full inset-0 bg-black-900 opacity-30 rounded-bl-[50px] md:rounded-bl-none rounded-br-[50px] md:rounded-br-none"></div>
                       <div className="flex absolute h-full w-full flex-col items-center">
-                      <nav className="flex self-stretch justify-between items-center  w-full z-10 gap-5 p-10 md:p-4  bg-blue_gray-200_b2 rounded-bl-[50px] rounded-br-[50px]" ref={navbarRef}>
+                      <nav className="flex self-stretch justify-between items-center  w-full z-10 gap-5 p-10 md:p-4  bg-blue_gray-200_b2 right-3 rounded-bl-[50px] md:rounded-bl-none rounded-br-[50px] md:rounded-br-none" ref={navbarRef}>
         <div className="container mx-auto flex  justify-between items-center">
-        <svg width="82" height="33" viewBox="0 0 82 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M17.0531 26.4C22.8643 26.4 27.5753 21.6393 27.5753 15.7667C27.5753 9.89404 22.8643 5.13333 17.0531 5.13333C11.2419 5.13333 6.53101 9.89404 6.53101 15.7667C6.53101 21.6393 11.2419 26.4 17.0531 26.4Z" fill="#A46C6C"/>
-  <path d="M55.8761 5.13333H52.2478V12.4667H55.8761V5.13333Z" fill="#A46C6C"/>
-  <path d="M55.8761 16.1333H52.2478V24.2H55.8761V16.1333Z" fill="#A46C6C"/>
-  <path d="M77.646 16.1333H74.0177V24.2H77.646V16.1333Z" fill="#A46C6C"/>
-  <path d="M65.9323 9.71231C66.3838 9.23451 66.9296 8.86019 67.5336 8.61421C68.1376 8.36824 68.786 8.25623 69.4357 8.28562C70.8514 8.28562 71.9509 8.72573 72.7773 9.61329C73.4644 10.4072 73.8761 11.41 73.9487 12.4667H77.6461C77.567 10.2001 76.9514 8.43355 75.7992 7.16701C74.5559 5.8149 72.9067 5.13762 70.8514 5.13517C69.4866 5.10329 68.1434 5.48627 66.9923 6.23545C65.876 6.98307 65.0393 8.09299 64.6172 9.3859V5.43225H60.9558V12.4667H64.725C64.8429 11.4444 65.2641 10.4833 65.9323 9.71231Z" fill="#A46C6C"/>
-  <path d="M64.5841 16.1333H60.9558V24.2H64.5841V16.1333Z" fill="#A46C6C"/>
-  <path d="M82 12.4667H77.646C77.646 12.6342 77.646 12.798 77.646 12.9692V16.1333H81.9747L82 12.4667Z" fill="#A46C6C"/>
-  <path d="M47.8687 12.5865V5.37345H44.2195V9.67573C43.7704 8.33863 42.9301 7.18538 41.8189 6.38132C40.6107 5.52669 39.1782 5.09137 37.7225 5.13652C36.2794 5.10548 34.8563 5.49605 33.6118 6.26474C32.3849 7.05271 31.4009 8.19679 30.7783 9.55914C30.0665 11.1342 29.7161 12.8628 29.7551 14.606C29.7212 16.2763 30.0376 17.9339 30.6817 19.4612C30.6433 19.778 30.623 20.097 30.6209 20.4164V25.0233C30.7891 28.0657 31.9661 29.9122 33.483 31.1458C35 32.3793 37.007 32.996 39.4827 32.996C41.0446 33.0441 42.5904 32.6547 43.962 31.8678C45.1933 31.1329 46.1979 30.0416 46.8563 28.7238C47.5478 27.3042 47.8945 25.7267 47.8652 24.132V16.3736H52.2478V12.5865H47.8687ZM34.957 10.1308C35.4588 9.58325 36.0658 9.15447 36.7376 8.87303C37.4094 8.59158 38.1306 8.46394 38.8531 8.49862C39.8182 8.48122 40.7695 8.7413 41.6043 9.25076C42.4169 9.76972 43.075 10.5175 43.504 11.4094C43.6909 11.7847 43.8408 12.1791 43.9512 12.5865H38.0839C36.4275 12.5873 34.8191 13.1712 33.5152 14.245C33.5761 12.5188 34.0519 11.1462 34.957 10.1308ZM44.0371 16.3736C43.9223 16.8876 43.743 17.3834 43.504 17.8478C43.066 18.7345 42.4005 19.4745 41.5828 19.9839C40.7487 20.495 39.7969 20.7552 38.8316 20.736C38.1103 20.7696 37.3905 20.6415 36.72 20.3601C36.0495 20.0786 35.4436 19.6504 34.9427 19.1039C34.8247 18.9685 34.7102 18.8256 34.585 18.6789C34.9003 17.9856 35.3967 17.4007 36.0162 16.9925C36.6357 16.5844 37.3528 16.3697 38.0839 16.3736H44.0371ZM44.2195 24.1057C44.2195 25.9008 43.7497 27.2684 42.8099 28.2086C42.3319 28.6809 41.7697 29.049 41.1556 29.2917C40.5416 29.5344 39.8879 29.6469 39.2323 29.6227C38.0803 29.6725 36.9414 29.3495 35.9695 28.6975C35.118 28.0808 34.2379 26.2342 34.2415 25.2151V23.3347C35.3316 23.8754 36.5245 24.148 37.7297 24.132C39.1854 24.1771 40.6179 23.7418 41.8261 22.8872C42.9325 22.083 43.7699 20.933 44.2195 19.6003V24.1057Z" fill="#A46C6C"/>
-  <path d="M54.062 3.66667C55.0639 3.66667 55.8761 2.84585 55.8761 1.83333C55.8761 0.820811 55.0639 0 54.062 0C53.06 0 52.2478 0.820811 52.2478 1.83333C52.2478 2.84585 53.06 3.66667 54.062 3.66667Z" fill="#A46C6C"/>
-  </svg>
+        <svg width="113" height="45" viewBox="0 0 113 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M23.5 36C31.5081 36 38 29.5081 38 21.5C38 13.4919 31.5081 7 23.5 7C15.4919 7 9 13.4919 9 21.5C9 29.5081 15.4919 36 23.5 36Z" fill="white"/>
+<path d="M77 7H72V17H77V7Z" fill="white"/>
+<path d="M77 22H72V33H77V22Z" fill="white"/>
+<path d="M107 22H102V33H107V22Z" fill="white"/>
+<path d="M90.8579 13.2441C91.48 12.5925 92.2322 12.0821 93.0645 11.7467C93.8969 11.4112 94.7904 11.2585 95.6857 11.2986C97.6366 11.2986 99.1518 11.8987 100.291 13.109C101.237 14.1916 101.805 15.5591 101.905 17H107C106.891 13.9092 106.043 11.5003 104.455 9.7732C102.742 7.92941 100.469 7.00584 97.6366 7.00251C95.7559 6.95903 93.9048 7.48128 92.3186 8.50288C90.7803 9.52237 89.6272 11.0359 89.0456 12.799V7.40761H84V17H89.1942C89.3565 15.6059 89.9371 14.2954 90.8579 13.2441Z" fill="white"/>
+<path d="M89 22H84V33H89V22Z" fill="white"/>
+<path d="M113 17H107C107 17.2284 107 17.4518 107 17.6852V22H112.965L113 17Z" fill="white"/>
+<path d="M65.9655 17.1635V7.32743H60.9367V13.1942C60.3178 11.3709 59.1597 9.79825 57.6286 8.70181C55.9636 7.53639 53.9895 6.94278 51.9835 7.00435C49.9948 6.96202 48.0338 7.49461 46.3188 8.54283C44.628 9.61734 43.272 11.1774 42.4141 13.0352C41.4332 15.183 40.9503 17.5402 41.004 19.9173C40.9573 22.195 41.3933 24.4553 42.281 26.5379C42.228 26.97 42.2 27.405 42.1971 27.8405V34.1227C42.4289 38.2714 44.0509 40.7894 46.1413 42.4715C48.2317 44.1536 50.9975 44.9946 54.4092 44.9946C56.5614 45.0601 58.6917 44.5291 60.5817 43.4561C62.2786 42.4539 63.663 40.9659 64.5702 39.1689C65.5233 37.233 66.0009 35.0818 65.9605 32.9073V22.3276H72V17.1635H65.9655ZM48.1725 13.8147C48.8639 13.0681 49.7004 12.4834 50.6262 12.0996C51.552 11.7158 52.5459 11.5417 53.5415 11.589C54.8714 11.5653 56.1824 11.92 57.3328 12.6147C58.4525 13.3224 59.3594 14.3421 59.9507 15.5583C60.2083 16.0701 60.4148 16.6079 60.5669 17.1635H52.4815C50.1989 17.1645 47.9824 17.9607 46.1856 19.425C46.2695 17.0711 46.9252 15.1993 48.1725 13.8147ZM60.6853 22.3276C60.5271 23.0286 60.2801 23.7046 59.9507 24.3379C59.3471 25.5471 58.4299 26.5561 57.3032 27.2508C56.1537 27.9477 54.8421 28.3025 53.5119 28.2764C52.5179 28.3222 51.526 28.1475 50.602 27.7637C49.678 27.38 48.8431 26.7961 48.1528 26.0508C47.9901 25.8661 47.8323 25.6713 47.6598 25.4713C48.0944 24.5258 48.7784 23.7282 49.6321 23.1716C50.4857 22.6151 51.474 22.3223 52.4815 22.3276H60.6853ZM60.9367 32.8714C60.9367 35.3193 60.2892 37.1842 58.9942 38.4663C58.3355 39.1103 57.5607 39.6123 56.7145 39.9432C55.8683 40.2741 54.9675 40.4275 54.0641 40.3945C52.4765 40.4624 50.9071 40.0221 49.5677 39.133C48.3944 38.2919 47.1815 35.774 47.1865 34.3842V31.8201C48.6887 32.5573 50.3325 32.9291 51.9934 32.9073C53.9993 32.9688 55.9735 32.3752 57.6384 31.2098C59.1631 30.1132 60.3171 28.545 60.9367 26.7277V32.8714Z" fill="white"/>
+<path d="M74.5 5C75.8807 5 77 3.88071 77 2.5C77 1.11929 75.8807 0 74.5 0C73.1193 0 72 1.11929 72 2.5C72 3.88071 73.1193 5 74.5 5Z" fill="white"/>
+</svg>
   
           <div className="hidden md:block  ">
             {isMenuOpen ? (
@@ -117,7 +129,9 @@ function Page1({ togglePage }: Page1Props){
               <div>Our Services</div>
               <div>Blog</div>
               <div>Contact Us</div>
-              <div className="my-auto text-neutral-400">Login</div>
+              <NavLink to="/auth/login">
+            <div className="my-auto text-white-A700">Login</div>
+            </NavLink>
   
           </div>
             </div>
@@ -133,7 +147,10 @@ function Page1({ togglePage }: Page1Props){
               <div>Contact Us</div>
             </div>
             <div className="h-[19px] w-px  text-white-A700 md:h-px md:w-[19px]" />
+            <NavLink to="/auth/login">
             <div className="my-auto text-white-A700">Login</div>
+            </NavLink>
+           
           </div>
           </div>
           <div className="md:hidden  flex flex-row items-center">
@@ -154,7 +171,7 @@ function Page1({ togglePage }: Page1Props){
         </div>
       </nav>
                       
-                        <div className="mt-20 flex ] items-center justify-between gap-2 rounded-[15px] bg-gray-100_89 p-[5px] ">
+                        <div className="mt-20 flex  items-center justify-between gap-2 rounded-[15px] bg-gray-100_89 p-[5px] ">
                           <Button
                             color="blue_gray_800"
                             size="lg"
@@ -179,10 +196,10 @@ function Page1({ togglePage }: Page1Props){
                           </Button>
                           
                         </div>
-                        <Heading  className="mt-16 text-7xl md:text-5xl sm:text-5xl text-center !text-white-A700">
+                        <Heading  className="mt-16 text-7xl md:text-5xl sm:text-3xl text-center !text-white-A700 ">
                           New in Canada?
                         </Heading>
-                        <Text  as="p" className=" mt-2 text-center text-4xl md:text-3xl sm:text-2xl !text-white-A700">
+                        <Text  as="p" className=" mt-2 text-center text-4xl md:text-xl sm:text-2xl !text-white-A700 md:p-5">
                           Let’s help you figure things out
                         </Text>
                         <NavLink to="/auth/register">
@@ -200,222 +217,103 @@ function Page1({ togglePage }: Page1Props){
               <Img
                 src="images/img_polygon_1.svg"
                 alt="polygonone_one"
-                className="relative z-[1] mt-[-84px] h-[148px] w-[148px] rounded-[32px]"
+                className="md:hidden relative z-[1] mt-[-84px] h-[148px] w-[148px] rounded-[32px]"
               />
             </div>
-            <div className="relative mt-28 h-[142px] w-[36%] md:h-auto">
-              <div className="ml-[45px] mt-11 h-[21px] w-[38%] rounded-[10px] bg-orange-200 md:ml-0" />
-              <Heading
-                size="2xl"
-                as="h2"
-                className="absolute bottom-0 left-0 right-0 top-0 m-auto h-max w-full text-center !text-black-900"
+
+            <Heading
+              
+                className="text-7xl md:text-5xl sm:text-3xl mt-10 m-auto h-max w-full text-center !text-black-900 md:p-5"
               >
                 <>
                   Finding all you need in <br />
                   one place!
                 </>
               </Heading>
-            </div>
-            <div className="relative mx-auto mt-[69px] h-[604px] w-full max-w-[1393px] md:p-5">
-              <Img
-                src="images/img_rectangle_34.svg"
-                alt="image_one"
-                className="absolute bottom-0 left-0 right-0 top-0 m-auto h-[604px] w-[76%] rounded-[285px]"
-              />
-              <div className="absolute bottom-0 left-0 right-0 top-0 m-auto flex h-max w-full items-start justify-between gap-5 pb-4 pr-4 md:relative md:flex-col">
-                <div className="relative mb-7 h-[415px] w-[23%] md:w-full">
-                  <Img
-                    src="images/img_istockphoto_147.png"
-                    alt="istockphoto147"
-                    className="absolute bottom-[0.00px] right-[0.00px] m-auto h-[374px] w-[94%] rounded-[27px] object-cover"
-                  />
-                  <div className="absolute left-[0.00px] top-[0.00px] m-auto flex h-[79px] w-[61%] items-start justify-center bg-[url(/public/images/img_group_36.svg)] bg-cover bg-no-repeat p-[15px] md:h-auto">
-                    <Text size="s" as="p" className="mb-[9px] w-[90%] !text-white-A700">
-                      <>
-                        Need help with finding <br />
-                        restaurants?
-                      </>
-                    </Text>
-                  </div>
-                </div>
-                <div className="flex w-[22%] flex-col items-end md:w-full">
-                  <Img
-                    src="images/img_ad2c4726_c034_4.png"
-                    alt="ad2c4726c034fou"
-                    className="h-[374px] w-full rounded-[27px] object-cover md:h-auto"
-                  />
-                  <div className="relative mr-[29px] mt-[-32px] flex h-[81px] items-end bg-[url(/public/images/img_group_37.svg)] bg-cover bg-no-repeat p-[13px] md:mr-0 md:h-auto">
-                    <Text size="s" as="p" className="mb-2.5 mt-[25px]">
-                      Find grocery stores nearby
-                    </Text>
-                  </div>
-                </div>
-                <div className="mb-[69px] flex w-[22%] flex-col items-center md:w-full">
-                  <div className="relative z-[2] flex h-[79px] w-[65%] items-start justify-center bg-[url(/public/images/img_group_36.svg)] bg-cover bg-no-repeat p-4 md:h-auto md:w-full">
-                    <Text size="s" as="p" className="mb-[7px] w-[88%] !text-white-A700">
-                      <>
-                        Discover the night life <br />
-                        around your vicinity
-                      </>
-                    </Text>
-                  </div>
-                  <Img
-                    src="images/img_istockphoto_127.png"
-                    alt="istockphoto127"
-                    className="relative mt-[-19px] h-[374px] w-full rounded-[27px] object-cover md:h-auto"
-                  />
-                </div>
-                <div className="mt-10 flex w-[22%] flex-col items-center md:w-full">
-                  <Img
-                    src="images/img_cbebb5b3_6d27_4.png"
-                    alt="cbebb5b36d27fou"
-                    className="h-[374px] w-full rounded-[27px] object-cover md:h-auto"
-                  />
-                  <div className="relative mt-[-34px] flex h-[68px] w-[55%] items-end justify-center bg-[url(/public/images/img_group_37.svg)] bg-cover bg-no-repeat p-[9px] md:h-auto md:w-full">
-                    <Text size="s" as="p" className="mt-[9px] w-[98%]">
-                      <>
-                        Recreational activities
-                        <br />
-                        tailored for you
-                      </>
-                    </Text>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <Button color="blue_gray_400" size="4xl" className="mt-14 min-w-[377px] rounded-[45px] font-medium sm:px-5">
+              <div className="mt-1 mb-10 h-4  w-32 rounded-[10px] bg-orange-200 md:ml-0" />
+
+ 
+           
+           
+            <Button color="blue_gray_400" size="4xl" className="mt-14 text-base md:text-sm w-52 rounded-[45px] font-medium ">
+           
               Say hello to Mon -Ami
             </Button>
-            <Text size="6xl" as="p" className="mt-[81px] w-[40%] text-center !font-inter md:w-full md:p-5">
-              <span className="font-poppins font-normal text-gray_800_06">Sign up and get access to</span>
-              <span className="font-poppins font-semibold text-gray_800_06">&nbsp;</span>
-              <span className="font-poppins font-semibold text-gray-900_02">Mon - Ami</span>
-              <span className="font-poppins font-semibold text-gray_800_06">
+            <Text  className="mt-[81px] w-[40%] text-center !font-inter md:w-full md:p-5">
+              <span className="font-poppins font-normal text-gray_800_06 text-base md:text-sm">Sign up and get access to</span>
+              <span className="font-poppins font-semibold text-gray_800_06 text-base md:text-sm ">&nbsp;</span>
+              <span className="font-poppins font-semibold text-gray-900_02 text-base md:text-sm">Mon - Ami</span>
+              <span className="font-poppins font-semibold text-gray_800_06 text-base md:text-sm">
                 <>
                   , <br />
                 </>
               </span>
-              <span className="font-poppins font-normal text-gray_800_06">
+              <span className="font-poppins font-normal text-gray_800_06 text-base md:text-sm">
                 your help and guide to easy settlement in Canada
               </span>
             </Text>
-            <div className="mx-auto mt-[99px] h-px w-full max-w-[1388px] bg-black-900 md:p-5" />
-            <div className="ml-[62px] mt-3 flex w-[14%] items-center gap-[23px] self-start md:ml-0 md:w-full md:p-5">
+            <div className="mt-10 h-[1px] w-full  bg-black-900 " />
+            <div className="md:p-5 w-full flex flex-col justify-center  items-center" >
+            <div className="ml-20 flex  items-center gap-[23px] self-start md:ml-0 md:w-full  mt-5">
               <Img src="images/img_star_1.svg" alt="image_two" className="h-[38px] w-[38px]" />
               <Text size="6xl" as="p" className="self-end">
                 What we do
               </Text>
             </div>
-            <Heading size="5xl" as="h2" className="ml-[173px] mt-[81px] self-start !text-blue_gray-900 md:ml-0">
+            <Heading  className="text-6xl md:text-4xl sm:text-2xl ml-32 mt-20  mb-2 self-start !text-blue_gray-900 md:ml-0">
               Sign up to access our services
             </Heading>
             <Text
               size="5xl"
               as="p"
-              className="ml-[173px] w-[67%] self-start leading-[41px] !text-gray-800_01 md:ml-0 md:w-full md:p-5"
+              className="text-2xl md:text-xl sm:text-sm ml-32  md:ml-0 self-start leading-[41px] !text-gray-800_01  md:w-full"
             >
               <>
                 we are dedicated to helping individuals and families achieve their settlement <br />
                 goals in Canada.
               </>
             </Text>
-            <div className="relative mx-auto mt-[35px] h-[804px] w-full max-w-[1124px] md:p-5">
-              <Button
+            <Button
                 color="blue_gray_400"
                 shape="round"
-                className="absolute left-[0.00px] top-[0.00px] m-auto min-w-[190px] font-inter font-semibold sm:px-5"
+                className="ml-32 md:ml-0 m-auto  my-5 font-inter font-semibold sm:px-5"
               >
                 Signup
               </Button>
-              <div className="absolute bottom-0 left-0 right-0 top-0 m-auto h-[777px] w-[97%] rounded-[285px] bg-[url(/public/images/img_group_92.svg)] bg-cover bg-no-repeat p-4 md:h-auto">
-                <div className="flex w-[66%] flex-col items-start gap-7">
-                  <div className="flex flex-col gap-7 self-stretch">
-                    <div className="flex flex-1 justify-between gap-5 md:flex-col">
-                      <div className="flex w-[46%] flex-col items-center gap-[11px] rounded-[15px] bg-red-400_01 p-9 md:w-full sm:p-5">
-                        <Img src="images/img_home.svg" alt="government_one" className="h-[40px]" />
-                        <Heading size="xl" as="h2" className="mb-[11px] !font-inter !text-white-A700">
-                          Government
+              <div className="grid  grid-cols-3 md:grid-cols-1 bg-[url(/public/images/img_bg.svg)] bg-contain bg-no-repeat  gap-5 w-[80%] md:w-full ">
+      {items.map(item => (
+        <div key={item.id} className=" w-full  mb-10   rounded-[15px] bg-red-400_01 flex  flex-col items-center gap-[11px] py-10" >
+            
+            <Img src={item.icon} alt="government_one" className="h-14" />
+                        <Heading  as="h2" className="text-2xl md:text-xl sm:text-base !font-inter !text-white-A700">
+                          {item.name}
                         </Heading>
-                      </div>
-                      <div className="flex w-[46%] flex-col items-center gap-[15px] rounded-[15px] bg-red-400 p-[38px] md:w-full sm:p-5">
-                        <Img src="images/img_settings.svg" alt="community_one" className="h-[36px] w-[35px]" />
-                        <Heading size="xl" as="h3" className="mb-[7px] !font-inter !text-white-A700">
-                          Community
-                        </Heading>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 justify-between gap-5 md:flex-col">
-                      <div className="flex w-[46%] flex-col items-center gap-[18px] rounded-[15px] bg-red-400 p-[38px] md:w-full sm:p-5">
-                        <Img src="images/img_group_55.svg" alt="image" className="h-[30px] w-[30px]" />
-                        <Heading size="xl" as="h4" className="mb-2.5 !font-inter !text-white-A700">
-                          Healthcare
-                        </Heading>
-                      </div>
-                      <div className="flex w-[46%] flex-col items-center justify-center gap-3.5 rounded-[15px] bg-red-400 p-7 md:w-full sm:p-5">
-                        <Img src="images/img_group_52.svg" alt="image_one" className="mt-[3px] h-[32px] w-[32px]" />
-                        <Heading size="xl" as="h5" className="w-[88%] text-center !font-inter !text-white-A700 md:w-full">
-                          <>
-                            Legal & Immigration <br />
-                            service
-                          </>
-                        </Heading>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex w-[46%] flex-col items-center gap-[11px] rounded-[15px] bg-red-400 p-[39px] md:w-full sm:p-5">
-                    <Img src="images/img_settings_white_a700.svg" alt="settings_one" className="h-[35px] w-[35px]" />
-                    <Heading size="xl" as="h6" className="mb-2.5 !font-inter !text-white-A700">
-                      Finance
-                    </Heading>
-                  </div>
-                </div>
-                <div className="absolute bottom-[14%] left-0 right-0 m-auto flex w-[31%] flex-col items-center gap-[11px] rounded-[15px] bg-red-400 p-[38px] sm:p-5">
-                  <Img src="images/img_group_59.svg" alt="image_three" className="h-[36px] w-[21%]" />
-                  <Heading size="xl" as="h4" className="mb-[11px] text-center !font-inter !text-white-A700">
-                    Social
-                  </Heading>
-                </div>
-              </div>
-              <div className="absolute bottom-0 right-[0.00px] top-0 my-auto flex h-max w-[29%] flex-col gap-7">
-                <div className="flex flex-col gap-7">
-                  <div className="flex flex-col items-center gap-[13px] rounded-[15px] bg-red-400 p-[38px] sm:p-5">
-                    <Img src="images/img_thumbs_up.svg" alt="thumbsup_one" className="h-[35px]" />
-                    <Heading size="xl" as="h4" className="mb-2.5 !font-inter !text-white-A700">
-                      Educational
-                    </Heading>
-                  </div>
-                  <div className="flex flex-col items-center justify-center gap-1.5 rounded-[15px] bg-red-400 p-[30px] sm:p-5">
-                    <Img src="images/img_thumbs_up_white_a700.svg" alt="thumbsup_three" className="h-[38px] w-[38px]" />
-                    <Heading size="xl" as="h4" className="text-center !font-inter !text-white-A700">
-                      <>
-                        Cultural & <br />
-                        Recreational Activities
-                      </>
-                    </Heading>
-                  </div>
-                </div>
-                <div className="flex flex-col items-center justify-center gap-[11px] rounded-[15px] bg-red-400 p-[47px] md:p-5">
-                  <Img src="images/img_group_57.svg" alt="image_four" className="h-[28px] w-[28px]" />
-                  <Heading size="xl" as="h4" className="text-center !font-inter !text-white-A700">
-                    Investment
-                  </Heading>
-                </div>
-              </div>
+        </div>
+      ))}
+     </div>
             </div>
-            <div className="mx-auto mt-[78px] h-px w-full max-w-[1388px] bg-black-900 md:p-5" />
-            <div className="ml-[59px] mt-[15px] flex w-[7%] items-center gap-2 self-start md:ml-0 md:w-full md:p-5">
-              <Img src="images/img_star_2.svg" alt="image_five" className="h-[38px] w-[38px]" />
+            <div className="mt-10 h-[1px] w-full  bg-black-900 " />
+            <div className="md:p-5 w-full flex flex-col justify-center  items-center" >
+            <div className="ml-20 flex  items-center gap-[23px] self-start md:ml-0 md:w-full  mt-5">
+              <Img src="images/img_star_1.svg" alt="image_two" className="h-[38px] w-[38px]" />
               <Text size="6xl" as="p" className="self-end">
-                Blog
+              Blog
               </Text>
             </div>
-            <Heading size="4xl" as="h2" className="ml-[169px] mt-36 self-start !text-blue_gray-900 md:ml-0">
-              News and immigration tips
+            <Heading  className="text-6xl md:text-4xl sm:text-2xl ml-32 mt-20 self-start !text-blue_gray-900 md:ml-0">
+            News and immigration tips
             </Heading>
-            <Text size="6xl" as="p" className="ml-[173px] mt-[23px] self-start !text-gray-800_09 md:ml-0">
+            <Text
+              size="5xl"
+              as="p"
+              className="text-2xl md:text-xl sm:text-sm ml-32 mb-q md:ml-0 self-start leading-[41px] !text-gray-800_01  md:w-full"
+            >
+              <>
               Latest on immigration
+              </>
             </Text>
-            <div className="mx-auto mt-[35px] flex w-full max-w-[1270px] gap-[54px] md:flex-col md:p-5">
+            
+            <div className="mx-auto mt-10 flex w-[80%] md:w-full gap-[54px] md:flex-col ">
               <div className="flex w-full flex-col gap-2.5">
                 <div className="relative h-[320px] rounded-[10px] bg-blue_gray-100_02">
                   <Img
@@ -513,15 +411,16 @@ function Page1({ togglePage }: Page1Props){
                 </Text>
               </div>
             </div>
+
             <Text size="6xl" as="p" className="ml-[173px] mt-28 self-start !text-gray-800_03 md:ml-0">
               Social Channels
             </Text>
-            <div className="mx-auto mt-[25px] flex w-full max-w-[1270px] gap-[54px] md:flex-col md:p-5">
+            <div className="mx-auto mt-[25px] flex  w-[80%] md:w-full gap-[54px] md:flex-col ">
               <div className="flex w-full flex-col items-start gap-[18px]">
                 <Img
                   src="images/img_rectangle_21.png"
                   alt="instagram_post"
-                  className="h-[279px] w-full rounded-[10px] object-cover md:h-auto"
+                  className="h-72 w-full rounded-[10px] object-cover "
                 />
                 <Text size="2xl" as="p">
                   instagram post
@@ -531,7 +430,7 @@ function Page1({ togglePage }: Page1Props){
                 <Img
                   src="images/img_rectangle_22.png"
                   alt="image"
-                  className="h-[279px] w-full rounded-[10px] object-cover md:h-auto"
+                  className="h-72 w-full rounded-[10px] object-cover "
                 />
                 <Text size="2xl" as="p">
                   instagram post
@@ -541,7 +440,7 @@ function Page1({ togglePage }: Page1Props){
                 <Img
                   src="images/img_rectangle_23.png"
                   alt="image"
-                  className="h-[279px] w-full rounded-[10px] object-cover md:h-auto"
+                  className="h-72 w-full rounded-[10px] object-cover "
                 />
                 <Text size="2xl" as="p">
                   instagram post
@@ -551,15 +450,18 @@ function Page1({ togglePage }: Page1Props){
                 <Img
                   src="images/img_rectangle_24.png"
                   alt="image"
-                  className="h-[279px] w-full rounded-[10px] object-cover md:h-auto"
+                  className="h-72 w-full rounded-[10px] object-cover "
                 />
                 <Text size="2xl" as="p">
                   instagram post
                 </Text>
               </div>
             </div>
-            <div className="mt-32 flex flex-col items-start gap-[63px] self-stretch overflow-auto bg-blue_gray-50_01 py-[63px] pl-[63px] md:py-5 md:pl-5 sm:gap-[31px]">
-              <Heading size="4xl" as="h2" className="ml-[145px] mt-[21px] !text-blue_gray-900 md:ml-0">
+            </div>
+            
+          
+            <div className="mt-32 flex flex-col items-start gap-[63px] self-stretch overflow-auto bg-blue_gray-50_01 p-5 sm:gap-[31px]">
+              <Heading  className= " text-6xl md:text-4xl sm:text-2xl ml-32 mt-[21px] !text-blue_gray-900 md:ml-0">
                 What Our Partners Say
               </Heading>
               <div className="mb-24 flex w-full gap-[30px] md:flex-col">
@@ -675,53 +577,41 @@ function Page1({ togglePage }: Page1Props){
                 </div>
               </div>
             </div>
-            <div className="mt-[157px] flex flex-col items-center">
-              <Heading size="3xl" as="h2" className="!text-blue_gray-900">
-                Ready to Start?
-              </Heading>
-              <Text size="6xl" as="p" className="mt-[9px] !font-normal !text-gray-700_01">
-                Powered by AI, Our goal is to create the best settlement experience for you
-              </Text>
-              <Button color="gray_600_04" shape="round" className="mt-20 min-w-[190px] font-inter font-semibold sm:px-5">
+            <div className="mt-20 flex flex-col items-center">
+
+            <Heading  className="text-6xl md:text-4xl sm:text-2xl ml-32 mt-20  !text-blue_gray-900 md:ml-0">
+            Ready to Start?
+            </Heading>
+            <Text
+              size="5xl"
+              as="p"
+              className="text-2xl md:text-xl sm:text-sm ml-32 mb-5 md:ml-0 text-center  leading-[41px] !text-gray-800_01  md:w-full md:p-5"
+            >
+              <>
+              Powered by AI, Our goal is to create the best settlement experience for you
+              </>
+            </Text>
+             
+              <Button color="gray_600_04" shape="round" className="min-w-[190px] font-inter font-semibold sm:px-5">
                 Get Started
               </Button>
             </div>
-            {/* <div className="mx-auto mt-[79px] flex w-full max-w-[1039px] flex-col items-start md:p-5">
+            <div className=" mt-[79px] flex w-full  flex-col justify-center items-center md:px-5 md:pt-20">
               <Img
                 src="images/img_group_76.svg"
                 alt="image_six"
-                className="relative z-[3] ml-[79px] h-[299px] w-[78%] md:ml-0"
+                className="relative z-[3] md:h-32  h-48 w-[78%] md:ml-0"
               />
-              <div className="relative mt-[-169px] flex justify-center self-stretch rounded-[285px] bg-red-400 px-14 py-[209px] md:p-5">
-                <div className="mb-64 flex w-[41%] flex-col items-start gap-[23px] md:w-full">
-                  <div className="ml-[66px] flex items-start gap-[18px] md:ml-0">
-                    <div className="flex items-start gap-[9px] rounded-[15px] border border-solid border-white-A700">
-                      <Img
-                        src="images/img_mobile_blue_gray_900_01.svg"
-                        alt="mobile_three"
-                        className="mt-[5px] h-[15px] w-[15px]"
-                      />
-                      <Button
-                        color="white_A700"
-                        size="xs"
-                        variant="fill"
-                        shape="circle"
-                        className="w-[26px] !rounded-[13px]"
-                      >
-                        <Img src="images/img_brightness.svg" />
-                      </Button>
-                    </div>
-                    <Text size="4xl" as="p" className="mt-0.5 !text-white-A700">
-                      Light Mode
-                    </Text>
-                  </div>
+              <div className=" -mt-20 flex justify-center items-center w-[80%] md:w-full  rounded-t-[285px] md:rounded-t-[50px] bg-red-400 px-14 pt-32 md:px-5 ">
+                <div className="mb-10 flex w-[41%] flex-col items-start gap-[23px] md:w-full">
+               
                   <a href="#" className="ml-3.5 md:ml-0">
-                    <Heading size="3xl" as="h2" className="!text-white-A700">
+                    <Heading className="text-6xl md:text-4xl sm:text-2x !text-white-A700">
                       Contact Us
                     </Heading>
                   </a>
                   <div className="self-stretch">
-                    <Text size="xl" as="p" className="!text-white-A700">
+                    <Text  className="text-2xl md:text-xl sm:text-sm !text-white-A700">
                       <>
                         Subscribe to our newsletter for immigration <br />
                         insights and travel news!
@@ -746,7 +636,7 @@ function Page1({ togglePage }: Page1Props){
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </>

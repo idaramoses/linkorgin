@@ -4,6 +4,7 @@ import NotFound from "pages/NotFound";
 import HomeScreen from "pages/HomeScreen";
 import Signup from "pages/Signup";
 import Register from "pages/Register";
+import LoginPage from "pages/Login";
 
 
 const ProjectRoutes = () => {
@@ -17,6 +18,10 @@ const ProjectRoutes = () => {
     {
       path: "/signup",
       element: <Signup />,
+    },
+    {
+      path: "auth/login",
+      element: <LoginPage />,
     },
     {
       path: "/auth/register",
