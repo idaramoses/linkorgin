@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Text, Heading, Radio, RadioGroup, Img, SelectBox } from "../../../components";
 
 
-const Step2 = () => {
+const Step4 = () => {
    
       return (
         <div className="self-end mt-10 w-full flex items-center justify-center">
@@ -10,7 +10,7 @@ const Step2 = () => {
         <div className="flex w-[58%] my-5 items-center gap-[11px] md:w-full">
                     <Text size="6xl" as="p" className="w-full !font-kumbhsans !text-blue_gray-700_01">
                       <>
-                        Basic Immigration Details
+                      Education & Employment Background
                       </>
                     </Text>
                    
@@ -19,31 +19,26 @@ const Step2 = () => {
            
               <div className="mb-4 w-full" >
                 <label className="mb-2.5 block font-medium  text-black ">
-                  Country of origin
+                Highest level of education completed
                 </label>
                 <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
     <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
-      <option value="">Select country</option>
-      <option value="railway">Nigeria</option>
-      <option value="road">Indian</option>
-      <option value="aviation">Canada</option>
-      <option value="marine">Marine</option>
+      <option value="">Select education complete</option>
+      <option value="railway">No formal education</option>
+      <option value="road">Secondary School Diploma (or equivalent) obtained outside of Canada</option>
+      <option value="aviation">Post-Secondary Certificate (non-university) obtained outside of Canada</option>
+      <option value="marine">Diploma (University or College) obtained outside of Canada</option>
+
+      <option value="road">Bachelor's Degree obtained outside of Canada</option>
+      <option value="aviation">Master's Degree obtained outside of Canada</option>
+      <option value="marine">Doctorate (Ph.D.) obtained outside of Canada</option>
+
+      <option value="aviation">Other (specify their highest level of education, including education obtained outside of Canada)</option>
+      <option value="marine">Prefer not to say</option>
     </select>
   </div>
               </div>
-              <div className="mb-4 w-full" >
-                <label className="mb-2.5 block font-medium  text-black ">
-                  Current immigaration status
-                </label>
-                <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
-    <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
-      <option value="">Select status</option>
-      <option value="railway">Permanent Resident</option>
-      <option value="road">Temporary Resident Permit Holder</option>
-      <option value="aviation">Prefer not to say</option>
-    </select>
-  </div>
-              </div>
+         
               <div className="mb-6 w-full">
                 <label className="mb-2.5 block font-medium  text-black ">
                   Date of immigration 
@@ -81,31 +76,26 @@ const Step2 = () => {
               </div>
               <div className="mb-4 w-full" >
                 <label className="mb-2.5 block font-medium  text-black ">
-                 Visa type
+                 Previous work experience
                 </label>
-                <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
-    <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
-      <option value="">Select visa type</option>
-      <option value="railway">Work Permit</option>
-      <option value="road">Study Permit</option>
-      <option value="road">others</option>
-      <option value="aviation">Prefer not to say</option>
-    </select>
-  </div>
+                <div className="w-full rounded-lg border border-[#E0E0E0] bg-[#E0E0E0] py-4 pl-6 pr-5 text-black outline-none focus:border-[#E0E0E0] focus-visible:shadow-none   ">
+                <textarea
+                              placeholder="Type here..."
+                              className="w-full h-auto bg-transparent text-[15px] border-[#E0E0E0] bg-[#E0E0E0] font-hanken focus:outline-none text-[#858585] text-start"
+                            />
+                </div>
               </div>
               <div className="mb-4 w-full" >
                 <label className="mb-2.5 block font-medium  text-black ">
-                 Type of status
+                 Employment goal ans aspiration
                 </label>
-                <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
-    <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
-      <option value="">Select status</option>
-      <option value="railway">Skilled Worker</option>
-      <option value="road">Family Sponsorship</option>
-      <option value="road">others</option>
-      <option value="aviation">Prefer not to say</option>
-    </select>
-  </div>
+                <div className="w-full rounded-lg border border-[#E0E0E0] bg-[#E0E0E0] py-4 pl-6 pr-5 text-black outline-none focus:border-[#E0E0E0] focus-visible:shadow-none   ">
+                <textarea
+                              placeholder="Type here..."
+                              className="w-full h-auto bg-transparent text-[15px] border-[#E0E0E0] bg-[#E0E0E0] font-hanken focus:outline-none text-[#858585] text-start"
+                            />
+                </div>
+                
               </div>
         </div>
     </div>
@@ -113,4 +103,4 @@ const Step2 = () => {
       );
     };
     
-    export default Step2;
+    export default Step4;

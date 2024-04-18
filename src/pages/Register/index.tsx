@@ -4,13 +4,25 @@ import { Button, Heading, Input, Text, CheckBox, Img } from "../../components";
 import { Link } from "react-router-dom";
 import Step1 from "./component/step1";
 import Step2 from "./component/step2";
+import Step3 from "./component/step3";
+import Step4 from "./component/step4";
+import Step5 from "./component/step5";
+import Step6 from "./component/step6";
+import Step7 from "./component/step7";
+import StepComponent from "./component/sideicons";
 
 export default function MacBookPro14SixPage() {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const navbarRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
+  const handleMenuToggle = () => {
+    setMenuOpen(!isMenuOpen);
+  };
 
+  const handleCloseMenu = () => {
+    setMenuOpen(false);
+  };
   useEffect(() => {
     // Check local storage for user data
     const userData = localStorage.getItem('userData');
@@ -38,21 +50,23 @@ export default function MacBookPro14SixPage() {
     },
   };
  
-  const handleMenuToggle = () => {
-    setMenuOpen(!isMenuOpen);
-  };
 
-  const handleCloseMenu = () => {
-    setMenuOpen(false);
-  };
 
   const [currentStep, setCurrentStep] = useState<number>(1);
 
   const handleNext = (): void => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scrolling animation
+  });
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
   const handlePrev = (): void => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scrolling animation
+  });
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
@@ -63,19 +77,20 @@ export default function MacBookPro14SixPage() {
       case 2:
         return <Step2/>;
       case 3:
-        return <Step1/>;
+        return <Step3/>;
       case 4:
-          return <Step1/>;
+          return <Step4/>;
       case 5:
-          return <Step2/>;
+          return <Step5/>;
       case 6:
-          return <Step1/>;
+          return <Step6/>;
+      case 7:
+         return <Step7/>;
       default:
-        return null;
+         return null;
     }
   };
   const renderProgress = (): JSX.Element => {
-    const steps: string[] = ['1', '2', '3','4','5','6','7'];
     return (
       <div className=" w-full flex flex-col items-center justify-center">
    
@@ -253,7 +268,7 @@ export default function MacBookPro14SixPage() {
           </div>
         )}
 
-        <div className="md:hidden  flex flex-row space-x-4 items-center">
+        <div className="md:hidden  flex flex-row items-center">
   
         <div className="flex gap-5 justify-between mt-3.5 md:flex-wrap">
           <div className="flex gap-5 justify-between self-start text-black md:flex-wrap md:w-full">
@@ -266,6 +281,10 @@ export default function MacBookPro14SixPage() {
           <div className="my-auto text-neutral-400">Login</div>
         </div>
         </div>
+        <div className="md:hidden  flex flex-row  items-center">
+  
+  
+  </div>
       </div>
     </nav>
      <div className="w-full relative">
@@ -274,16 +293,20 @@ export default function MacBookPro14SixPage() {
                   Sign Up
                 </Text>
       </div>
+      <StepComponent currentStep={currentStep} />
+     
+
+
      <div className="w-full absolute flex flex-col items-center justify-center md:px-5">
    
      <div className="mt-40  md:w-full ">
       {renderProgress()}
 
       </div>
-      <div className=" w-[50%] md:w-full   ">
+      <div className=" w-[40%] md:w-full   ">
       {renderStepContent()}
       </div>
-      <div className="my-10 w-[50%] md:w-full flex justify-between ">
+      <div className="my-10 w-[40%] md:w-full flex justify-between ">
       {currentStep  === 1 && <button className="" ></button>}
       {currentStep !== 1 && <button onClick={handlePrev}>Previous</button>}
       {currentStep !== 7 ? (
@@ -299,8 +322,9 @@ export default function MacBookPro14SixPage() {
       </div>
       
      </div>
-     </div>
      
+     </div>
+    
     </div>
    
     </>

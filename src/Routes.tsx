@@ -11,15 +11,15 @@ const ProjectRoutes = () => {
     { path: "/", element: <HomeScreen /> },
     { path: "*", element: <NotFound /> },
     {
-      path: "homescreen",
+      path: "/homescreen",
       element: <HomeScreen />,
     },
     {
-      path: "signup",
+      path: "/signup",
       element: <Signup />,
     },
     {
-      path: "register",
+      path: "/auth/register",
       element: <Register />,
     },
   

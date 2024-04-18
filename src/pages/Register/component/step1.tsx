@@ -7,7 +7,7 @@ const Step1 = () => {
         <div className="self-end mt-10 w-full flex items-center justify-center">
           <div className="flex flex-col w-full md:ml-0 md:w-full">
           <div className="flex w-[58%] my-5 items-center gap-[11px] md:w-full">
-                      <Text size="6xl" as="p" className="w-[75%] !font-kumbhsans !text-blue_gray-700_01">
+                      <Text size="6xl" as="p" className=" !font-kumbhsans !text-blue_gray-700_01">
                         <>
                          
                           Personal information
