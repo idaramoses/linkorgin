@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { Input, Img, Text, Heading, Button } from "../../../components";
 import { NavLink } from "react-router-dom";
 import HomeScreenRowcloseOne from "components/HomeScreenRowcloseOne";
+import ImageSlider from "components/ImageSlider";
 
 interface Page1Props {
   togglePage: () => void;
@@ -31,6 +32,18 @@ function Page1({ togglePage }: Page1Props){
         { id: 8, name: 'Social',icon:'images/img_group_59.svg'  },
         { id: 9, name: 'Investment' ,icon:'images/img_group_57.svg' },
         
+      ];
+
+      const images = [
+        'images/img_slider_1.png',
+        'images/img_slider_2.png',
+        'images/img_slider_3.png',
+        'images/img_slider_4.png',
+        // 'images/img_slider_4.png',
+        // 'images/img_slider_3.png',
+        // 'images/img_slider_2.png',
+        // 'images/img_slider_1.png',
+
       ];
     return (
       <>
@@ -232,8 +245,8 @@ function Page1({ togglePage }: Page1Props){
               </Heading>
               <div className="mt-1 mb-10 h-4  w-32 rounded-[10px] bg-orange-200 md:ml-0" />
 
- 
-           
+             <div className="w-[80%] relative  bg-[url(/public/images/img_bg_slider.svg)] bg-center bg-contain bg-no-repeat py-8 ">  <ImageSlider images={images} /></div>
+          
            
             <Button color="blue_gray_400" size="4xl" className="mt-14 text-base md:text-sm w-52 rounded-[45px] font-medium ">
            

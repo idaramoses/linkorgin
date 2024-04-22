@@ -5,6 +5,10 @@ import "./styles/tailwind.css";
 import "./styles/index.css";
 import "./styles/font.css";
 import 'react-toastify/dist/ReactToastify.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import 'flatpickr/dist/flatpickr.min.css';
+
 
 
 const container = document.getElementById("root");

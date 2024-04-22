@@ -15,6 +15,11 @@ import { Alert, Box, CircularProgress, IconButton, InputAdornment, TextField } f
 import { Visibility, VisibilityOff } from '@mui/icons-material'; 
 import { toast, Bounce, ToastContainer } from "react-toastify";
 import { CgSpinner } from "react-icons/cg";
+import DatePicker from '@mui/lab/DatePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns'; // Adapter for date-fns
+import LocalizationProvider from '@mui/lab/LocalizationProvider'; // Provides localization to DatePicker
+import flatpickr from 'flatpickr';
+
 
 interface TableRow {
   id: number;
@@ -43,11 +48,30 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
     );
 };
 
+useEffect(() => {
+  // Init flatpickr
+   flatpickr('.form-datepicker', {
+    mode: 'single',
+    static: true,
+    monthSelectorType: 'static',
+    dateFormat: 'Y-m-d',
+    prevArrow:
+      '<svg className="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
+    nextArrow:
+      '<svg className="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
+  });
+
+  
+}, []);
+
+
+
+
   const [firstname, setFirstNmae] = useState('');
   const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [confirmpassword, setConfirmPassword] = useState('');
   const [dateOfBirth, setdateOfBirth] = useState('');
   const [ gender, setgender] = useState('');
   const [ phone, setphone] = useState('');
@@ -90,9 +114,16 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
-  
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null); 
+
+  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setdateOfBirth(e.target.value); // Update selected date state
+  };
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+  };
+  const handleConfirmChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(e.target.value);
   };
   const handleGenderChange = (event) => {
     setgender(event.target.value);
@@ -188,7 +219,7 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
 
   const handleNext = (): void => {
     if(currentStep===1){
-      if (!firstname || !lastname || !email|| !gender || !phone  || !password ) {
+      if (!firstname || !lastname || !email|| !gender || !phone  || !password || !confirmpassword ) {
         setError('Please fill in all required fields.');
         return;
       }
@@ -328,14 +359,14 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
   const userData = {
   firstName: firstname,
   lastName:  lastname,
-  dateOfBirth: "2023-06-23",// Consider using Date type if you'll be working with dates
+  dateOfBirth: dateOfBirth,
   gender: gender,
   email: email,
   password: password,
   phone:phone,
   countryOfOrigin: countryOfOrigin,
   currentImmigrationStatus: countryOfOrigin,
-  dateOfImmigration: "2023-06-23",// Consider using Date type if you'll be working with dates
+  dateOfImmigration: dateOfImmigration,
   visaType: visaType,
   typeOfStatus: typeOfStatus,
   nativeLanguage: nativeLanguage,
@@ -526,6 +557,7 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
 
       <div className=" w-[40%] md:w-full   ">
       <>
+
             {currentStep === 1 ? (
                <div className="self-end mt-10 w-full flex items-center justify-center">
                   <div className="flex flex-col w-full md:ml-0 md:w-full">
@@ -627,17 +659,32 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                      
                         <div className="mb-4 w-full" >
                           <label className="mb-2.5 block font-medium  text-black ">
-                            Date Of Birth
+                            Date Of Birthn
                           </label>
-                          <div className="relative">
-                            <input
-                              placeholder="Enter your Date of Birth"
-                            
-                              className="w-full rounded-lg border border-[#E0E0E0] bg-[#E0E0E0] py-4 pl-6 pr-5 text-black outline-none focus:border-[#E0E0E0] focus-visible:shadow-none   "
-                            />
-        
-                        
-                          </div>
+                          <div className="relative w-full rounded border-[1.5px] border-[#E0E0E0] bg-[#E0E0E0] px-5 py-4">
+        <input
+          className="form-datepicker  font-normal outline-none transition focus:border-primary active:border-primary "
+          placeholder="mm/dd/yyyy"
+          data-class="flatpickr-right"
+          onChange={handleDateChange}
+          value={dateOfBirth}
+        />
+
+        <div className="pointer-events-none absolute inset-0 left-auto right-5 flex items-center">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9.0002 12.8249C8.83145 12.8249 8.69082 12.7687 8.5502 12.6562L2.08145 6.2999C1.82832 6.04678 1.82832 5.65303 2.08145 5.3999C2.33457 5.14678 2.72832 5.14678 2.98145 5.3999L9.0002 11.278L15.0189 5.34365C15.2721 5.09053 15.6658 5.09053 15.9189 5.34365C16.1721 5.59678 16.1721 5.99053 15.9189 6.24365L9.45019 12.5999C9.30957 12.7405 9.16895 12.8249 9.0002 12.8249Z"
+              fill="#64748B"
+            />
+          </svg>
+        </div>
+      </div>
                         </div>
                     <div className="mb-4 w-full" >
                   <label className="mb-2.5 block font-medium  text-black ">
@@ -781,6 +828,56 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                
              
                 </div>
+                <div className="mb-6 w-full">
+                  <label className="mb-2.5 block font-medium  text-black ">
+                   Confirm Password 
+                  </label>
+                  <TextField
+            placeholder="Confirm Password"
+            type={showPassword ? 'text' : 'password'} // Show/hide password based on state
+            value={confirmpassword}
+            onChange={handleConfirmChange}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                backgroundColor: '#E0E0E0', // Set background color
+                '& fieldset': {
+                  borderColor: '#E0E0E0', // Set border color
+                },
+                '&:hover fieldset': {
+                  borderColor: '#E0E0E0', // Set border color on hover
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#E0E0E0', // Set border color on focus
+                },
+              },
+             
+              '& .MuiInputBase-root': {
+                marginTop: 0, // Remove top padding
+                marginBottom: 0, // Remove bottom padding
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'transparent', // Remove outline by default
+              },
+            }}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            required
+
+            InputProps={{
+              // Show/hide password icon button
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={toggleShowPassword} edge="end">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+               
+             
+                </div>
                 {error &&  <Alert severity="error">{error}</Alert>}
    
                   </div>
@@ -829,40 +926,14 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                       <label className="mb-2.5 block font-medium  text-black ">
                         Date of immigration 
                       </label>
-                      <TextField
-                      placeholder="Date of immigaration"
-      type="text"
-      className='w-full self-stretch flex'
-      onChange={handleImigrationDateChange}
-      value={dateOfImmigration}
-      sx={{
-        '& .MuiOutlinedInput-root': {
-          backgroundColor: '#E0E0E0', // Set background color
-          '& fieldset': {
-            borderColor: '#E0E0E0', // Set border color
-          },
-          '&:hover fieldset': {
-            borderColor: '#E0E0E0', // Set border color on hover
-          },
-          '&.Mui-focused fieldset': {
-            borderColor: '#E0E0E0', // Set border color on focus
-          },
-        },
-       
-        '& .MuiInputBase-root': {
-          marginTop: 0, // Remove top padding
-          marginBottom: 0, // Remove bottom padding
-        },
-        '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: 'transparent', // Remove outline by default
-        },
-      }}
-      fullWidth
-      margin="normal"
-      variant="outlined"
-      required
-
-                    />
+                      <input
+          className="form-datepicker  font-normal outline-none transition focus:border-primary active:border-primary "
+          placeholder="mm/dd/yyyy"
+          data-class="flatpickr-right"
+          onChange={handleImigrationDateChange}
+          value={dateOfImmigration}
+        />
+             
                     </div>
                     <div className="mb-4 w-full" >
                       <label className="mb-2.5 block font-medium  text-black ">
@@ -917,9 +988,7 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
           <select value={nativeLanguage} onChange={handleNativeLanguageChange}  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
             <option value="">Select Language</option>
             <option value="English">English</option>
-            <option value="Hausa">Hausa</option>
-            <option value="Igbo">Igbo</option>
-            <option value="Yoruba">Yoruba</option>
+            
           </select>
         </div>
                     </div>
@@ -1018,16 +1087,37 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                     <label className="mb-2.5 block font-medium  text-black ">
                      Previous work experience
                     </label>
-                    <div className="w-full rounded-lg border border-[#E0E0E0] bg-[#E0E0E0] py-4 pl-6 pr-5 text-black outline-none focus:border-[#E0E0E0] focus-visible:shadow-none   ">
-                    <textarea
-                                  placeholder="Type here..."
-                                  className="w-full h-auto bg-transparent text-[15px] border-[#E0E0E0] bg-[#E0E0E0] font-hanken focus:outline-none text-[#858585] text-start"
-                                />
+                    <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
+          <select  value={previousWorkExperience}   className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
+            <option value="">Select vWork expoerice</option>
+            <option value="Agriculture">Agriculture, Forestry, Fishing & Hunting</option>
+            <option value="Mining">Mining, Quarrying, and Oil & Gas Extraction</option>
+            <option value="Utilities">Utilities (Electricity, Gas, Water)</option>
+            <option value="construction">Construction</option>
+
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Wholesale Trade">Wholesale Trade</option>
+            <option value="Retail Trade">Retail Trade</option>
+            <option value="Transportation & Warehousing">Transportation & Warehousing</option>
+
+            <option value="ICT">Information & Communication Technology (ICT)</option>
+            <option value="Finance & Insurance">Finance & Insurance</option>
+            <option value="Real Estate & Rental & Leasing">Real Estate & Rental & Leasing</option>
+            <option value="Professional, Scientific & Technical Services">Professional, Scientific & Technical Services</option>
+
+            <option value="Administrative">Administrative & Support Services, Waste Management & Remediation Service</option>
+            <option value="Educational Services">Educational Services</option>
+            <option value="Healthcare & Social Assistance">Healthcare & Social Assistance</option>
+            <option value="Arts, Entertainment & Recreation">Arts, Entertainment & Recreation</option>
+
+            <option value="Accommodation & Food Service">Accommodation & Food Service</option>
+            <option value="Other Services">Other Services (e.g., Personal & Laundry Services, Repair & Maintenance)</option>
+          </select>
+        </div>
                     </div>
-                  </div>
                   <div className="mb-4 w-full" >
                     <label className="mb-2.5 block font-medium  text-black ">
-                     Employment goal ans aspiration
+                     Employment goal and aspiration
                     </label>
                     <div className="w-full rounded-lg border border-[#E0E0E0] bg-[#E0E0E0] py-4 pl-6 pr-5 text-black outline-none focus:border-[#E0E0E0] focus-visible:shadow-none   ">
                     <textarea
@@ -1151,9 +1241,10 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                     <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
                     <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
                       <option value="">Select hobbies</option>
-                      <option value="railway">Singing</option>
-                      <option value="road">Hikings</option>
-                      <option value="aviation">Reading </option>
+                      <option value="railway">Hiking & Camping</option>
+                      <option value="road">Biking & Cycling</option>
+                      <option value="aviation">Swimming & Water Sports </option>
+                      <option value="road">Picnics & Barbecues</option>
                     </select>
                   </div>
                   </div>
@@ -1164,57 +1255,29 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                     <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
                     <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
                       <option value="">Select socializing new people</option>
-                     
-      
+                      <option value=">Board Games">Board Games & Game Nights</option>
+                      <option value=">Cultural Events">Cultural Events & Festivals</option>
+                      <option value="Sports & Fitness Activities">Sports & Fitness Activities (Running, Hiking, etc.)</option>
+                      <option value="Volunteering">Volunteering </option>
+                      <option value="Book Clubs & Movie Nights">Book Clubs & Movie Nights </option>
+                      <option value="Language Exchange">Language Exchange </option>
+
                   </select>
                   </div>
                   </div>
-               
-                  <div className="flex w-[58%] my-5 items-center gap-[11px] md:w-full">
-                        <Text size="6xl" as="p" className="w-full !font-kumbhsans !text-blue_gray-700_01">
-                          <>
-                          Family Information
-                          </>
-                        </Text>
-                       
-                      </div>
-          
-               
                   <div className="mb-4 w-full" >
                     <label className="mb-2.5 block font-medium  text-black ">
-                    Number of family members immigrating with the user
+                    Any specific cultural or religious considerations
                     </label>
                     <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
                     <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
-                      <option value="">Select number</option>
-                      <option value="one">1</option>
-                      <option value="two">2</option>
-                      <option value="three">3 </option>
-                      <option value="four">4</option>
-                      <option value="five">5</option>
-                      <option value="six">6</option>
-                      <option value="seven">7</option>
-                      <option value="eight">8 </option>
-                      <option value="ning">9</option>
-                      <option value="ten">10</option>
-                    </select>
+                      <option value="">Select specific cultural or religious considerations</option>
+              
+
+                  </select>
                   </div>
                   </div>
-                  <div className="mb-4 w-full" >
-                    <label className="mb-2.5 block font-medium  text-black ">
-                   Relationship to family
-                    </label>
-                    <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
-                    <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
-                      <option value="">Select relationship</option>
-                      <option value="railway">Father</option>
-                      <option value="road">Mother</option>
-                      <option value="aviation">Son </option>
-                      <option value="marine">Daughter</option>
-                      <option value="marine">Prefer not to say</option>
-                    </select>
-                  </div>
-                  </div>
+             
             </div>
         </div>
            ):currentStep === 7 ? (

@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Img, Heading, Button, Text } from "../../../components";
 import { NavLink } from 'react-router-dom';
+import VideoPlayer from 'components/VideoPlayer';
+import YouTubeVideo from 'components/VideoPlayer';
 interface Page2Props {
   togglePage: () => void;
 }
@@ -213,21 +215,12 @@ function Page2({ togglePage }: Page2Props) {
          </NavLink>
            
           </div> 
-        <div className="flex flex-row md:flex-col gap-5 justify-center items-center md:w-full  w-[70%]">
-        <Img
-                  src="images/video1.svg"
-                  alt="screenshot_one"
-                  className="h-48 w-full rounded-[14px] object-cover"
-                />
-
-<Img
-                  src="images/video2.svg"
-                  alt="screenshot_one"
-                  className="h-48 w-full rounded-[14px] object-cover"                />
-                <Img
-                  src="images/video3.svg"
-                  alt="screenshot_one"
-                  className="h-48 w-full rounded-[14px] object-cover"                />
+        <div className="flex flex-row md:flex-col gap-5 justify-center items-center mb-10 md:w-full  w-[70%]">
+                
+             <YouTubeVideo videoUrl="https://youtu.be/1QFTSafMxBQ?si=FF-U8Li22aC2TiUL" />
+             <YouTubeVideo videoUrl="https://youtu.be/Ek1f2MIe34s?si=6Tu0RXehm4xq4IcG" />
+             <YouTubeVideo videoUrl="https://www.youtube.com/embed/zpXXvx1gCpU" />
+               
         </div>
       </div>
     </div>

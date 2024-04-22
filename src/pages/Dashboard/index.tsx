@@ -128,7 +128,9 @@ export default function Dashboard() {
           Explore Resource Directory
         </div>
       </div>
-      <ToastContainer
+
+    </div>
+<ToastContainer
 position="top-right"
 autoClose={3000}
 hideProgressBar={false}
@@ -140,7 +142,6 @@ draggable
 pauseOnHover
 theme="light"
 />
-    </div>
     </>
   );
 }
