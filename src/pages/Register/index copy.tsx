@@ -15,9 +15,10 @@ import { Alert, Box, CircularProgress, IconButton, InputAdornment, TextField } f
 import { Visibility, VisibilityOff } from '@mui/icons-material'; 
 import { toast, Bounce, ToastContainer } from "react-toastify";
 import { CgSpinner } from "react-icons/cg";
-import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from '@mui/lab/DatePicker';
+import AdapterDateFns from '@mui/lab/AdapterDateFns'; // Adapter for date-fns
+import LocalizationProvider from '@mui/lab/LocalizationProvider'; // Provides localization to DatePicker
+import flatpickr from 'flatpickr';
 
 
 interface TableRow {
@@ -49,7 +50,21 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
 
 
 
+useEffect(() => {
+  // Init flatpickr
+   flatpickr('.form-datepicker', {
+    mode: 'single',
+    static: true,
+    monthSelectorType: 'static',
+    dateFormat: 'Y-m-d',
+    prevArrow:
+      '<svg className="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
+    nextArrow:
+      '<svg className="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
+  });
 
+  
+}, []);
 
 
 
@@ -87,7 +102,7 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
   const [subSector, setSubSector] = useState('');
   const [category, setCategory] = useState('');
   const [role, setRole] = useState('');
-  const [startDate, setStartDate] = useState(new Date());
+
 
 
   // Function to handle changes in dropdowns
@@ -651,7 +666,12 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                             Date Of Birthn
                           </label>
                           <div className="relative w-full rounded border-[1.5px] border-[#E0E0E0] bg-[#E0E0E0] px-5 py-4">
-                          <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+        <input
+          className="form-datepicker  font-normal outline-none transition focus:border-primary active:border-primary "
+          placeholder="mm/dd/yyyy"
+          data-class="flatpickr-right"
+    
+        />
 
         <div className="pointer-events-none absolute inset-0 left-auto right-5 flex items-center">
           <svg
@@ -909,8 +929,13 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                       <label className="mb-2.5 block font-medium  text-black ">
                         Date of immigration 
                       </label>
-                      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-
+                      <input
+          className="form-datepicker  font-normal outline-none transition focus:border-primary active:border-primary "
+          placeholder="mm/dd/yyyy"
+          data-class="flatpickr-right"
+          onChange={handleImigrationDateChange}
+          value={dateOfImmigration}
+        />
              
                     </div>
                     <div className="mb-4 w-full" >
