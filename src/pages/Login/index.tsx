@@ -78,22 +78,8 @@ const handleSubmit = async (e) => {
       <nav className="flex self-stretch justify-between items-center fixed w-full z-10 gap-5 p-6 md:p-4  bg-white-A700" ref={navbarRef}>
       <div className="container mx-auto flex  justify-between items-center">
       <NavLink to="/">
-      <svg width="124" height="27" viewBox="0 0 124 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 0.256408H8.84341V26.7305H0V0.256408Z" fill="#3864FF"/>
-<path d="M17.6868 9.10249H26.5302V26.7305H17.6868V9.10249Z" fill="#3864FF"/>
-<path d="M17.6868 0H26.5302V9.10249H17.6868V0Z" fill="#90A8FF"/>
-<path d="M44.153 0.256408H52.9964V26.7305H44.153V0.256408Z" fill="#90C6E3"/>
-<path d="M79.5266 0.256408H88.37V26.7305H79.5266V0.256408Z" fill="#FFA422"/>
-<path d="M26.5302 0.256408L52.9964 26.7305H26.5302V0.256408Z" fill="#B8DDF1"/>
-<path d="M79.5266 0.256408L53.0605 26.7305V0.256408H79.5266Z" fill="#F4C37D"/>
-<path d="M53.0605 0.256408L79.5266 26.7305H53.0605V0.256408Z" fill="#F5E0C1"/>
-<path d="M0 26.7305V17.9486H17.6868V26.7305H0Z" fill="#90A8FF"/>
-<path d="M79.5266 0.256408H97.1494V5.44867H79.5266V0.256408Z" fill="#FF5353"/>
-<path d="M79.5266 10.8973H97.1494V16.0896H79.5266V10.8973Z" fill="#FF5353"/>
-<path d="M79.5266 21.5383H97.1494V26.7305H79.5266V21.5383Z" fill="#FF5353"/>
-<path d="M124 13.4935C124 20.8041 118.061 26.7305 110.735 26.7305C103.409 26.7305 97.4698 20.8041 97.4698 13.4935C97.4698 6.18284 103.409 0.256408 110.735 0.256408C118.061 0.256408 124 6.18284 124 13.4935Z" fill="#6FE9A7"/>
-<path d="M97.4057 0.256408H110.35V26.7305H97.4057V0.256408Z" fill="#D4FCBC"/>
-</svg>
+      <Img src="/images/img_header_logo.svg" alt="headerlogo_one" className="h-8 " />
+
          </NavLink>  
 
 

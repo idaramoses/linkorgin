@@ -34,22 +34,81 @@ interface AuthResponse {
   error?: string;
   user?: UserData;
 }
-interface UserData {
+
+
+export interface UserData {
   _id: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  companyName: string;
-  position: string;
-  sector: string;
-  industry: string;
-  companySize: string;
-  password: string;
-  companyUsers: any[]; 
-  surveys: any[];
-  cert: any[]; 
+  personalInfo: PersonalInfo;
+  languageProficiency: LanguageProficiency;
+  educationAndEmployment: EducationAndEmployment;
+  housingSituation: HousingSituation;
+  familyInfo: FamilyInfo;
+  socialIntegration: SocialIntegration;
+  supportNeeds: SupportNeeds;
+  userId: string;
+  profile: Profile;
   __v: number;
+  searchHistory: SearchHistory[];
 }
+
+interface PersonalInfo {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  email: string;
+  password: string;
+  phone: string;
+  _id: string;
+}
+
+interface LanguageProficiency {
+  nativeLanguage: string;
+  _id: string;
+}
+
+interface EducationAndEmployment {
+  highestLevelOfEducation: string;
+  previousWorkExperience: string;
+  aspirations: string;
+  _id: string;
+}
+
+interface HousingSituation {
+  currentHousingSituation: string;
+  housingPreference: string;
+  _id: string;
+}
+
+interface FamilyInfo {
+  numOfFamilyMembers: number;
+  relationship: string;
+  _id: string;
+}
+
+interface SocialIntegration {
+  interestsAndHobbies: string;
+  preferredSocialActivities: string;
+  ethos: string;
+  _id: string;
+}
+
+interface SupportNeeds {
+  supportServices: any;
+  _id: string;
+}
+
+interface Profile {
+  _id: string;
+  name: string;
+}
+
+interface SearchHistory {
+  searchTerm: string;
+  _id: string;
+  timestamp: string;
+}
+
+
 
 
 class AuthService {
@@ -63,10 +122,19 @@ class AuthService {
   
       const { token,user } = response.data;
       TokenService.setToken(token);
-  
-    
-  
-      localStorage.setItem('userData', JSON.stringify(user)); // Save user data locally
+     // Store token in local storage
+     localStorage.setItem('token', token);
+
+     // Fetch user data using the token
+     const userDataResponse = await axios.get('https://linked-origin-server.vercel.app/api/v1/users/profile/be975b14-26e7-4e35-81d4-eb5091923eed/', {
+       headers: {
+         Authorization: `Bearer ${token}`
+       }
+     });
+
+     // Store user data in local storage
+     localStorage.setItem('userData', JSON.stringify(userDataResponse.data));
+
       toast.success('Logged In Successfully', {
         position:"top-right",
         autoClose: 5000,
@@ -149,7 +217,14 @@ class AuthService {
   }
   
 
-  
+
+  static getUserDataFromLocalStorage(): UserData | null {
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+      return JSON.parse(userDataString);
+    }
+    return null;
+  }
   static getUserData(): UserData | null {
     // Retrieve user data from local storage
     const userDataString = localStorage.getItem('userData');
