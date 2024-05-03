@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Heading, Img, Text } from "../../../components";
 import { NavLink } from "react-router-dom";
 import Header from "components/Header";
 import ReadMoreReact from 'react-read-more-less';
+import AuthService from "services/authService";
+import { Skeleton } from "@mui/material";
 
 const data = [
   { governmentone: "/images/img_home.svg", governmenttwo: "Government", route: 'government' },
@@ -27,7 +29,63 @@ const newsdata = [
   { title: "Tools Outage", contents: "USCIS will conduct system maintenance to the Contact Relationship Interface System (CRIS) on Wednesday, April 17, 2024 at 11:50 p.m. through Thursday, April 18, 2024 at 2:00 a.m. Eastern." },
  
 ];
+const NewsItem = ({ title, contents, image }) => {
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleExpanded = () => {
+    setExpanded(!expanded);
+  };
+
+  const shortContents = contents.split(' ').slice(0, 12).join(' ');
+  const fullContents = contents;
+
+  return (
+ 
+         <div
+                  
+                  className="flex w-full mt-2 flex-col items-center gap-2 rounded-[15px] z-10 cursor-pointer"
+                >
+                 <Img src={image} alt="government_one" className="h-auto rounded-md" />
+                  <p  className="text-sm font-normal text-black-900 text-center">
+                    {title}
+                  </p>
+                  {/* <p  className="text-sm text-gray-600 text-center">
+                  {expanded ? fullContents : shortContents}
+                  <button className=" ml-2 text-blue-600" onClick={toggleExpanded}>{expanded ? '   Read less' : '  Read more'}</button>
+                  </p> */}
+                </div> 
+
+  );
+};
+
+const NewsList = ({ news }) => {
+  return (
+    <div  className="flex flex-col gap-4">
+      {news.map((item, index) => (
+        <NewsItem key={index} title={item.title} contents={item.description} image={item.image} />
+      ))}
+    </div>
+  );
+};
 export default function CategoryPage() {
+  const [news, setNews] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const newsData = await AuthService.getNews(); // Call AuthService method to get news
+        setNews(newsData);
+        setLoading(false); // Set loading to false when data is fetched
+      } catch (error) {
+        console.error('Error fetching news:', error);
+        setLoading(false); // Set loading to false if there's an error
+      }
+    };
+
+    fetchNews();
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -45,22 +103,31 @@ export default function CategoryPage() {
            <div className="flex md:flex-col-reverse flex-row w-full justify-between items-start px-4">
            <div className="flex flex-col md:w-full  w-[25%] px-5 border-r border-gray-600 md:border-none ">
 
+          <div className="news-feed">
+            {loading ? (
+            <div className='items-center w-full justify-center p-2'>
+            <Skeleton sx={{ bgcolor: "#f9f9f9" }} variant="rectangular" className='w-full my-2 bg-gray-3  dark:bg-boxdark rounded-md' height={200}  />
+            <Skeleton sx={{ bgcolor: "#f9f9f9" }} variant="rectangular" className='w-full my-2 bg-gray-200 rounded-md' height={200}  />
+            <Skeleton sx={{ bgcolor: "#f9f9f9" }} variant="rectangular" className='w-full my-2 bg-gray-200 rounded-md' height={200}  />
+           
+         </div>
+            ) : (
+              <>
+                 <NewsList news={news} />
+                {/* {news.map((item, index) => (
+                  <div key={index} className="news-item">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <p>Published at: {new Date(item.publishedAt).toLocaleString()}</p>
+                    <a href={item.url} target="_blank" rel="noopener noreferrer">Read more</a>
+                  </div>
+                ))} */}
+              </>
+            )}
+          </div>
+
           <div className="mt-20 grid justify-center gap-[54px] grid-cols-1">
-            {newsdata.map((d, index) => (
-                  <div
-                  key={"category" + index}
-                  className="flex w-full flex-col items-center gap-4 rounded-[15px] bg-gray-200 p-9 sm:p-5 z-10 cursor-pointer"
-                >
-                  <p  className="text-base font-semibold text-black-900 text-center">
-                    {d.title}
-                  </p>
-                  <p  className="text-sm text-gray-600 text-center">
-                  {d.contents}
-                    {/* <ReadMoreReact text={d.contents} min={100} ideal={200} max={300} /> */}
-                  </p>
-                </div> 
-         
-            ))}
+       
           </div>
 
           </div>

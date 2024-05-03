@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Img, Heading, Button, Text } from "../../../components";
 import { NavLink } from 'react-router-dom';
-import VideoPlayer from 'components/VideoPlayer';
-import YouTubeVideo from 'components/VideoPlayer';
+import {YouTubeVideo} from 'components/VideoPlayer';
 interface Page2Props {
   togglePage: () => void;
 }

@@ -7,17 +7,20 @@ import Register from "pages/Register";
 import LoginPage from "pages/Login";
 import Dashboard from "pages/Dashboard";
 import Category from "pages/Dashboard/Category";
-import Govenment from "pages/Dashboard/Govenment";
 import Welcomescreen from "pages/Welcomescreen";
 import AIseachpagegovernment from "pages/AIseachpagegovernment";
 import AIseachpagegovernmentOne from "pages/AIseachpagegovernmentOne";
 import AIseachpagegovernmentTwo from "pages/AIseachpagegovernmentTwo";
-import GovernmentPage from "pages/Dashboard/Govenment";
-import CommunityPage from "pages/Dashboard/Community";
 import EducationPage from "pages/Dashboard/Education";
 import HealthCarePage from "pages/Dashboard/HealthCare";
 import ImigrationPage from "pages/Dashboard/Immigration";
 import CulturalPage from "pages/Dashboard/Cultural";
+import ProfilePage from "pages/Profile";
+import GovernmentPage from "pages/Dashboard/Govenment";
+import CommunityPage from "pages/Dashboard/Community";
+import InvestmentPage from "pages/Dashboard/Investment";
+import FinancePage from "pages/Dashboard/Finance";
+import SocialPage from "pages/Dashboard/Social";
 
 
 const ProjectRoutes = () => {
@@ -73,8 +76,24 @@ const ProjectRoutes = () => {
       element: <CulturalPage />,
     },
     {
+      path: "/dashboard/category/social",
+      element: <SocialPage />,
+    },
+    {
+      path: "/dashboard/category/finance",
+      element: <FinancePage />,
+    },
+    {
+      path: "/dashboard/category/investment",
+      element: <InvestmentPage />,
+    },
+    {
       path: "welcomescreen",
       element: <Welcomescreen />,
+    },
+    {
+      path: "profile",
+      element: <ProfilePage />,
     },
     {
       path: "aiseachpagegovernment",

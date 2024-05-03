@@ -38,25 +38,18 @@ interface AuthResponse {
 
 export interface UserData {
   _id: string;
-  personalInfo: PersonalInfo;
-  languageProficiency: LanguageProficiency;
-  educationAndEmployment: EducationAndEmployment;
-  housingSituation: HousingSituation;
-  familyInfo: FamilyInfo;
-  socialIntegration: SocialIntegration;
-  supportNeeds: SupportNeeds;
-  userId: string;
-  profile: Profile;
-  __v: number;
-  searchHistory: SearchHistory[];
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
 }
 
 interface PersonalInfo {
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
+  // dateOfBirth: string;
   email: string;
-  password: string;
+  // password: string;
   phone: string;
   _id: string;
 }
@@ -125,15 +118,15 @@ class AuthService {
      // Store token in local storage
      localStorage.setItem('token', token);
 
-     // Fetch user data using the token
-     const userDataResponse = await axios.get('https://linked-origin-server.vercel.app/api/v1/users/profile/be975b14-26e7-4e35-81d4-eb5091923eed/', {
+    //  Fetch user data using the token
+     const userDataResponse = await axios.get(`https://linked-origin-server.vercel.app/api/v1/users/profile/`, {
        headers: {
          Authorization: `Bearer ${token}`
        }
      });
 
      // Store user data in local storage
-     localStorage.setItem('userData', JSON.stringify(userDataResponse.data));
+     localStorage.setItem('userData', JSON.stringify(userDataResponse.data['data']));
 
       toast.success('Logged In Successfully', {
         position:"top-right",
@@ -146,7 +139,10 @@ class AuthService {
         theme: "light",
         transition: Bounce,
       });
-      console.log('successfull:', response);
+      console.log('successfull:', response.data);
+      console.log('user_data:', response.data['userId']);
+      // console.log('user-data:', userDataResponse.data['data']);
+
       return { success: true, user };
     } catch (error) {
       console.error('Login error:', error);
@@ -216,7 +212,35 @@ class AuthService {
     return !!localStorage.getItem('token');
   }
   
+  static async getNews(): Promise<any[]> {
+    try {
+      const token = TokenService.getToken(); // Assuming TokenService stores the token
+      const response = await axios.get('https://linked-origin-server.vercel.app/api/v1/news-update', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return response.data.news;
+    } catch (error) {
+      console.error('Error fetching news:', error);
+      throw error;
+    }
+  }
 
+  static async getHistory(): Promise<any[]> {
+    try {
+      const token = TokenService.getToken(); // Assuming TokenService stores the token
+      const response = await axios.get('https://linked-origin-server.vercel.app/api/v1/search/search-history/user/', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return response.data.data.searchHistory;
+    } catch (error) {
+      console.error('Error fetching news:', error);
+      throw error;
+    }
+  }
 
   static getUserDataFromLocalStorage(): UserData | null {
     const userDataString = localStorage.getItem('userData');

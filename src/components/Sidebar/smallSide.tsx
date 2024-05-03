@@ -4,6 +4,7 @@ import { NavLink, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import { Input, Img, Text, Button, Heading } from "../../components";
 import AuthService from 'services/authService';
+import { Skeleton } from '@mui/material';
 
 
 
@@ -26,6 +27,58 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isMenuOpen, handleCloseMenu, 
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
   );
+
+  const [browserHistory, setBrowserHistory] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchUserBrowserHistory = async () => {
+      try {
+        const historyData = await AuthService.getHistory(); // Call AuthService method to get user's browser history
+        setBrowserHistory(historyData || []); // Set browser history to an empty array if historyData is undefined
+        setLoading(false); // Set loading to false when data is fetched
+      } catch (error) {
+        console.error('Error fetching user browser history:', error);
+        setLoading(false); // Set loading to false if there's an error
+      }
+    };
+
+    fetchUserBrowserHistory();
+  }, []);
+
+  // Function to group browser history by time
+  const groupByTime = (history: any[]) => {
+    const groupedHistory: any = {
+      today: [],
+      yesterday: [],
+      lastMonth: []
+    };
+
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const lastMonth = new Date(today);
+    lastMonth.setMonth(lastMonth.getMonth() - 1);
+
+    history.forEach(item => {
+      const timestamp = new Date(item.timestamp);
+      if (timestamp.toDateString() === today.toDateString()) {
+        groupedHistory.today.push(item);
+      } else if (timestamp.toDateString() === yesterday.toDateString()) {
+        groupedHistory.yesterday.push(item);
+      } else if (timestamp > lastMonth) {
+        groupedHistory.lastMonth.push(item);
+      }
+    });
+
+    return groupedHistory;
+  };
+
+  // Group browser history by time
+  const groupedHistory = groupByTime(browserHistory);
+
+
   return (
     <>
      <div>
@@ -71,7 +124,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isMenuOpen, handleCloseMenu, 
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
-        <div className="h-full w-full bg-white-A700 pl-5 gap-2">
+        {/* <div className="h-full w-full bg-white-A700 pl-5 gap-2">
           <Text  className="m-auto text-base md:text-sm !text-gray-600">
             Today
           </Text>
@@ -105,7 +158,48 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isMenuOpen, handleCloseMenu, 
           
           
        
-        </div>
+        </div> */}
+        {loading ? (
+            <div className='items-center w-full justify-center p-2'>
+            <Skeleton sx={{ bgcolor: "#f9f9f9" }} variant="rectangular" className='w-full my-2 bg-gray-3  dark:bg-boxdark rounded-md' height={200}  />
+            <Skeleton sx={{ bgcolor: "#f9f9f9" }} variant="rectangular" className='w-full my-2 bg-gray-200 rounded-md' height={200}  />
+            <Skeleton sx={{ bgcolor: "#f9f9f9" }} variant="rectangular" className='w-full my-2 bg-gray-200 rounded-md' height={200}  />
+           
+         </div>
+            ) : (
+              <div className='flex flex-col gap-4'>
+              {groupedHistory.today.length > 0 && (
+                <div>
+                  <h3>Today</h3>
+                  {groupedHistory.today.map((item, index) => (
+                    <div key={index} className="history-item">
+                     <p className='text-sm'>{item.searchQuery}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {groupedHistory.yesterday.length > 0 && (
+                <div>
+                  <h3>Yesterday</h3>
+                  {groupedHistory.yesterday.map((item, index) => (
+                    <div key={index} className="history-item">
+                    <p className='text-sm'>{item.searchQuery}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {groupedHistory.lastMonth.length > 0 && (
+                <div>
+                  <h3>Last Month</h3>
+                  {groupedHistory.lastMonth.map((item, index) => (
+                    <div key={index} className="history-item">
+                   <p className='text-sm'>{item.searchQuery}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            )}
         {/* <!-- Sidebar Menu --> */}
       </div>
             </div>
