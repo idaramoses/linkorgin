@@ -160,11 +160,14 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ isMenuOpen, handleCloseMenu, 
        
         </div> */}
         {loading ? (
-            <div className='items-center w-full justify-center p-2'>
-            <Skeleton sx={{ bgcolor: "#f9f9f9" }} variant="rectangular" className='w-full my-2 bg-gray-3  dark:bg-boxdark rounded-md' height={200}  />
-            <Skeleton sx={{ bgcolor: "#f9f9f9" }} variant="rectangular" className='w-full my-2 bg-gray-200 rounded-md' height={200}  />
-            <Skeleton sx={{ bgcolor: "#f9f9f9" }} variant="rectangular" className='w-full my-2 bg-gray-200 rounded-md' height={200}  />
-           
+            <div className='flex flex-col items-center w-full justify-center p-2 gap-4'>
+            <div  className="flex  w-full h-10 flex-col items-center gap-4 rounded-[5px] bg-red-400_01 bg-opacity-20 animate-pulse "  />
+            {/* <Skeleton sx={{ bgcolor: "#f9f9f9" }} variant="rectangular" className='w-full my-2 bg-gray-200 rounded-md' height={200}  />
+            <Skeleton sx={{ bgcolor: "#f9f9f9" }} variant="rectangular" className='w-full my-2 bg-gray-200 rounded-md' height={200}  /> */}
+             <div  className="flex w-full h-10 flex-col items-center gap-4 rounded-[5px] bg-red-400_01 bg-opacity-20 animate-pulse "  />
+             <div  className="flex w-full h-10 flex-col items-center gap-4 rounded-[5px] bg-red-400_01 bg-opacity-20 animate-pulse "  />
+             <div  className="flex w-full h-10 flex-col items-center gap-4 rounded-[5px] bg-red-400_01 bg-opacity-20 animate-pulse "  />
+
          </div>
             ) : (
               <div className='flex flex-col gap-4'>
