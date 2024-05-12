@@ -9,9 +9,10 @@ import Settings from "components/Settings";
 
 interface Page1Props {
   togglePage: () => void;
+  maintainPage: () => void;
 }
 
-function Page2({ togglePage }: Page1Props){
+function Page2({ togglePage,maintainPage }: Page1Props){
     const [isMenuOpen, setMenuOpen] = useState(false);
     const navbarRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);

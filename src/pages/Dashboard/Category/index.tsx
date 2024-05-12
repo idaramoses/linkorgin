@@ -36,8 +36,8 @@ const NewsItem = ({ title, contents, image }) => {
     setExpanded(!expanded);
   };
 
-  const shortContents = contents.split(' ').slice(0, 12).join(' ');
-  const fullContents = contents;
+  // const shortContents = contents.split(' ').slice(0, 12).join(' ');
+  // const fullContents = contents;
 
   return (
  

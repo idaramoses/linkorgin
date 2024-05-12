@@ -10,12 +10,15 @@ export default function GovernmentPage() {
   const togglePage = () => {
     setCurrentPage(currentPage === 'page1' ? 'page2' : 'page1');
   };
+  const maintainPage = () => {
+    setCurrentPage(currentPage === 'page1' ? 'page1' : 'page2');
+  };
   return (
     <div>
       {currentPage === 'page2' ? (
-        <Page1 togglePage={togglePage} />
+        <Page1 togglePage={togglePage}  maintainPage={maintainPage}  />
       ) : (
-        <Page2 togglePage={togglePage} />
+        <Page2 togglePage={togglePage}  maintainPage={maintainPage}/>
       )}
     </div>
   );

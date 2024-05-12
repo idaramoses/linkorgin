@@ -38,8 +38,36 @@ const SmallYouTubeVideo: React.FC<YouTubeVideoProps> = ({ videoUrl }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
+
+        <label className="mt-2.5 mb-5 block font-normal  text-black ">
+        The new immigrant guide 
+          </label> 
     </div>
   );
 };
 
 export  {SmallYouTubeVideo};
+
+const SmallImmigrantYouTubeVideo: React.FC<YouTubeVideoProps> = ({ videoUrl }) => {
+  return (
+    <div>
+      <iframe
+         
+        width="220"
+   
+        className='rounded-lg  h-52 '
+          src={videoUrl}
+          title="YouTube video player"
+          frameBorder={0}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+
+        <label className="mt-2.5 mb-5 block font-normal  text-black ">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempus elit ac est maximus.
+        </label> 
+    </div>
+  );
+};
+
+export  {SmallImmigrantYouTubeVideo};

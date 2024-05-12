@@ -6,6 +6,7 @@ import HomeScreenRowcloseOne from "components/HomeScreenRowcloseOne";
 import ImageSlider from "components/ImageSlider";
 import Header from "components/Header";
 import Settings from "components/Settings";
+import { SmallImmigrantYouTubeVideo } from "components/VideoPlayer";
 
 interface Page1Props {
   togglePage: () => void;
@@ -100,20 +101,53 @@ function Page2({ togglePage }: Page1Props){
       </div>
    
       <div className="flex flex-col gap-3" >
-      {/* healthcare questions section */}
-      {data.map((d, index) => (
-    <div  className="flex   flex-row gap-2 items-start justify-center w-[80%]">
-     <Img
-          src={d.image}
-          alt="image"
-          className="h-[100px] w-[100px] rounded-[12px] object-cover "
-        />
-         <p  className="text-base self-start w-[60%]">
-          {d.wherecani}
-      </p>
-      
-    </div>
-  ))}
+      <div className=" ml-20 md:m-0 flex flex-col md:flex-col-reverse">
+                <div className="flex flex-row md:flex-col gap-5 justify-center items-center mt-10 mb-10 md:w-full  md:h-auto   h-auto  w-[90%]">
+                <SmallImmigrantYouTubeVideo videoUrl="https://www.youtube.com/embed/Ek1f2MIe34s" />
+                <SmallImmigrantYouTubeVideo videoUrl="https://www.youtube.com/embed/1QFTSafMxBQ" />
+                <SmallImmigrantYouTubeVideo videoUrl="https://www.youtube.com/embed/zpXXvx1gCpU" />
+                  
+           </div>
+           <div className="flex flex-row md:flex-col gap-5 justify-center items-center mb-10 md:w-full  md:h-auto  h-52  w-[90%]">
+                
+                <SmallImmigrantYouTubeVideo videoUrl="https://www.youtube.com/embed/1QFTSafMxBQ" />
+                <SmallImmigrantYouTubeVideo videoUrl="https://www.youtube.com/embed/zpXXvx1gCpU" />
+                <SmallImmigrantYouTubeVideo videoUrl="https://www.youtube.com/embed/Ek1f2MIe34s" />
+                  
+           </div>
+                    {/* search section */}
+                    <div className="mt-64 md:mt-10 flex flex-col items-end gap-[3px] mb-20 ">
+                    <div className="mr-7 flex w-[27%] flex-wrap justify-end gap-5 md:mr-0 md:w-full">
+                          <Heading   className="cursor-pointer !text-gray-800 text-base md:text-sm border-b-2  border-red-500 ">
+                            Ask Mon-Ami
+                          </Heading>
+                          <Heading  onClick={togglePage}  className="cursor-pointer !text-gray-800 text-base md:text-sm  ">
+                              Search
+                          </Heading>
+                        </div>
+                       <div className="flex  flex-col items-end gap-2.5 self-stretch">
+                        <div className="self-stretch rounded-[21px] border border-solid border-blue_gray-100_01 bg-white-A700 p-[9px]">
+                          <div className="flex flex-col gap-[27px]">
+                            <div className="flex items-start justify-between gap-5">
+                              <input  className="mt-[7px] text-base md:text-sm outline-none border-none focus:outline-none" placeholder=" Ask me anything"/>
+                               
+                              
+                             
+                              <Img src="/images/img_menu.svg" alt="menu_one" className="h-[20px]" />
+                            </div>
+                            <div className="flex items-center justify-between gap-5">
+                              <Img src="/images/img_clock.svg" alt="clock_one" className="h-[19px] self-start" />
+                              <Img
+                                src="/images/img_settings_gray_500_01.svg"
+                                alt="settings_one"
+                                className="h-[17px] w-[17px] self-end"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
       
       </div>
                    

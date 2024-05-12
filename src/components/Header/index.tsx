@@ -139,6 +139,7 @@ const Header = (props: {}) => {
 
             Setting</li>
           <div className='bg-gray-300 h-[1px] w-full my-1'></div>
+          <NavLink to={`/`}>
           <li className="cursor-pointer text-base hover:bg-gray-100 flex flex-row items-center gap-5 text-gray-700 ">
           <svg width="17" height="17" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M4.36133 3.66281C4.52414 1.77206 5.49577 1 7.62287 1H7.69115C10.0388 1 10.979 1.94013 10.979 4.28781V7.71219C10.979 10.0599 10.0388 11 7.69115 11H7.62287C5.51153 11 4.5399 10.2384 4.36658 8.3792" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round"/>
@@ -146,6 +147,8 @@ const Header = (props: {}) => {
 <path d="M2.75945 4.23535L1 5.9948L2.75945 7.75426" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
              Logout</li>
+          </NavLink>
+        
         </ul>
       )}
               </div>

@@ -9,9 +9,10 @@ import Settings from "components/Settings";
 
 interface Page1Props {
   togglePage: () => void;
+  maintainPage: () => void;
 }
 
-function Page1({ togglePage }: Page1Props){
+function Page1({ togglePage,maintainPage }: Page1Props){
     const [isMenuOpen, setMenuOpen] = useState(false);
     const navbarRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -29,6 +30,51 @@ function Page1({ togglePage }: Page1Props){
       { image: "/images/img_istockphoto_143.png", wherecani: "What are government policies in healthcare?" },
       { image: "/images/img_istockphoto_148.png", wherecani: "What are government policies in healthcare?" },
     ];
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchQuery(event.target.value);
+    };
+  
+    const handleSubmit = async () => {
+      const token = localStorage.getItem('token'); // Get the token from local storage
+      if (!token) {
+        console.error('Token not found in local storage');
+        return;
+      }
+  
+      const apiUrl = 'https://linked-origin-server.vercel.app/api/v1/search/update-search-history/user/';
+      const requestBody = {
+        searchQuery: {
+          searchQuery: searchQuery
+        }
+      };
+  
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(requestBody)
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to update search history');
+        }
+  
+        const responseData = await response.json();
+        if (responseData.message === 'success!') {
+          maintainPage();
+          console.log('Search history updated successfully');
+        } else {
+          throw new Error('Unexpected response from server');
+        }
+      } catch (error) {
+        console.error('Error updating search history:', error);
+      }
+    };
       return (
         <>
           <Helmet>
@@ -102,9 +148,20 @@ function Page1({ togglePage }: Page1Props){
                        <div className="flex  flex-col items-end gap-2.5 self-stretch">
                         <div className="self-stretch rounded-[21px] border border-solid border-blue_gray-100_01 bg-white-A700 p-[9px]">
                           <div className="flex flex-col gap-[27px]">
-                            <div className="flex items-start justify-between gap-5">
-                              <input  className="mt-[7px] text-base md:text-sm outline-none border-none focus:outline-none" placeholder=" Ask me anything"/>
-                               
+                            <div className="flex w-full items-start justify-between gap-5">
+        <form onSubmit={handleSubmit} className="w-full">
+        <input
+            type="text"
+            placeholder=" Ask me anything"
+            value={searchQuery}
+            onChange={handleInputChange}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSubmit();
+              }
+            }}
+          />
+      </form>
                               
                              
                               <Img src="/images/img_menu.svg" alt="menu_one" className="h-[20px]" />
