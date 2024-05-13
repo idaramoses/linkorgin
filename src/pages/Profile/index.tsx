@@ -119,6 +119,7 @@ const handleSubmit = async (e) => {
 
           <div className="w-[25%] md:hidden border-r border-gray-200">
           <ProfileSideMenu/>
+          
           </div>
        
          <div className="flex flex-col  items-start  mt-10  px-10 bg-white-A700 ">

@@ -136,7 +136,7 @@ export default function CategoryPage() {
           </div>
            <div className="flex flex-col md:w-full  w-[75%] px-10 ">
     {/* greeting text section */}
-    <Heading
+      <Heading
            
             className="mt-20   md:text-2xl text-3xl self-start bg-gradient2 bg-clip-text !text-transparent !font-kumbhsans "
           >
