@@ -189,13 +189,17 @@ const handleSubmit = async (e) => {
        
                <div className="w-[50%] md:w-full md:p-5  ">
                <div className="mt-20 md:mt-10 flex w-72 my-10  mx-auto items-center justify-between gap-2 rounded-[15px] bg-gray-100_89 p-[5px] ">
-                          <button
-                            onClick={(e) => { e.preventDefault();}}
+                         
+               <NavLink to="/">
+               <button
+                          
                            
                             className=" rounded-[10px]  h-14 font-inter font-semibold "
                           >
                             Tour
                           </button>
+              </NavLink>
+                          
                           <button
                               onClick={(e) => { e.preventDefault();}}
 

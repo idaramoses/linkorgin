@@ -203,6 +203,17 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
         setError('Please fill in all required fields.');
         return;
       }
+      if ( password !== confirmpassword ) {
+        setError('Password does not match');
+        return;
+      }
+    
+
+      // Check password complexity
+      if (!isPasswordValid(password) ||!isPasswordValid(confirmpassword)) {
+        setError('Password must contain at least one capital letter, one lowercase letter,  one special character and t must not be less than 6 characters in length');
+        return;
+      }
     }
     if(currentStep===2){
       if (!countryOfOrigin || !currentImmigrationStatus || !visaType || !typeOfStatus   ) {
@@ -349,17 +360,11 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Check if any required fields are empty
-    if (!firstname || !lastname || !email || !password ) {
+    if (!firstname || !lastname || !email || !password) {
       setError('Please fill in all required fields.');
       return;
     }
-  
-
-    // Check password complexity
-    if (!isPasswordValid(password)) {
-      setError('Password must contain at least one capital letter, one lowercase letter,  one special character and t must not be less than 6 characters in length');
-      return;
-    }
+ 
   
   
   
@@ -683,6 +688,7 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
       <option value="">Select gender</option>
       <option value="Male">Male</option>
       <option value="Female">Female</option>
+      <option value="x">X</option>
       <option value="Others">others</option>
     </select>
   </div>
@@ -849,12 +855,205 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                       </label>
                       <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
           <select value={countryOfOrigin} onChange={handleCountryofOriginChange}  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
-            <option value="">Select country</option>
-            <option value="Nigeria">Nigeria</option>
-            <option value="India">India</option>
-            <option value="Canada">Canada</option>
-            <option value="Ghana">Ghana</option>
-          </select>
+       
+          <option value="">Select country</option>
+<option value="Afghanistan">Afghanistan</option>
+<option value="Albania">Albania</option>
+<option value="Algeria">Algeria</option>
+<option value="Andorra">Andorra</option>
+<option value="Angola">Angola</option>
+<option value="Antigua and Barbuda">Antigua and Barbuda</option>
+<option value="Argentina">Argentina</option>
+<option value="Armenia">Armenia</option>
+<option value="Australia">Australia</option>
+<option value="Austria">Austria</option>
+<option value="Azerbaijan">Azerbaijan</option>
+<option value="Bahamas">Bahamas</option>
+<option value="Bahrain">Bahrain</option>
+<option value="Bangladesh">Bangladesh</option>
+<option value="Barbados">Barbados</option>
+<option value="Belarus">Belarus</option>
+<option value="Belgium">Belgium</option>
+<option value="Belize">Belize</option>
+<option value="Benin">Benin</option>
+<option value="Bhutan">Bhutan</option>
+<option value="Bolivia">Bolivia</option>
+<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+<option value="Botswana">Botswana</option>
+<option value="Brazil">Brazil</option>
+<option value="Brunei">Brunei</option>
+<option value="Bulgaria">Bulgaria</option>
+<option value="Burkina Faso">Burkina Faso</option>
+<option value="Burundi">Burundi</option>
+<option value="Cabo Verde">Cabo Verde</option>
+<option value="Cambodia">Cambodia</option>
+<option value="Cameroon">Cameroon</option>
+<option value="Canada">Canada</option>
+<option value="Central African Republic">Central African Republic</option>
+<option value="Chad">Chad</option>
+<option value="Chile">Chile</option>
+<option value="China">China</option>
+<option value="Colombia">Colombia</option>
+<option value="Comoros">Comoros</option>
+<option value="Congo">Congo</option>
+<option value="Costa Rica">Costa Rica</option>
+<option value="Croatia">Croatia</option>
+<option value="Cuba">Cuba</option>
+<option value="Cyprus">Cyprus</option>
+<option value="Czech Republic">Czech Republic</option>
+<option value="Denmark">Denmark</option>
+<option value="Djibouti">Djibouti</option>
+<option value="Dominica">Dominica</option>
+<option value="Dominican Republic">Dominican Republic</option>
+<option value="East Timor">East Timor</option>
+<option value="Ecuador">Ecuador</option>
+<option value="Egypt">Egypt</option>
+<option value="El Salvador">El Salvador</option>
+<option value="Equatorial Guinea">Equatorial Guinea</option>
+<option value="Eritrea">Eritrea</option>
+<option value="Estonia">Estonia</option>
+<option value="Eswatini">Eswatini</option>
+<option value="Ethiopia">Ethiopia</option>
+<option value="Fiji">Fiji</option>
+<option value="Finland">Finland</option>
+<option value="France">France</option>
+<option value="Gabon">Gabon</option>
+<option value="Gambia">Gambia</option>
+<option value="Georgia">Georgia</option>
+<option value="Germany">Germany</option>
+<option value="Ghana">Ghana</option>
+<option value="Greece">Greece</option>
+<option value="Grenada">Grenada</option>
+<option value="Guatemala">Guatemala</option>
+<option value="Guinea">Guinea</option>
+<option value="Guinea-Bissau">Guinea-Bissau</option>
+<option value="Guyana">Guyana</option>
+<option value="Haiti">Haiti</option>
+<option value="Honduras">Honduras</option>
+<option value="Hungary">Hungary</option>
+<option value="Iceland">Iceland</option>
+<option value="India">India</option>
+<option value="Indonesia">Indonesia</option>
+<option value="Iran">Iran</option>
+<option value="Iraq">Iraq</option>
+<option value="Ireland">Ireland</option>
+<option value="Israel">Israel</option>
+<option value="Italy">Italy</option>
+<option value="Jamaica">Jamaica</option>
+<option value="Japan">Japan</option>
+<option value="Jordan">Jordan</option>
+<option value="Kazakhstan">Kazakhstan</option>
+<option value="Kenya">Kenya</option>
+<option value="Kiribati">Kiribati</option>
+<option value="Korea, North">Korea, North</option>
+<option value="Korea, South">Korea, South</option>
+<option value="Kosovo">Kosovo</option>
+<option value="Kuwait">Kuwait</option>
+<option value="Kyrgyzstan">Kyrgyzstan</option>
+<option value="Laos">Laos</option>
+<option value="Latvia">Latvia</option>
+<option value="Lebanon">Lebanon</option>
+<option value="Lesotho">Lesotho</option>
+<option value="Liberia">Liberia</option>
+<option value="Libya">Libya</option>
+<option value="Liechtenstein">Liechtenstein</option>
+<option value="Lithuania">Lithuania</option>
+<option value="Luxembourg">Luxembourg</option>
+<option value="Madagascar">Madagascar</option>
+<option value="Malawi">Malawi</option>
+<option value="Malaysia">Malaysia</option>
+<option value="Maldives">Maldives</option>
+<option value="Mali">Mali</option>
+<option value="Malta">Malta</option>
+<option value="Marshall Islands">Marshall Islands</option>
+<option value="Mauritania">Mauritania</option>
+<option value="Mauritius">Mauritius</option>
+<option value="Mexico">Mexico</option>
+<option value="Micronesia">Micronesia</option>
+<option value="Moldova">Moldova</option>
+<option value="Monaco">Monaco</option>
+<option value="Mongolia">Mongolia</option>
+<option value="Montenegro">Montenegro</option>
+<option value="Morocco">Morocco</option>
+<option value="Mozambique">Mozambique</option>
+<option value="Myanmar">Myanmar</option>
+<option value="Namibia">Namibia</option>
+<option value="Nauru">Nauru</option>
+<option value="Nepal">Nepal</option>
+<option value="Netherlands">Netherlands</option>
+<option value="New Zealand">New Zealand</option>
+<option value="Nicaragua">Nicaragua</option>
+<option value="Niger">Niger</option>
+<option value="Nigeria">Nigeria</option>
+<option value="North Macedonia">North Macedonia</option>
+<option value="Norway">Norway</option>
+<option value="Oman">Oman</option>
+<option value="Pakistan">Pakistan</option>
+<option value="Palau">Palau</option>
+<option value="Palestine">Palestine</option>
+<option value="Panama">Panama</option>
+<option value="Papua New Guinea">Papua New Guinea</option>
+<option value="Paraguay">Paraguay</option>
+<option value="Peru">Peru</option>
+<option value="Philippines">Philippines</option>
+<option value="Poland">Poland</option>
+<option value="Portugal">Portugal</option>
+<option value="Qatar">Qatar</option>
+<option value="Romania">Romania</option>
+<option value="Russia">Russia</option>
+<option value="Rwanda">Rwanda</option>
+<option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+<option value="Saint Lucia">Saint Lucia</option>
+<option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+<option value="Samoa">Samoa</option>
+<option value="San Marino">San Marino</option>
+<option value="Sao Tome and Principe">Sao Tome and Principe</option>
+<option value="Saudi Arabia">Saudi Arabia</option>
+<option value="Senegal">Senegal</option>
+<option value="Serbia">Serbia</option>
+<option value="Seychelles">Seychelles</option>
+<option value="Sierra Leone">Sierra Leone</option>
+<option value="Singapore">Singapore</option>
+<option value="Slovakia">Slovakia</option>
+<option value="Slovenia">Slovenia</option>
+<option value="Solomon Islands">Solomon Islands</option>
+<option value="Somalia">Somalia</option>
+<option value="South Africa">South Africa</option>
+<option value="South Sudan">South Sudan</option>
+<option value="Spain">Spain</option>
+<option value="Sri Lanka">Sri Lanka</option>
+<option value="Sudan">Sudan</option>
+<option value="Suriname">Suriname</option>
+<option value="Sweden">Sweden</option>
+<option value="Switzerland">Switzerland</option>
+<option value="Syria">Syria</option>
+<option value="Taiwan">Taiwan</option>
+<option value="Tajikistan">Tajikistan</option>
+<option value="Tanzania">Tanzania</option>
+<option value="Thailand">Thailand</option>
+<option value="Togo">Togo</option>
+<option value="Tonga">Tonga</option>
+<option value="Trinidad and Tobago">Trinidad and Tobago</option>
+<option value="Tunisia">Tunisia</option>
+<option value="Turkey">Turkey</option>
+<option value="Turkmenistan">Turkmenistan</option>
+<option value="Tuvalu">Tuvalu</option>
+<option value="Uganda">Uganda</option>
+<option value="Ukraine">Ukraine</option>
+<option value="United Arab Emirates">United Arab Emirates</option>
+<option value="United Kingdom">United Kingdom</option>
+<option value="United States">United States</option>
+<option value="Uruguay">Uruguay</option>
+<option value="Uzbekistan">Uzbekistan</option>
+<option value="Vanuatu">Vanuatu</option>
+<option value="Vatican City">Vatican City</option>
+<option value="Venezuela">Venezuela</option>
+<option value="Vietnam">Vietnam</option>
+<option value="Yemen">Yemen</option>
+<option value="Zambia">Zambia</option>
+<option value="Zimbabwe">Zimbabwe</option>
+</select>
+
         </div>
                     </div>
                     <div className="mb-4 w-full" >
@@ -1044,11 +1243,11 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
               
                   <div className="mb-4 w-full" >
                     <label className="mb-2.5 block font-medium  text-black ">
-                     Previous work experience
+                     Previous work industry
                     </label>
                     <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
-          <select  value={previousWorkExperience}   className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
-            <option value="">Select Previous Work expoerice</option>
+          <select    className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
+            <option value="">Select Previous Work industry</option>
             <option value="Agriculture">Agriculture, Forestry, Fishing & Hunting</option>
             <option value="Mining">Mining, Quarrying, and Oil & Gas Extraction</option>
             <option value="Utilities">Utilities (Electricity, Gas, Water)</option>
@@ -1145,11 +1344,12 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                
                   <div className="mb-4 w-full" >
                     <label className="mb-2.5 block font-medium  text-black ">
-                    Number of family members immigrating with the user
+                    Number of family members currently with the user
                     </label>
                     <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
                     <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
                       <option value="">Select number</option>
+                      <option value="zero">0</option>
                       <option value="one">1</option>
                       <option value="two">2</option>
                       <option value="three">3 </option>
@@ -1199,11 +1399,43 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                     </label>
                     <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
                     <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
-                      <option value="">Select hobbies</option>
-                      <option value="railway">Hiking & Camping</option>
-                      <option value="road">Biking & Cycling</option>
-                      <option value="aviation">Swimming & Water Sports </option>
-                      <option value="road">Picnics & Barbecues</option>
+                    <option value="Painting & Drawing">Painting & Drawing</option>
+<option value="Music">Music (playing an instrument, singing)</option>
+<option value="Photography">Photography</option>
+<option value="Writing & Poetry">Writing & Poetry</option>
+<option value="Crafts & DIY projects">Crafts & DIY projects</option>
+<option value="Film & Theatre">Film & Theatre</option>
+<option value="Dance">Dance</option>
+<option value="Hiking & Camping">Hiking & Camping</option>
+<option value="Cycling">Cycling</option>
+<option value="Running & Fitness">Running & Fitness</option>
+<option value="Team Sports">Team Sports (soccer, basketball, etc.)</option>
+<option value="Water Sports">Water Sports (swimming, kayaking, etc.)</option>
+<option value="Rock Climbing & Skiing">Rock Climbing & Skiing</option>
+<option value="Gardening">Gardening</option>
+<option value="Book Clubs & Reading Groups">Book Clubs & Reading Groups</option>
+<option value="Board Games & Game Nights">Board Games & Game Nights</option>
+<option value="Cooking Classes & Food Exploration">Cooking Classes & Food Exploration</option>
+<option value="Travel & Cultural Exchange">Travel & Cultural Exchange</option>
+<option value="Volunteering & Community Service">Volunteering & Community Service</option>
+<option value="Language Learning & Exchange">Language Learning & Exchange</option>
+<option value="Attending Events & Festivals">Attending Events & Festivals</option>
+<option value="Video Games & E-sports">Video Games & E-sports</option>
+<option value="Coding & Programming">Coding & Programming</option>
+<option value="Taking Online Courses & Workshops">Taking Online Courses & Workshops</option>
+<option value="Attending Lectures & Talks">Attending Lectures & Talks</option>
+<option value="Science & Technology Discussions">Science & Technology Discussions</option>
+<option value="Movie & TV Show Discussions">Movie & TV Show Discussions</option>
+<option value="Playing Chess & Strategy Games">Playing Chess & Strategy Games</option>
+<option value="Meditation & Mindfulness">Meditation & Mindfulness</option>
+<option value="Cooking & Baking">Cooking & Baking</option>
+<option value="Coffee & Tea Enthusiast">Coffee & Tea Enthusiast</option>
+<option value="Pets & Animal Lovers">Pets & Animal Lovers</option>
+<option value="Fashion & Style">Fashion & Style</option>
+<option value="Meditation & Yoga">Meditation & Yoga</option>
+<option value="Attending Concerts & Live Music">Attending Concerts & Live Music</option>
+<option value="Others">Others</option>
+
                     </select>
                   </div>
                   </div>
@@ -1213,13 +1445,44 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                     </label>
                     <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
                     <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
-                      <option value="">Select socializing new people</option>
-                      <option value=">Board Games">Board Games & Game Nights</option>
-                      <option value=">Cultural Events">Cultural Events & Festivals</option>
-                      <option value="Sports & Fitness Activities">Sports & Fitness Activities (Running, Hiking, etc.)</option>
-                      <option value="Volunteering">Volunteering </option>
-                      <option value="Book Clubs & Movie Nights">Book Clubs & Movie Nights </option>
-                      <option value="Language Exchange">Language Exchange </option>
+                    <option value="Hiking or biking trails">Hiking or biking trails</option>
+<option value="Group fitness classes">Group fitness classes (yoga, Zumba, HIIT)</option>
+<option value="Recreational sports leagues">Recreational sports leagues (volleyball, soccer, kickball)</option>
+<option value="Rock climbing gyms or bouldering centers">Rock climbing gyms or bouldering centers</option>
+<option value="Participating in outdoor adventure races or marathons">Participating in outdoor adventure races or marathons (with a "cheerleader" mentality)</option>
+<option value="Attending free fitness events">Attending free fitness events in parks or community centers</option>
+<option value="Taking a group art or pottery class">Taking a group art or pottery class</option>
+<option value="Joining a community choir or musical ensemble">Joining a community choir or musical ensemble</option>
+<option value="Attending local art walks or gallery openings">Attending local art walks or gallery openings</option>
+<option value="Participating in open mic nights or poetry slams">Participating in open mic nights or poetry slams</option>
+<option value="Volunteering at a community theatre or arts organization">Volunteering at a community theatre or arts organization</option>
+<option value="Taking a cooking class with friends">Taking a cooking class with friends or enrolling in a cooking club</option>
+<option value="Board game cafes or nights">Board game cafes or nights</option>
+<option value="Trivia nights at bars or restaurants">Trivia nights at bars or restaurants</option>
+<option value="Attending comedy shows or improv nights">Attending comedy shows or improv nights</option>
+<option value="Joining a local sports bar">Joining a local sports bar for game nights and cheering on teams</option>
+<option value="Volunteering at a music festival or cultural event">Volunteering at a music festival or cultural event</option>
+<option value="Participating in pub crawls or brewery tours">Participating in pub crawls or brewery tours</option>
+<option value="Attending food truck festivals or farmers markets">Attending food truck festivals or farmers markets</option>
+<option value="Joining a wine tasting club or brewery tour group">Joining a wine tasting club or brewery tour group</option>
+<option value="Participating in potlucks or themed dinner parties">Participating in potlucks or themed dinner parties</option>
+<option value="Taking a cooking class together">Taking a cooking class together and then enjoying the meal</option>
+<option value="Exploring new restaurants">Exploring new restaurants with friends and trying different cuisines</option>
+<option value="Attending happy hours">Attending happy hours or social gatherings at local bars</option>
+<option value="Book clubs with specific genre or theme focus">Book clubs with specific genre or theme focus</option>
+<option value="Taking a language learning course together">Taking a language learning course together</option>
+<option value="Attending lectures, workshops, or talks">Attending lectures, workshops, or talks on topics of interest</option>
+<option value="Joining a mastermind group or business networking event">Joining a mastermind group or business networking event</option>
+<option value="Participating in online courses or discussions">Participating in online courses or discussions with a social aspect</option>
+<option value="Attending museum or science center events">Attending museum or science center events with interactive exhibits</option>
+<option value="Joining a coffee club">Joining a coffee club or meeting friends at cafes</option>
+<option value="Attending outdoor movie screenings">Attending outdoor movie screenings or concerts in the park</option>
+<option value="Volunteering at an animal shelter">Volunteering at an animal shelter or dog park (great for dog lovers!)</option>
+<option value="Going for walks or bike rides with friends">Going for walks or bike rides with friends and exploring new areas</option>
+<option value="Hosting game nights">Hosting game nights or movie nights at your place</option>
+<option value="Joining a local club">Joining a local club dedicated to a specific hobby (chess, gardening, etc.)</option>
+<option value="Others">Others</option>
+
 
                   </select>
                   </div>
@@ -1231,7 +1494,12 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                     <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
                     <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
                       <option value="">Select specific cultural or religious considerations</option>
-              
+                      <option value="Vegetarian">Food preferences (Select if Vegetarian or Vegan)</option>
+<option value="Yes">Open to trying new cuisines? (Select if Yes)</option>
+<option value="Important">Importance of religion in your life (Select if Important)</option>
+<option value="Yes">Do you celebrate religious holidays? (Select if Yes)</option>
+<option value="Direct">Preferred communication style (Select if you prefer Direct)</option>
+
 
                   </select>
                   </div>
@@ -1265,7 +1533,7 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                   </div>
                   <div className="mb-4 w-full" >
                     <label className="mb-2.5 block font-medium  text-black ">
-                    Do u need any support services or resources
+                    Do you need any support services or resources
                     </label>
                     <div className="w-full rounded-lg border border-[#E0E0E0] bg-[#E0E0E0] py-4 pl-6 pr-5 text-black outline-none focus:border-[#E0E0E0] focus-visible:shadow-none   ">
                     <textarea

@@ -12,7 +12,7 @@ export default function SocialPage() {
   };
   return (
     <div>
-      {currentPage === 'page1' ? (
+      {currentPage === 'page2' ? (
         <Page1 togglePage={togglePage} />
       ) : (
         <Page2 togglePage={togglePage} />

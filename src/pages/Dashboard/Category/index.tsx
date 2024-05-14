@@ -134,7 +134,7 @@ export default function CategoryPage() {
           </div>
 
           </div>
-           <div className="flex flex-col md:w-full  w-[75%] px-10 ">
+           <div className="flex flex-col md:w-full  w-[75%] px-10 md:px-4">
     {/* greeting text section */}
       <Heading
            
@@ -144,7 +144,7 @@ export default function CategoryPage() {
           </Heading>
 
           {/* introduction text section */}
-          <Text className="mt-14 !font-kumbhsans md:text-sm text-base">
+          <Text className="mt-14 !font-kumbhsans md:text-sm text-[20px]">
             <>
               Welcome to the Resource Directory, your comprehensive guide to essential services and support in your new
               country.

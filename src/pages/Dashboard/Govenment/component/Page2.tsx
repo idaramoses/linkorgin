@@ -231,30 +231,27 @@ function Page2({ togglePage,maintainPage }: Page1Props){
                   <div className="flex flex-col items-start gap-[21px]">
               
                     <div className="self-stretch rounded-[10px] bg-gray-200 p-[18px]">
-                      <p className= "text-base md:text-sm !text-blue_gray-900">
-                        Whether you need help navigating immigration applications, finding employment opportunities,
-                        accessing healthcare services, securing housing accommodations, or understanding your legal rights,
-                        government services are here to help you access public services that support you through the
-                        settlement process.
+                    <p className= "text-sm md:text-xs !text-blue_gray-900">
+                      Hi there! I'm Mon-Ami, your friendly AI guide on Linked Origins. Settling in Canada involves navigating government resources. Don't worry, I can help!  Whether you have questions about immigration, healthcare, housing, or anything else, just ask and I'll guide you to the right information. 
                       </p>
                     </div>
                   </div>
     
                   {/* quick links section */}
                   <div className="flex flex-col gap-3 items-start w-full">
-                    <Text size="md" as="p" className="!font-hankengrotesk">
+                    <Text  className="!font-hankengrotesk text-sm md:text-xs">
                       Quick links
                     </Text>
-                    <button  color="light_green_100_2d_blue_50" className="w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                    <button  color="light_green_100_2d_blue_50" className="w-full text-sm md:text-xs bg-gray-200 h-12 font-hankengrotesk sm:px-5">
                       Immigration & Citizenship
                     </button>
-                    <button  color="light_green_100_2d_blue_50" className="w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                    <button  color="light_green_100_2d_blue_50" className="w-full text-sm md:text-xs bg-gray-200 h-12 font-hankengrotesk sm:px-5">
                       Employment Services
                     </button>
-                    <button  color="light_green_100_2d_blue_50" className="w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                    <button  color="light_green_100_2d_blue_50" className="w-full text-sm md:text-xs bg-gray-200 h-12 font-hankengrotesk sm:px-5">
                       Social Services
                     </button>
-                     <button  color="light_green_100_2d_blue_50" className="w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                     <button  color="light_green_100_2d_blue_50" className="w-full text-sm md:text-xs bg-gray-200 h-12 font-hankengrotesk sm:px-5">
                      Healthcare Services
                     </button>
                  

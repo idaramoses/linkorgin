@@ -28,10 +28,10 @@ export default function Dashboard() {
                 className=" h-10 w-10 rounded-[50%]"
               />
           </div>
-        <div className=" mt-32 text-5xl font-semibold bg-clip-text max-md:mt-10 md:max-w-full md:text-3xl">
+        <div className=" mt-32 text-4xl font-semibold bg-clip-text max-md:mt-10 md:max-w-full md:text-xl">
           Welcome to Mon-Ami Dashboard
         </div>
-        <div className=" mt-14 text-2xl md:text-xl text-black md:mt-10 mmd:w-full">
+        <div className=" mt-14  text-base  md:text-sm text-black md:mt-10 mmd:w-full">
           Hey there! I'm Mon-Ami, your go-to guide for settling into your new
           country.
         </div>
@@ -109,11 +109,11 @@ export default function Dashboard() {
             </div>
      
        
-        <div className="relative mt-10 text-2xl md:text-xl text-black md:mt-10 md:max-w-full">
+        <div className="relative mt-10 text-base  md:text-smtext-black md:mt-10 md:max-w-full">
           So, let's make settling into your new home easier than usual.
         </div>
         <NavLink to="/dashboard/category">
-        <div className="cursor-pointer relative justify-center px-12 py-6 mt-16 mb-11 text-xl text-white-A700 bg-black-900 rounded-[34px] max-md:px-5 max-md:my-10 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
+        <div className="cursor-pointer relative justify-center px-5 py-4 mt-16 mb-11 text-base  md:text-sm text-white-A700 bg-black-900 rounded-[34px] max-md:px-5 max-md:my-10 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
           Explore Resource Directory
         </div>
      </NavLink>  

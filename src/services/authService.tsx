@@ -128,6 +128,7 @@ class AuthService {
      // Store user data in local storage
      localStorage.setItem('userData', JSON.stringify(userDataResponse.data['data']));
 
+
       toast.success('Logged In Successfully', {
         position:"top-right",
         autoClose: 5000,
@@ -242,6 +243,29 @@ class AuthService {
     }
   }
 
+  static async searchChat(searchQuery: string, category: string): Promise<any> {
+    try {
+      const token = TokenService.getToken();
+      const apiUrl = 'https://linked-origin-server.vercel.app/api/v1/users/mon-ami/chat';
+      const requestBody = {
+        searchQuery: searchQuery,
+        category: category
+      };
+
+      const response = await axios.post(apiUrl, requestBody, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error('Error searching chat:', error);
+      throw error;
+    }
+  }
+
   static getUserDataFromLocalStorage(): UserData | null {
     const userDataString = localStorage.getItem('userData');
     if (userDataString) {
@@ -249,6 +273,7 @@ class AuthService {
     }
     return null;
   }
+
   static getUserData(): UserData | null {
     // Retrieve user data from local storage
     const userDataString = localStorage.getItem('userData');

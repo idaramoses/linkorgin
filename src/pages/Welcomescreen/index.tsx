@@ -6,7 +6,7 @@ export default function WelcomescreenPage() {
   return (
     <>
       <Helmet>
-        <title>Welcome to Your Personalized Mon-Ami Dashboard</title>
+        <title>Welcome to Your Personalized Mon-Ami Dashard</title>
         <meta
           name="description"
           content="Discover personalized recommendations and expert guidance tailored to your settlement needs with Mon-Ami. Explore interactive features and dynamic categories for a seamless experience."
@@ -155,7 +155,7 @@ export default function WelcomescreenPage() {
               color="black_900"
               size="md"
               variant="fill"
-              className="mt-[59px] min-w-[364px] rounded-[34px] font-kumbhsans sm:px-5"
+              className="mt-[59px] min-w-[364px] rounded-[34px] font-kumbhsans sm:px-5 text-sm"
             >
               Explore Resource Directory
             </Button>
