@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import { Input, Img, Text, Button, Heading } from "../../components";
 import SidebarMenu from '../Sidebar/smallSide';
@@ -8,6 +8,7 @@ import { UserData } from 'services/authService';
 const Header = (props: {}) => {
 
   const [userData, setUserData] = useState<UserData | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userDataFromStorage = AuthService.getUserDataFromLocalStorage();
@@ -82,7 +83,10 @@ const Header = (props: {}) => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
+  const handleLogout = () => {
+    AuthService.logout();
+    navigate("/");
+  };
   return (
     <>
       <header className="sticky top-0 z-40 flex w-full p-2 bg-white-A700 bg-gradient3 drop-shadow-1">
@@ -107,11 +111,15 @@ const Header = (props: {}) => {
        
     
         <div onClick={toggleMenu} className="flex justify-center items-center cursor-pointer">
-            <Img
-                src="/images/img_ellipse_29.png"
-                alt="circleimage"
-                className=" h-10 w-10 rounded-[50%]"
-              />
+        {userData && userData.firstName && (
+        <div className="flex justify-center items-center h-12 w-12  left-0 bottom-0 right-0 top-0  m-auto  bg-red-400_01 border-red-400_01 border-2 border-solid  rounded-full">
+        <div  className="!text-white-A700 !font-hankengrotesk !font-normal">
+        {userData.firstName ? userData.firstName.charAt(0) : ''}
+        </div>
+      </div>
+      )}    
+       
+          
           {isOpen && (
         <ul className="absolute top-20 right-6 w-60 bg-white-A700 shadow-md py-2 px-4 rounded mt-2 border border-gray-400">
          {userData && userData.firstName && (
@@ -139,15 +147,15 @@ const Header = (props: {}) => {
 
             Setting</li>
           <div className='bg-gray-300 h-[1px] w-full my-1'></div>
-          <NavLink to={`/`}>
-          <li className="cursor-pointer text-base hover:bg-gray-100 flex flex-row items-center gap-5 text-gray-700 ">
+          
+          <li onClick={handleLogout} className="cursor-pointer text-base hover:bg-gray-100 flex flex-row items-center gap-5 text-gray-700 ">
           <svg width="17" height="17" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M4.36133 3.66281C4.52414 1.77206 5.49577 1 7.62287 1H7.69115C10.0388 1 10.979 1.94013 10.979 4.28781V7.71219C10.979 10.0599 10.0388 11 7.69115 11H7.62287C5.51153 11 4.5399 10.2384 4.36658 8.3792" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M7.56478 5.99463H1.58789" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M2.75945 4.23535L1 5.9948L2.75945 7.75426" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
              Logout</li>
-          </NavLink>
+          
         
         </ul>
       )}

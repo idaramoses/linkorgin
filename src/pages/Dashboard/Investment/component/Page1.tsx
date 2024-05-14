@@ -4,6 +4,7 @@ import { Input, Img, Text, Heading, Button } from "../../../../components";
 import { NavLink } from "react-router-dom";
 import HomeScreenRowcloseOne from "components/HomeScreenRowcloseOne";
 import ImageSlider from "components/ImageSlider";
+import Typed, { ReactTyped } from 'react-typed'; // Import react-typed
 import Header from "components/Header";
 import Settings from "components/Settings";
 import AuthService from "services/authService";
@@ -42,9 +43,10 @@ function Page1({ togglePage }: Page1Props){
   
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement> | React.KeyboardEvent<HTMLInputElement>): Promise<void> => { event.preventDefault(); 
       setisSearched(true);
-      setLoading(true);
       setSubmittedQuery(searchQuery);
-     
+      setLoading(true);
+    
+    
     try {
     
       const chatResults = await AuthService.searchChat(searchQuery,'government');
@@ -59,13 +61,14 @@ function Page1({ togglePage }: Page1Props){
     };
 
     const handlequicklink = async (quicklinks: string) => {
-      setLoading(true);
+      setisSearched(true);
       setSubmittedQuery(quicklinks);
+      setLoading(true);
+    
    
   try {
   
     const chatResults = await AuthService.searchChat(quicklinks,'government');
-    setisSearched(true);
     setSearchResult(chatResults);
     setSearchQuery('');
     setLoading(false);
@@ -104,10 +107,8 @@ function Page1({ togglePage }: Page1Props){
                      <div className="flex  flex-row w-[40%] h-full items-center justify-center gap-[7px] rounded-[7px] bg-red-400_01 p-6 md:w-full sm:p-5">
                      <Img src="/images/img_group_57.svg" alt="home_one" className="h-[23px] self-center" />
                       <h1  className="text-base md:text-sm !font-kumbhsans md:ml-0 text-white-A700">
-                        Investmet
+                      Local Resources 
                       </h1>
-
-
                     </div>
                       <h1  className="bg-gradient2 bg-clip-text font-bold !text-transparent text-[40px] md:text-base ">
                         Mon - Ami
@@ -116,7 +117,7 @@ function Page1({ togglePage }: Page1Props){
                  
                       <p  className=" w-[40%] md:mt-5 h-14 text-sm md:text-xs md:text-left flex items-center text-center  justify-center !font-kumbhsans sm:w-full">
                         <>
-                        Use quick links to search for information on Jobs, housing, healthcare, social services
+                        Get help with immigration, employment,healthcare, housing, and legal matters.
                         </>
                       </p>
                     </div>
@@ -186,8 +187,8 @@ function Page1({ togglePage }: Page1Props){
                       </div>
                       <div className="flex flex-col gap-4">
                       {searchResult && (
-    <p className="text-sm md:text-xs">{searchResult.response}</p>
-  )}
+                    <ReactTyped strings={[searchResult?.response ?? '']} typeSpeed={10} loop={false} />
+                   )}
   <div className=" flex flex-row gap-4">
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M9 7.8V10.2C9 12.2 8.2 13 6.2 13H3.8C1.8 13 1 12.2 1 10.2V7.8C1 5.8 1.8 5 3.8 5H6.2C8.2 5 9 5.8 9 7.8Z" stroke="#CACACA" stroke-linecap="round" stroke-linejoin="round"/>
@@ -214,7 +215,7 @@ function Page1({ togglePage }: Page1Props){
                     </div>)}
     
                     
-    <div className="mt-64 md:mt-10 flex flex-col items-end gap-[3px] mb-20 md:mb-5">
+                    <div className="mt-64 md:mt-10 flex flex-col items-end gap-[3px] mb-20 md:mb-5">
                     <div className="mr-7 flex w-[27%] flex-wrap justify-end gap-5 md:mr-0 md:w-full">
                           <Heading   className="cursor-pointer !text-gray-800 text-base md:text-sm border-b-2  border-red-500 ">
                             Ask Mon-Ami
@@ -242,16 +243,16 @@ function Page1({ togglePage }: Page1Props){
       </form>
                               
                              
-                              <Img src="/images/img_menu.svg" alt="menu_one" className="h-[20px]" />
+                              {/* <Img src="/images/img_menu.svg" alt="menu_one" className="h-[20px]" /> */}
                             </div>
-                            <div className="flex items-center justify-between gap-5">
+                            {/* <div className="flex items-center justify-between gap-5">
                               <Img src="/images/img_clock.svg" alt="clock_one" className="h-[19px] self-start" />
                               <Img
                                 src="/images/img_settings_gray_500_01.svg"
                                 alt="settings_one"
                                 className="h-[17px] w-[17px] self-end"
                               />
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>
@@ -263,34 +264,35 @@ function Page1({ togglePage }: Page1Props){
             
                 </div>
     
+    
                 {/* government services section */}
                 <div className="flex md:pt-5 pt-20 w-[30%] px-5  items-center justify-center md:hidden   flex-col gap-[29px] md:w-full">
                   <div className="flex flex-col items-start gap-[21px]">
               
                     <div className="self-stretch rounded-[10px] bg-gray-200 p-[18px]">
                       <p className= "text-sm md:text-xs !text-blue_gray-900">
-                      Hi there! I'm Mon-Ami, your friendly AI guide on Linked Origins. Settling in Canada involves navigating government resources. Don't worry, I can help!  Whether you have questions about immigration, healthcare, housing, or anything else, just ask and I'll guide you to the right information. 
-                      </p>
-                    </div>
+                      Whether you need help navigating immigration applications, finding employment opportunities, accessing healthcare services, securing housing accommodations, or understanding your legal rights, government services are here to help you access public services that support you through the settlement process.                                      </p>
+                                  </div>
                   </div>
     
                   {/* quick links section */}
                   <div className="flex flex-col gap-3 items-start w-full">
                     <Text  as="p" className="text-sm md:text-xs !font-hankengrotesk ">
-                      Quick links
+                    Quick links
                     </Text>
                     <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                      Immigration & Citizenship
+                    Immigrant Support Groups 
                     </button>
                     <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                      Employment Services
+                    Cultural Associations 
                     </button>
                     <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                      Social Services
+                    Refugee Assistance Organizations  
                     </button>
                      <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                     Healthcare Services
+                     Language and Education Programs 
                     </button>
+                    
                  
                   </div>
                 </div>

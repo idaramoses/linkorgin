@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Helmet } from "react-helmet";
 import { Img, Heading, Button, Text } from "../../../components";
 import { NavLink } from 'react-router-dom';
@@ -19,13 +19,29 @@ function Page2({ togglePage }: Page2Props) {
     const handleCloseMenu = () => {
       setMenuOpen(false);
     };
+
+    const [fadeOut, setFadeOut] = useState(false);
+
+    useEffect(() => {
+      if (fadeOut) {
+        const timeout = setTimeout(() => {
+          togglePage();
+        }, 50); // Adjust the duration to match your CSS transition duration
+        return () => clearTimeout(timeout);
+      }
+    }, [fadeOut, togglePage]);
+  
+    const handleToggle = () => {
+      setFadeOut(true);
+    };
+  
   return (
     <>
     <Helmet>
       <title>Origin</title>
       <meta name="description" content="Web site created using create-react-app" />
     </Helmet>
-    <div className='h-screen w-full relative bg-white-A700' >
+    <div className={`h-screen w-full relative bg-white-A700 transition-opacity ${fadeOut ? 'opacity-0' : ''}`}>
 
     <Img
             src="images/landing_bg.svg"
@@ -33,7 +49,7 @@ function Page2({ togglePage }: Page2Props) {
             className=" bottom-0 left-0 fixed"
           />
             
-  <div className="absolute flex w-full mb-10 flex-col gap-5  ">
+ <div className={`absolute w-full h-full flex flex-col items-center justify-center`}>
       <div>
       <nav className="flex self-stretch justify-between items-center  w-full z-10 gap-5 p-10 md:p-4  bg-white-A700 right-3 rounded-bl-[50px] md:rounded-bl-none rounded-br-[50px] md:rounded-br-none" ref={navbarRef}>
         <div className="container mx-auto flex  justify-between items-center">
@@ -135,7 +151,7 @@ function Page2({ togglePage }: Page2Props) {
       <div className="flex w-full mt-20 flex-col items-center justify-center gap-[45px]  md:p-5">
       <div className="mt-20 md:mt-10 flex  items-center justify-between gap-2 rounded-[15px] bg-gray-100_89 p-[5px] ">
                           <Button
-                            onClick={togglePage}
+                            onClick={handleToggle}
                             size="lg"
                             variant="fill"
                             className=" rounded-[10px] font-inter font-semibold "

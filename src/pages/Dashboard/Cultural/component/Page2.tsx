@@ -4,18 +4,23 @@ import { Input, Img, Text, Heading, Button } from "../../../../components";
 import { NavLink } from "react-router-dom";
 import HomeScreenRowcloseOne from "components/HomeScreenRowcloseOne";
 import ImageSlider from "components/ImageSlider";
+import Typed, { ReactTyped } from 'react-typed'; // Import react-typed
 import Header from "components/Header";
 import Settings from "components/Settings";
+import AuthService from "services/authService";
+import { SmallYouTubeVideo } from "components/VideoPlayer";
 
 interface Page1Props {
   togglePage: () => void;
+ 
 }
 
 function Page2({ togglePage }: Page1Props){
     const [isMenuOpen, setMenuOpen] = useState(false);
     const navbarRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [isSearched, setisSearched] = useState(false);
     const handleMenuToggle = () => {
       setMenuOpen(!isMenuOpen);
     };
@@ -24,10 +29,88 @@ function Page2({ togglePage }: Page1Props){
       setMenuOpen(false);
     };
     const data = [
-      { image: "/images/img_istockphoto_113.png", wherecani: "The bright headquarters of ApplyBoard effuses the spirit that has long defined Canada’s immigration narrative. " },
-      { image: "/images/img_istockphoto_171.png", wherecani: "The bright headquarters of ApplyBoard effuses the spirit that has long defined Canada’s immigration narrative. " },
-      { image: "/images/img_istockphoto_143.png", wherecani: "What are government policies in healthcare The bright headquarters of ApplyBoard effuses the spirit that has long defined Canada’s immigration narrative." },
+      { image: "/images/img_istockphoto_113.png", wherecani: "Where can i find healthcare facilities?" },
+      { image: "/images/img_istockphoto_171.png", wherecani: "What are government policies in healthcare?" },
+      { image: "/images/img_istockphoto_143.png", wherecani: "What are government policies in healthcare?" },
+      { image: "/images/img_istockphoto_148.png", wherecani: "What are government policies in healthcare?" },
     ];
+
+    const datas = [
+      { 
+       title: "Front End Developer",
+       comapany: "The Max Company",
+       country: "Canada",
+       salary: "100k -200k",
+       jobType: "Remote",
+       description: "Help back-end developer with codeing and troubleshooting",
+       description2: "Collaborate with back-end and designers to improve usability",
+       time: "2 day",
+
+     },
+     { 
+      title: "Back End Developer",
+      comapany: "The Max Company",
+      country: "Canada",
+      salary: "150k -200k",
+      jobType: "Remote",
+      description: "Help back-end developer with codeing and troubleshooting",
+      description2: "Collaborate with back-end and designers to improve usability",
+      time: "3 day",
+
+    },
+     
+    ];
+    const [searchQuery, setSearchQuery] = useState('');
+    const [submittedQuery, setSubmittedQuery] = useState<string>('');
+    const [searchResult, setSearchResult] = useState<any>(null);
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchQuery(event.target.value);
+    };
+  
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement> | React.KeyboardEvent<HTMLInputElement>): Promise<void> => { event.preventDefault(); 
+      setisSearched(true);
+      setSubmittedQuery(searchQuery);
+      setLoading(true);
+    
+    
+    try {
+    
+      const chatResults = await AuthService.searchChat(searchQuery,'government');
+      setSearchResult(chatResults);
+      setSearchQuery('');
+      setLoading(false);
+      setisSearched(true);
+    } catch (error) {
+      console.error('Chat search error:', error);
+      setLoading(false);
+    }
+    };
+
+    const handlequicklink = async (quicklinks: string) => {
+      setisSearched(true);
+      setSubmittedQuery(quicklinks);
+      setLoading(true);
+    
+   
+  try {
+  
+    const chatResults = await AuthService.searchChat(quicklinks,'government');
+    setSearchResult(chatResults);
+    setSearchQuery('');
+    setLoading(false);
+    setisSearched(true);
+  } catch (error) {
+    console.error('Chat search error:', error);
+    setLoading(false);
+  }
+  };
+  const handleResponse = (responseData: any): void => {
+    // Handle the response from the API here
+    console.log(responseData);
+    // You can set the response data to state or perform any other actions based on the response
+  };
+  
       return (
         <>
           <Helmet>
@@ -44,15 +127,15 @@ function Page2({ togglePage }: Page1Props){
               <div className="relative mx-auto flex w-full items-start justify-between gap-5   md:h-auto md:flex-col md:p-5">
               <Settings/>
                 {/* introductory section */}
-                <div className="mb-7  pt-20 md:pt-16 flex w-[70%] flex-col items-start gap-10 md:w-full md:gap-5 sm:gap-10  border-r border-gray-300 md:border-none">
+                <div className="mb-7  pt-20 md:pt-16 flex w-[70%] flex-col items-start gap-10 md:w-full md:gap-5 sm:gap-10 border-r border-gray-300 md:border-none">
                   {/* questions list section */}
-                  <div className="flex w-full flex-col  md:w-full">
-                    <div className="ml-20 flex w-[80%] md:h-auto md:my-5 h-14 md:m-auto items-center justify-center gap-2 md:ml-0 md:w-full sm:flex-col">
+                  <div className="flex w-full flex-col self-end md:w-full ">
+                  <div className=" flex w-full md:h-auto md:my-5 h-14 md:m-auto items-center justify-center gap-2 md:ml-0 md:w-full sm:flex-col  md:px-0 px-20">
                      <div className="flex md:flex-col flex-row h-14 w-[60%] md:w-full gap-2">
                      <div className="flex  flex-row w-[40%] h-full items-center justify-center gap-[7px] rounded-[7px] bg-red-400_01 p-6 md:w-full sm:p-5">
                      <Img src="/images/img_thumbs_up_white_a700.svg" alt="home_one" className="h-[23px] self-center" />
                       <h1  className="text-base md:text-sm !font-kumbhsans md:ml-0 text-white-A700">
-                      Cultural 
+                       Cultural 
                       </h1>
                     </div>
                       <h1  className="bg-gradient2 bg-clip-text font-bold !text-transparent text-[40px] md:text-base ">
@@ -62,13 +145,15 @@ function Page2({ togglePage }: Page1Props){
                  
                       <p  className=" w-[40%] md:mt-5 h-14 text-sm md:text-xs md:text-left flex items-center text-center  justify-center !font-kumbhsans sm:w-full">
                         <>
-                        Use quick links to search for information on Jobs, housing, healthcare, social services
+                        Get help with immigration, employment, healthcare, housing, and legal matters.
                         </>
                       </p>
                     </div>
-      {/* search section */}
-      <div className="flex flex-col items-start my-10 md:my-5 w-full" >
-      <div className="ml-20 md:ml-0  md:flex-col flex flex-row w-[90%] md:w-full  gap-2  ">
+    
+                    {/* healthcare questions section */}
+                    <div className="flex flex-col">
+                    <div className="flex flex-col  my-10 md:my-5">
+      <div className="ml-20 md:ml-0  md:flex-col flex flex-row w-[90%] md:w-full items-start justify-start gap-2   ">
         
         <div className="pt-10 flex flex-col items-end gap-[3px]  w-[85%] md:w-full">
                         <div className="mr-7 flex w-[27%] flex-wrap justify-end gap-5 md:mr-0 md:w-full">
@@ -82,23 +167,28 @@ function Page2({ togglePage }: Page1Props){
                         <div className="self-stretch rounded-[21px]  bg-white-A700 p-[9px]">
                             <div className="flex flex-col gap-[27px]">
                               <div className="flex items-center justify-between gap-5 h-10">
-                                <div  className="flex items-center text-base h-10 md:text-sm outline-none border-none focus:outline-none border-r border-black-900_2d w-[50%]">
+                                <div  className="flex items-center text-base h-10 md:text-sm outline-none border-none focus:outline-none border-r border-black-900_2d">
                                 <input  placeholder="Search job title,keywords or company"/>
   
                                </div>
-                        
+                               <div className= "flex flex-row h-full items-center justify-between gap-2 pl-2 w-[50%]    border-blue_gray-100_01">
+                                
+                              
+                               
+                               </div>
                             
                               </div>
                            
                             </div>
                           </div>
         </div>
-       
-     
+        
         </div>
-      
+     
       </div>
    
+    
+      <div className=" ml-20 md:m-0 flex flex-col md:flex-col-reverse">
       <div className="flex flex-col gap-3" >
       {/* healthcare questions section */}
       {data.map((d, index) => (
@@ -116,7 +206,11 @@ function Page2({ togglePage }: Page1Props){
   ))}
       
       </div>
+                    {/* search section */}
                    
+                    </div>
+                   
+                    </div>
                    
                   </div>
     
@@ -128,32 +222,29 @@ function Page2({ togglePage }: Page1Props){
                   <div className="flex flex-col items-start gap-[21px]">
               
                     <div className="self-stretch rounded-[10px] bg-gray-200 p-[18px]">
-                      <p className= "text-base md:text-sm !text-blue_gray-900">
-                        Whether you need help navigating immigration applications, finding employment opportunities,
-                        accessing healthcare services, securing housing accommodations, or understanding your legal rights,
-                        government services are here to help you access public services that support you through the
-                        settlement process.
-                      </p>
-                    </div>
+                      <p className= "text-sm md:text-xs !text-blue_gray-900">
+                      Welcome to the fun side of Canada! Discover a vibrant calendar of cultural events, festivals, workshops, and recreational activities designed to promote social integration and cultural exchange.  Mon-Ami can help you find events that match your interests and connect you with people who share your cultural background.  Let's explore Canada together!                     </p>
+                                  </div>
                   </div>
     
                   {/* quick links section */}
                   <div className="flex flex-col gap-3 items-start w-full">
-                    <Text size="md" as="p" className="!font-hankengrotesk">
-                      Quick links
+                    <Text  as="p" className="text-sm md:text-xs !font-hankengrotesk ">
+                    Quick links
                     </Text>
-                    <button  color="light_green_100_2d_blue_50" className="w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                      Immigration & Citizenship
+                    <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                    Cultural Festivals and Celebrations 
                     </button>
-                    <button  color="light_green_100_2d_blue_50" className="w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                      Employment Services
+                    <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                    Community Events and Workshops 
                     </button>
-                    <button  color="light_green_100_2d_blue_50" className="w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                      Social Services
+                    <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                    Sports Clubs and Recreation Centers 
                     </button>
-                     <button  color="light_green_100_2d_blue_50" className="w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                     Healthcare Services
+                     <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                     Arts and Performance Groups 
                     </button>
+                    
                  
                   </div>
                 </div>

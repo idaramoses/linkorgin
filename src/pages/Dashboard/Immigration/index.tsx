@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import Page1 from "./component/Page1";
 import Page2 from "./component/Page2";
 
+
 export default function ImigrationPage() {
   const [currentPage, setCurrentPage] = useState<string>('page1');
 

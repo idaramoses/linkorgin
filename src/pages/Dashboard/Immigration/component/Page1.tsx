@@ -4,6 +4,7 @@ import { Input, Img, Text, Heading, Button } from "../../../../components";
 import { NavLink } from "react-router-dom";
 import HomeScreenRowcloseOne from "components/HomeScreenRowcloseOne";
 import ImageSlider from "components/ImageSlider";
+import Typed, { ReactTyped } from 'react-typed'; // Import react-typed
 import Header from "components/Header";
 import Settings from "components/Settings";
 import AuthService from "services/authService";
@@ -48,7 +49,7 @@ function Page1({ togglePage }: Page1Props){
     
     try {
     
-      const chatResults = await AuthService.searchChat(searchQuery,'finance');
+      const chatResults = await AuthService.searchChat(searchQuery,'government');
       setSearchResult(chatResults);
       setSearchQuery('');
       setLoading(false);
@@ -67,7 +68,7 @@ function Page1({ togglePage }: Page1Props){
    
   try {
   
-    const chatResults = await AuthService.searchChat(quicklinks,'finance');
+    const chatResults = await AuthService.searchChat(quicklinks,'government');
     setSearchResult(chatResults);
     setSearchQuery('');
     setLoading(false);
@@ -104,12 +105,10 @@ function Page1({ togglePage }: Page1Props){
                   <div className=" flex w-full md:h-auto md:my-5 h-14 md:m-auto items-center justify-center gap-2 md:ml-0 md:w-full sm:flex-col">
                      <div className="flex md:flex-col flex-row h-14 w-[60%] md:w-full gap-2">
                      <div className="flex  flex-row w-[40%] h-full items-center justify-center gap-[7px] rounded-[7px] bg-red-400_01 p-6 md:w-full sm:p-5">
-                     <Img src="/images/img_group_52.svg" alt="home_one" className="h-[23px] self-center" />
+                     <Img src="/images/img_settings.svg" alt="home_one" className="h-[23px] self-center" />
                       <h1  className="text-base md:text-sm !font-kumbhsans md:ml-0 text-white-A700">
-                       Immigration 
+                        Legal & Immigration
                       </h1>
-
-
                     </div>
                       <h1  className="bg-gradient2 bg-clip-text font-bold !text-transparent text-[40px] md:text-base ">
                         Mon - Ami
@@ -188,8 +187,8 @@ function Page1({ togglePage }: Page1Props){
                       </div>
                       <div className="flex flex-col gap-4">
                       {searchResult && (
-    <p className="text-sm md:text-xs">{searchResult.response}</p>
-  )}
+                    <ReactTyped strings={[searchResult?.response ?? '']} typeSpeed={10} loop={false} />
+                   )}
   <div className=" flex flex-row gap-4">
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M9 7.8V10.2C9 12.2 8.2 13 6.2 13H3.8C1.8 13 1 12.2 1 10.2V7.8C1 5.8 1.8 5 3.8 5H6.2C8.2 5 9 5.8 9 7.8Z" stroke="#CACACA" stroke-linecap="round" stroke-linejoin="round"/>
@@ -216,7 +215,7 @@ function Page1({ togglePage }: Page1Props){
                     </div>)}
     
                     
-    <div className="mt-64 md:mt-10 flex flex-col items-end gap-[3px] mb-20 md:mb-5">
+                    <div className="mt-64 md:mt-10 flex flex-col items-end gap-[3px] mb-20 md:mb-5">
                     <div className="mr-7 flex w-[27%] flex-wrap justify-end gap-5 md:mr-0 md:w-full">
                           <Heading   className="cursor-pointer !text-gray-800 text-base md:text-sm border-b-2  border-red-500 ">
                             Ask Mon-Ami
@@ -244,16 +243,16 @@ function Page1({ togglePage }: Page1Props){
       </form>
                               
                              
-                              <Img src="/images/img_menu.svg" alt="menu_one" className="h-[20px]" />
+                              {/* <Img src="/images/img_menu.svg" alt="menu_one" className="h-[20px]" /> */}
                             </div>
-                            <div className="flex items-center justify-between gap-5">
+                            {/* <div className="flex items-center justify-between gap-5">
                               <Img src="/images/img_clock.svg" alt="clock_one" className="h-[19px] self-start" />
                               <Img
                                 src="/images/img_settings_gray_500_01.svg"
                                 alt="settings_one"
                                 className="h-[17px] w-[17px] self-end"
                               />
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>
@@ -265,34 +264,35 @@ function Page1({ togglePage }: Page1Props){
             
                 </div>
     
+    
                 {/* government services section */}
                 <div className="flex md:pt-5 pt-20 w-[30%] px-5  items-center justify-center md:hidden   flex-col gap-[29px] md:w-full">
                   <div className="flex flex-col items-start gap-[21px]">
               
                     <div className="self-stretch rounded-[10px] bg-gray-200 p-[18px]">
                       <p className= "text-sm md:text-xs !text-blue_gray-900">
-                      Hi there! I'm Mon-Ami, your friendly AI guide on Linked Origins. Settling in Canada involves navigating government resources. Don't worry, I can help!  Whether you have questions about immigration, healthcare, housing, or anything else, just ask and I'll guide you to the right information. 
-                      </p>
-                    </div>
+                      Navigating legal and immigration processes can be confusing. But fear not! Mon-Ami is here to guide you. I can help you search for immigration lawyers, legal aid organizations, and pro bono services to assist you with applications, visas, and other legal matters.  Just tell me what you need help with, and I'll point you in the right direction.                       </p>
+                                  </div>
                   </div>
     
                   {/* quick links section */}
                   <div className="flex flex-col gap-3 items-start w-full">
                     <Text  as="p" className="text-sm md:text-xs !font-hankengrotesk ">
-                      Quick links
+                    Quick links
                     </Text>
                     <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                      Immigration & Citizenship
+                    Legal Aid Organizations 
                     </button>
                     <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                      Employment Services
+                    Pro Bono Legal Services 
                     </button>
                     <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                      Social Services
+                    Refugee and Asylum Services 
                     </button>
                      <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                     Healthcare Services
+                     Know Your Rights Workshops 
                     </button>
+                    
                  
                   </div>
                 </div>

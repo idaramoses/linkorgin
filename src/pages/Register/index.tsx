@@ -1243,7 +1243,7 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
               
                   <div className="mb-4 w-full" >
                     <label className="mb-2.5 block font-medium  text-black ">
-                     Previous work industry
+                     Work industry
                     </label>
                     <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
           <select    className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">
@@ -1395,7 +1395,7 @@ const handleOptionChange = (rowId: number, optionName: string, value: string) =>
                
                   <div className="mb-4 w-full" >
                     <label className="mb-2.5 block font-medium  text-black ">
-                    Interest and hobbies
+                    Favorite interest and hobbies
                     </label>
                     <div className="flex flex-wrap mt-2 p-3 border border-[#E0E0E0] bg-[#E0E0E0] mb-5 gap-2  rounded-md w-full">
                     <select  className="h-8   text-gray-600 text-base font-hankengrotesk w-full  ">

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Heading, Img, Text } from "../../../components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Header from "components/Header";
 import ReadMoreReact from 'react-read-more-less';
-import AuthService from "services/authService";
+import AuthService, { UserData } from "services/authService";
 import { Skeleton } from "@mui/material";
 
 const data = [
@@ -20,7 +20,7 @@ const data = [
   },
   { governmentone: "/images/img_settings_white_a700.svg", governmenttwo: "Finance",route: 'finance' },
   { governmentone: "/images/img_group_59.svg", governmenttwo: "Social" ,route: 'social'},
-  { governmentone: "/images/img_group_57.svg", governmenttwo: "Investment" ,route: 'investment'},
+  { governmentone: "/images/img_group_57.svg", governmenttwo: "Local Resource" ,route: 'investment'},
 ];
 const newsdata = [
   { title: "USCIS Announces Open Application Period", contents: "U.S. Citizenship and Immigration Services today announced the application period for the Citizenship and Integration Grant Program, which provides funding for citizenship preparation programs in communities across the country" },
@@ -36,6 +36,14 @@ const NewsItem = ({ title, contents, image }) => {
     setExpanded(!expanded);
   };
 
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userDataFromStorage = AuthService.getUserDataFromLocalStorage();
+    console.log('userData:', userDataFromStorage); // Add this line for debugging
+    setUserData(userDataFromStorage);
+  }, []);
   // const shortContents = contents.split(' ').slice(0, 12).join(' ');
   // const fullContents = contents;
 
@@ -70,6 +78,15 @@ const NewsList = ({ news }) => {
 export default function CategoryPage() {
   const [news, setNews] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const [userData, setUserData] = useState<UserData | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userDataFromStorage = AuthService.getUserDataFromLocalStorage();
+    console.log('userData:', userDataFromStorage); // Add this line for debugging
+    setUserData(userDataFromStorage);
+  }, []);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -136,13 +153,16 @@ export default function CategoryPage() {
           </div>
            <div className="flex flex-col md:w-full  w-[75%] px-10 md:px-4">
     {/* greeting text section */}
-      <Heading
+    
+     {userData && userData.firstName && (
+   
+         <Heading
            
-            className="mt-20   md:text-2xl text-3xl self-start bg-gradient2 bg-clip-text !text-transparent !font-kumbhsans "
-          >
-            Hello Owen
-          </Heading>
-
+         className="mt-20   md:text-2xl text-3xl self-start bg-gradient2 bg-clip-text !text-transparent !font-kumbhsans "
+       >
+         Hello {userData.firstName}
+       </Heading>
+      )}
           {/* introduction text section */}
           <Text className="mt-14 !font-kumbhsans md:text-sm text-[20px]">
             <>

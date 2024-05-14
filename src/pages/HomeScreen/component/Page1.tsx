@@ -191,7 +191,7 @@ function Page1({ togglePage }: Page1Props){
         </div>
       </nav>
                       
-                        <div className="mt-20 flex  items-center justify-between gap-2 rounded-[15px] bg-gray-100_89 p-[5px] ">
+                        <div className="mt-20 flex  items-center justify-between rounded-[15px] bg-gray-100_89 p-[5px] ">
                           <Button
                             color="blue_gray_800"
                             size="lg"
@@ -227,7 +227,7 @@ function Page1({ togglePage }: Page1Props){
                             color="white_A700"
                             className="rounded-[38px] font-inter font-semibold sm:px-5"
                           >
-                            Signup
+                            Sign up
                           </Button>
          </NavLink>
                        
@@ -300,7 +300,7 @@ function Page1({ togglePage }: Page1Props){
                 shape="round"
                 className="ml-32 md:ml-0  my-5 font-inter font-semibold sm:px-5"
               >
-                Signup
+                Sign up
               </Button>
               </NavLink>
             </div>

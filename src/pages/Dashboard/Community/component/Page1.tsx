@@ -133,12 +133,9 @@ function Page1({ togglePage }: Page1Props){
                   <div className="flex flex-col items-start gap-[21px]">
               
                     <div className="self-stretch rounded-[10px] bg-gray-200 p-[18px]">
-                      <p className= "text-base md:text-sm !text-blue_gray-900">
-                        Whether you need help navigating immigration applications, finding employment opportunities,
-                        accessing healthcare services, securing housing accommodations, or understanding your legal rights,
-                        government services are here to help you access public services that support you through the
-                        settlement process.
-                      </p>
+                    <p className= "text-sm md:text-xs !text-blue_gray-900">
+                      Feeling lost and need a helping hand? You're in the right place!  Mon-Ami can be your bridge to the amazing community resources available.  Tell me what kind of support you're looking for, whether it's a support group, a cultural association, or something else, and I'll help you find the perfect match.               
+                    </p>
                     </div>
                   </div>
     

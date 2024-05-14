@@ -4,21 +4,19 @@ import { Input, Img, Text, Heading, Button } from "../../../../components";
 import { NavLink } from "react-router-dom";
 import HomeScreenRowcloseOne from "components/HomeScreenRowcloseOne";
 import ImageSlider from "components/ImageSlider";
-import Typed, { ReactTyped } from 'react-typed'; // Import react-typed
 import Header from "components/Header";
 import Settings from "components/Settings";
-import AuthService from "services/authService";
 
 interface Page1Props {
   togglePage: () => void;
+  maintainPage: () => void;
 }
 
-function Page2({ togglePage}: Page1Props){
+function Page2({ togglePage,maintainPage }: Page1Props){
     const [isMenuOpen, setMenuOpen] = useState(false);
     const navbarRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
-    const [loading, setLoading] = useState(false);
-    const [isSearched, setisSearched] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
     const handleMenuToggle = () => {
       setMenuOpen(!isMenuOpen);
     };
@@ -27,13 +25,6 @@ function Page2({ togglePage}: Page1Props){
       setMenuOpen(false);
     };
     const data = [
-      { image: "/images/img_istockphoto_113.png", wherecani: "Where can i find healthcare facilities?" },
-      { image: "/images/img_istockphoto_171.png", wherecani: "What are government policies in healthcare?" },
-      { image: "/images/img_istockphoto_143.png", wherecani: "What are government policies in healthcare?" },
-      { image: "/images/img_istockphoto_148.png", wherecani: "What are government policies in healthcare?" },
-    ];
-
-    const datas = [
       { 
        title: "Front End Developer",
        comapany: "The Max Company",
@@ -58,57 +49,6 @@ function Page2({ togglePage}: Page1Props){
     },
      
     ];
-    const [searchQuery, setSearchQuery] = useState('');
-    const [submittedQuery, setSubmittedQuery] = useState<string>('');
-    const [searchResult, setSearchResult] = useState<any>(null);
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchQuery(event.target.value);
-    };
-  
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement> | React.KeyboardEvent<HTMLInputElement>): Promise<void> => { event.preventDefault(); 
-      setisSearched(true);
-      setSubmittedQuery(searchQuery);
-      setLoading(true);
-    
-    
-    try {
-    
-      const chatResults = await AuthService.searchChat(searchQuery,'government');
-      setSearchResult(chatResults);
-      setSearchQuery('');
-      setLoading(false);
-      setisSearched(true);
-    } catch (error) {
-      console.error('Chat search error:', error);
-      setLoading(false);
-    }
-    };
-
-    const handlequicklink = async (quicklinks: string) => {
-      setisSearched(true);
-      setSubmittedQuery(quicklinks);
-      setLoading(true);
-    
-   
-  try {
-  
-    const chatResults = await AuthService.searchChat(quicklinks,'government');
-    setSearchResult(chatResults);
-    setSearchQuery('');
-    setLoading(false);
-    setisSearched(true);
-  } catch (error) {
-    console.error('Chat search error:', error);
-    setLoading(false);
-  }
-  };
-  const handleResponse = (responseData: any): void => {
-    // Handle the response from the API here
-    console.log(responseData);
-    // You can set the response data to state or perform any other actions based on the response
-  };
-  
       return (
         <>
           <Helmet>
@@ -125,10 +65,10 @@ function Page2({ togglePage}: Page1Props){
               <div className="relative mx-auto flex w-full items-start justify-between gap-5   md:h-auto md:flex-col md:p-5">
               <Settings/>
                 {/* introductory section */}
-                <div className="mb-7  pt-20 md:pt-16 flex w-[70%] flex-col items-start gap-10 md:w-full md:gap-5 sm:gap-10 border-r border-gray-300 md:border-none">
+                <div className="mb-7  pt-20 md:pt-16 flex w-[70%] flex-col items-start gap-10 md:w-full md:gap-5 sm:gap-10 md:px-0 px-20 border-r border-gray-300 md:border-none">
                   {/* questions list section */}
-                  <div className="flex w-full flex-col self-end md:w-full ">
-                  <div className=" flex w-full md:h-auto md:my-5 h-14 md:m-auto items-center justify-center gap-2 md:ml-0 md:w-full sm:flex-col  md:px-0 px-20">
+                  <div className="flex w-full flex-col self-end md:w-full">
+                   <div className=" flex w-full md:h-auto md:my-5 h-14 md:m-auto items-center justify-center gap-2 md:ml-0 md:w-full sm:flex-col">
                      <div className="flex md:flex-col flex-row h-14 w-[60%] md:w-full gap-2">
                      <div className="flex  flex-row w-[40%] h-full items-center justify-center gap-[7px] rounded-[7px] bg-red-400_01 p-6 md:w-full sm:p-5">
                       <Img src="/images/img_home_white_a700.svg" alt="home_one" className="h-[23px] self-center" />
@@ -147,11 +87,9 @@ function Page2({ togglePage}: Page1Props){
                         </>
                       </p>
                     </div>
-    
-                    {/* healthcare questions section */}
-                    <div className="flex flex-col">
-                    <div className="flex flex-col border-y border-gray-500 my-10 md:my-5">
-      <div className="ml-20 md:ml-0  md:flex-col flex flex-row w-[90%] md:w-full items-end justify-end gap-2   ">
+      {/* search section */}
+      <div className="flex flex-col border-y border-gray-500 my-10 md:my-5">
+      <div className="ml-20 md:ml-0  md:flex-col flex flex-row w-[90%] md:w-full items-end justify-end gap-2  ">
         
         <div className="pt-10 flex flex-col items-end gap-[3px]  w-[85%] md:w-full">
                         <div className="mr-7 flex w-[27%] flex-wrap justify-end gap-5 md:mr-0 md:w-full">
@@ -245,7 +183,7 @@ function Page2({ togglePage}: Page1Props){
                     <div className=" ml-20 md:ml-0 mr-10 md:mr-0 flex flex-col my-10 md:my-5 ">
 
                     <div className=" flex gap-2 flex-col">
-                      {datas.map((d, index) => (
+                      {data.map((d, index) => (
                         <div key={"listwherecani" + index} className="flex flex-col w-[60%] md:w-full bg-white-A700 border border-gray-200 p-5 items-center">
                           <p  className="text-xl font-bold self-start">
                            {d.title}
@@ -283,8 +221,6 @@ function Page2({ togglePage}: Page1Props){
                   
                     </div>
                    
-                    </div>
-                   
                   </div>
     
             
@@ -295,26 +231,27 @@ function Page2({ togglePage}: Page1Props){
                   <div className="flex flex-col items-start gap-[21px]">
               
                     <div className="self-stretch rounded-[10px] bg-gray-200 p-[18px]">
-                      <p className= "text-sm md:text-xs !text-blue_gray-900">
-                      Hi there! I'm Mon-Ami, your friendly AI guide on Linked Origins. Settling in Canada involves navigating government resources. Don't worry, I can help!  Whether you have questions about immigration, healthcare, housing, or anything else, just ask and I'll guide you to the right information.                      </p>
+                    <p className= "text-sm md:text-xs !text-blue_gray-900">
+                    Hi there! I'm Mon-Ami, your friendly AI guide on Linked Origins. Settling in Canada involves navigating government resources. Don't worry, I can help!  Whether you have questions about immigration, healthcare, housing, or anything else, just ask and I'll guide you to the right information.   
+                   </p>
                     </div>
                   </div>
     
                   {/* quick links section */}
                   <div className="flex flex-col gap-3 items-start w-full">
-                    <Text  as="p" className="text-sm md:text-xs !font-hankengrotesk ">
+                    <Text  className="!font-hankengrotesk text-sm md:text-xs">
                       Quick links
                     </Text>
-                    <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                    <button  color="light_green_100_2d_blue_50" className="w-full text-sm md:text-xs bg-gray-200 h-12 font-hankengrotesk sm:px-5">
                       Immigration & Citizenship
                     </button>
-                    <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                    <button  color="light_green_100_2d_blue_50" className="w-full text-sm md:text-xs bg-gray-200 h-12 font-hankengrotesk sm:px-5">
                       Employment Services
                     </button>
-                    <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                    <button  color="light_green_100_2d_blue_50" className="w-full text-sm md:text-xs bg-gray-200 h-12 font-hankengrotesk sm:px-5">
                       Social Services
                     </button>
-                     <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
+                     <button  color="light_green_100_2d_blue_50" className="w-full text-sm md:text-xs bg-gray-200 h-12 font-hankengrotesk sm:px-5">
                      Healthcare Services
                     </button>
                  

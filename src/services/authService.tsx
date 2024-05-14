@@ -141,8 +141,7 @@ class AuthService {
         transition: Bounce,
       });
       console.log('successfull:', response.data);
-      console.log('user_data:', response.data['userId']);
-      // console.log('user-data:', userDataResponse.data['data']);
+      console.log('user-data:', userDataResponse.data['data']);
 
       return { success: true, user };
     } catch (error) {
@@ -197,21 +196,7 @@ class AuthService {
     }
   }
 
-  static logout(): void {
-    // Clear token and user data from local storage
-    localStorage.removeItem('token');
-    localStorage.removeItem('userData');
-    toast("Logged out Successfully", {
-      position: "top-right",
-      autoClose: 5000,
-      closeOnClick: true,
-    });
-  }
 
-  static isLoggedIn(): boolean {
-    // Check if token exists in local storage
-    return !!localStorage.getItem('token');
-  }
   
   static async getNews(): Promise<any[]> {
     try {
@@ -281,6 +266,23 @@ class AuthService {
       return JSON.parse(userDataString);
     }
     return null;
+  }
+
+  static logout(): void {
+    // Clear token and user data from local storage
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
+    toast("Logged out Successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      closeOnClick: true,
+    });
+   
+  }
+
+  static isLoggedIn(): boolean {
+    // Check if token exists in local storage
+    return !!localStorage.getItem('token');
   }
 
 }
