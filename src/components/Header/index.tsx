@@ -89,23 +89,26 @@ const Header = (props: {}) => {
   };
   return (
     <>
-      <header className="sticky top-0 z-40 flex w-full p-2 bg-white-A700 bg-gradient3 drop-shadow-1">
-      <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
+      <header className="sticky top-0 z-40 flex w-full p-2 bg-white-A700 bg-gradient3 drop-shadow-1 border-b border-gray-100">
+      <div className="flex flex-grow items-center justify-between px-4 py-2 shadow-2 md:px-4 2xl:px-11">
      
 
         <div className="container mx-auto flex justify-between items-center">
-        <div className="flex flex-row gap-2 items-center justify-center h-full ">
+        <div className="flex flex-row gap-2 items-center justify-center h-full  ">
          <button
             // aria-controls="sidebar"
             onClick={handleMenuToggle} 
-            className={`z-50 block rounded-sm bg-white-A700 p-1.5  ${
+            className={`z-50 md:block rounded-sm bg-white-A700 p-1.5 hidden   ${
               pathname === '/dashboard/category' || pathname ==='/profile'  &&
               'invisible'
             }`}
           >
          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
          </button>
-         <Img src="/images/img_header_logo.svg" alt="headerlogo_one" className="h-8 md:hidden " />
+         <NavLink to="/">
+         <Img src="/images/img_header_logo.svg" alt="headerlogo_one" className="h-6 hidden md:block " />
+         </NavLink>
+         
          
        </div>
        

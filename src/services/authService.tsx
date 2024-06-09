@@ -22,20 +22,53 @@ interface User {
   aspirations: string;
   currentHousingSituation: string;
   housingPreference: string;
-  numOfFamilyMembers: string; // Consider using number type if you'll be working with numbers
+  numOfFamilyMembers: any; // Consider using number type if you'll be working with numbers
   relationship: string;
   interestsAndHobbies: string;
   preferredSocialActivities: string;
   ethos: string;
 }
 
+interface Locals {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  preferredLanguages:any[];
+  timeSpentInCanada: string;
+  areasOfExpertise:any[];
+  location: string;
+  motivations:any[];
+  backgrounds:any[];
+  selfDescription:string;
+  hobbies:any[];
+  specificAreasOfNeed:string;
+}
+interface newComers {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  preferredLanguages:any[];
+  timeSpentInCanada:string;
+  primaryReasonForImmigrating:string;
+  location:string;
+  challenges:any[];
+  expectedGains:string;
+  selfDescription:string;
+  hobbies:any[];
+  specificAreasOfNeed:string;
+}
 interface AuthResponse {
   success: boolean;
   error?: string;
   user?: UserData;
 }
 
-
+interface matchResponse {
+  success: boolean;
+  error?: string;
+}
 export interface UserData {
   _id: string;
   firstName: string;
@@ -196,8 +229,76 @@ class AuthService {
     }
   }
 
+  static async matchlocal(userData: Locals): Promise<matchResponse> {
+    try {
+      const response = await axios.post('https://linked-origin-server.vercel.app/api/v1/matching/add-new-local', userData);
 
-  
+      const { token, user } = response.data;
+      toast.success('Registered  Successfully', {
+        position:"top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+     console.log('sucessfull:', response);
+      return { success: true };
+    } catch (error) {
+      console.error('Registration error:', error);
+      toast.error('Registration failed. Please try again.', {
+        position:"top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+      return { success: false, error: 'Registration failed. Please try again.' };
+    }
+  }
+
+  static async matchnewcomers(userData: newComers): Promise<matchResponse> {
+    try {
+      const response = await axios.post('https://linked-origin-server.vercel.app/api/v1/users/register-new-user', userData);
+
+      const { token, user } = response.data;
+      toast.success('Registered  Successfully', {
+        position:"top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+     console.log('sucessfull:', response);
+      return { success: true};
+    } catch (error) {
+      console.error('Registration error:', error);
+      toast.error('Registration failed. Please try again.', {
+        position:"top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+      return { success: false, error: 'Registration failed. Please try again.' };
+    }
+  }
+
   static async getNews(): Promise<any[]> {
     try {
       const token = TokenService.getToken(); // Assuming TokenService stores the token
@@ -212,6 +313,31 @@ class AuthService {
       throw error;
     }
   }
+
+  static async getJobs(query: string, location: string, page: number = 2): Promise<any[]> {
+    try {
+        const token = TokenService.getToken();
+        const response = await axios.get(
+            'https://linked-origin-server.vercel.app/api/v1/jobs/',
+            {
+                params: {
+                    what: query,
+                    what_and: 'react and node',
+                    what_phrase: '',
+                    where: 'ontario',
+                    page: '2',
+                },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+        return response.data.jobs;
+    } catch (error) {
+        console.error('Error fetching jobs:', error);
+        throw error;
+    }
+}
 
   static async getHistory(): Promise<any[]> {
     try {
@@ -228,13 +354,14 @@ class AuthService {
     }
   }
 
-  static async searchChat(searchQuery: string, category: string): Promise<any> {
+  static async searchGovtChat(searchQuery: string, category: string, subcategory: string): Promise<any> {
     try {
       const token = TokenService.getToken();
       const apiUrl = 'https://linked-origin-server.vercel.app/api/v1/users/mon-ami/chat';
       const requestBody = {
         searchQuery: searchQuery,
-        category: category
+        category: category,
+        subCategory:subcategory
       };
 
       const response = await axios.post(apiUrl, requestBody, {
@@ -251,6 +378,52 @@ class AuthService {
     }
   }
 
+  static async searchHeatlhcare(query: string, lat: string, lng: string): Promise<any[]> {
+    try {
+        const token = TokenService.getToken();
+        const response = await axios.get(
+            'https://linked-origin-server.vercel.app/api/v1/search/location-search/',
+            {
+                params: {
+                  query: query,
+                  lat: lat,
+                  lng:lng
+                },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+        return response.data.jobs;
+    } catch (error) {
+        console.error('Error fetching jobs:', error);
+        throw error;
+    }
+}
+  static async searchChat(searchQuery: string, category: string): Promise<any> {
+    try {
+      const token = TokenService.getToken();
+      const apiUrl = 'https://linked-origin-server.vercel.app/api/v1/users/mon-ami/chat';
+      const requestBody = {
+        searchQuery: searchQuery,
+        category: category,
+        
+      };
+
+      const response = await axios.post(apiUrl, requestBody, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error('Error searching chat:', error);
+      throw error;
+    }
+  }
+  
   static getUserDataFromLocalStorage(): UserData | null {
     const userDataString = localStorage.getItem('userData');
     if (userDataString) {

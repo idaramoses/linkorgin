@@ -25,13 +25,13 @@ export default function WelcomescreenPage() {
           </header>
 
           {/* introduction section */}
-          <div className="mt-[39px] flex flex-col items-center gap-[38px]">
-            <Heading size="xl" as="h1" className="bg-gradient1 bg-clip-text !font-kumbhsans !text-transparent">
+          <div className="mt-20 flex flex-col items-center gap-[38px]">
+            <Heading  as="h1" className="bg-gradient1 bg-clip-text !font-kumbhsans !text-transparent">
               Welcome to Mon-Ami Dashboard
             </Heading>
-            <Text size="4xl" as="p" className="!font-kumbhsans !font-normal">
+            {/* <Text size="4xl" as="p" className="!font-kumbhsans !font-normal">
               Hey there! I&#39;m Mon-Ami, your go-to guide for settling into your new country.
-            </Text>
+            </Text> */}
           </div>
 
           {/* features section */}

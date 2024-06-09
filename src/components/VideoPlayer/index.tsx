@@ -29,7 +29,7 @@ const SmallYouTubeVideo: React.FC<YouTubeVideoProps> = ({ videoUrl }) => {
     <div>
       <iframe
          
-        width="220"
+        width="100%"
    
         className='rounded-lg  h-52 '
           src={videoUrl}
@@ -39,9 +39,7 @@ const SmallYouTubeVideo: React.FC<YouTubeVideoProps> = ({ videoUrl }) => {
           allowFullScreen
         ></iframe>
 
-        <label className="mt-2.5 mb-5 block font-normal  text-black ">
-        The new immigrant guide 
-          </label> 
+       
     </div>
   );
 };

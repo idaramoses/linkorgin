@@ -22,18 +22,18 @@ export default function Dashboard() {
       </Helmet>
       
       <div className="bg-[url(/public/images/img_welcome_screen.svg)] bg-center bg-cover bg-no-repeat flex  relative flex-col items-center px-5 pb-20 w-full ">
-      <div className="h-20 z-50 fixed px-10 flex w-full items-center justify-between gap-5 bg-white-A700">
+      <div className="h-20 z-50 fixed px-4 flex w-full items-center justify-between gap-5 bg-white-A700 border-b border-gray-200" >
             <div className="flex flex-row gap-2 items-center justify-between h-full  ">
             <div className=" h-10 w-10 flex-col gap-1 mt-auto hidden">
               <div className="h-[2px] w-[25px] bg-black-900_2d" />
               <div className="h-[2px] w-[25px] bg-black-900_2d" />
               <div className="h-[2px] w-[25px] bg-black-900_2d" />
             </div>
-              <Img src="/images/img_header_logo.svg" alt="headerlogo_one" className="h-8 " />
+              <Img src="/images/img_header_logo.svg" alt="headerlogo_one" className="h-6 " />
              </div>  
             <div className="">
             {userData && userData.firstName && (
-        <div className="flex justify-center items-center h-12 w-12  left-0 bottom-0 right-0 top-0  m-auto  bg-red-400_01 border-red-400_01 border-2 border-solid  rounded-full">
+        <div className="flex justify-center items-center h-10 w-10  left-0 bottom-0 right-0 top-0  m-auto  bg-red-400_01 border-red-400_01 border-2 border-solid  rounded-full">
         <div  className="!text-white-A700 !font-hankengrotesk !font-normal">
         {userData.firstName ? userData.firstName.charAt(0) : ''}
         </div>
@@ -43,17 +43,17 @@ export default function Dashboard() {
        
           </div>
         {/* introduction section */}
-        <div className="mt-[39px] flex flex-col items-center gap-[38px]">
-            <Heading size="xl" as="h1" className="bg-gradient1 bg-clip-text !font-kumbhsans !text-transparent">
+        <div className="mt-40 flex flex-col items-start gap-4">
+            <p   className="bg-gradient1 bg-clip-text !font-kumbhsans text-base">
               Welcome to Mon-Ami Dashboard
-            </Heading>
-            <Text size="4xl" as="p" className="!font-kumbhsans !font-normal">
+            </p>
+            <p   className="!font-kumbhsans !font-normal text-sm">
               Hey there! I&#39;m Mon-Ami, your go-to guide for settling into your new country.
-            </Text>
+            </p>
           </div>
 
           {/* features section */}
-          <div className="mx-auto mt-[83px] flex w-full max-w-[1301px] gap-[19px] md:flex-col md:p-5">
+          <div className=" mt-20 flex w-full  gap-4 md:flex-col md:px-2 ">
             <div className="flex w-full flex-col">
               <div className="relative z-[1] flex flex-col items-center gap-1.5 rounded-[11px] bg-lime-700 p-[26px] sm:p-5">
                 <Button size="xs" variant="fill" className="mt-[11px] w-[39px] rounded-[19px]">

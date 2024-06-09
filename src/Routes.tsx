@@ -21,6 +21,12 @@ import CommunityPage from "pages/Dashboard/Community";
 import InvestmentPage from "pages/Dashboard/Investment";
 import FinancePage from "pages/Dashboard/Finance";
 import SocialPage from "pages/Dashboard/Social";
+import Mathcategory from "pages/Matching/locals/CategoryPage";
+import MatchingWelcome from "pages/Matching/newCommers/Intro";
+import SuccessScreen from "pages/Matching/locals/sucessPage";
+import MatchingNewComersPage from "pages/Matching/newCommers";
+import MatchingLocalsPage from "pages/Matching/locals";
+import LocalRegisterPage from "pages/Matching/locals/CategoryPage";
 
 
 const ProjectRoutes = () => {
@@ -106,6 +112,27 @@ const ProjectRoutes = () => {
     {
       path: "aiseachpagegovernmenttwo",
       element: <AIseachpagegovernmentTwo />,
+    },
+    {
+      path: "/matching/locals",
+      element: <MatchingLocalsPage />,
+    },
+    {
+      path: "/matching/new-comer",
+      element: <MatchingNewComersPage />,
+    },
+    
+    {
+      path: "/matching/locals/register",
+      element: <LocalRegisterPage />,
+    },
+    {
+      path: "/matching/new-comer/register",
+      element: <Mathcategory />,
+    },
+    {
+      path: "/success",
+      element: <SuccessScreen />,
     },
   ]);
 

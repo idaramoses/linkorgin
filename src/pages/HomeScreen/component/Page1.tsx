@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Input, Img, Text, Heading, Button } from "../../../components";
 import { NavLink } from "react-router-dom";
@@ -18,6 +18,14 @@ function Page1({ togglePage }: Page1Props){
     const navbarRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [loggedIn, setLoggedIn] = useState(false);
+    useEffect(() => {
+      // Check local storage for user data
+      const userData = localStorage.getItem('userData');
+      if (userData) {
+        // If user data is found, consider the user logged in
+        setLoggedIn(true);
+      }
+    }, []);
     const handleMenuToggle = () => {
       setMenuOpen(!isMenuOpen);
     };
@@ -43,16 +51,28 @@ function Page1({ togglePage }: Page1Props){
       
     };
     const items = [
-        { id: 1, name: 'Government',icon:'images/img_home.svg' },
-        { id: 2, name: 'Community',icon:'images/img_settings.svg'  },
-        { id: 3, name: 'Educational' ,icon:'images/img_thumbs_up.svg' },
-        { id: 4, name: 'Healthcare',icon:'images/img_group_55.svg'  },
-        { id: 5, name: 'Legal & Immigration service' ,icon:'images/img_group_52.svg' },
-        { id: 6, name: 'Cultural & Recreational Activities',icon:'images/img_thumbs_up_white_a700.svg'  },
-        { id: 7, name: 'Finance',icon:'images/img_settings_white_a700.svg'  },
-        { id: 8, name: 'Social',icon:'images/img_group_59.svg'  },
-        { id: 9, name: 'Investment' ,icon:'images/img_group_57.svg' },
-        
+        // { id: 1, name: 'Government',icon:'images/img_home.svg' },
+        // { id: 2, name: 'Community',icon:'images/img_settings.svg'  },
+        // { id: 3, name: 'Educational' ,icon:'images/img_thumbs_up.svg' },
+        // { id: 4, name: 'Healthcare',icon:'images/img_group_55.svg'  },
+        // { id: 5, name: 'Legal & Immigration service' ,icon:'images/img_group_52.svg' },
+        // { id: 6, name: 'Cultural & Recreational Activities',icon:'images/img_thumbs_up_white_a700.svg'  },
+        // { id: 7, name: 'Finance',icon:'images/img_settings_white_a700.svg'  },
+        // { id: 8, name: 'Social',icon:'images/img_group_59.svg'  },
+        // { id: 9, name: 'Investment' ,icon:'images/img_group_57.svg' },
+        { icon: "/images/img_home.svg", name: "Government", route: 'government' },
+        { icon: "/images/img_settings.svg", name: "Community" ,route: 'community' },
+        { icon: "/images/img_thumbs_up.svg", name: "Educational" ,route: 'educational'},
+        { icon: "/images/img_group_55.svg", name: "Healthcare" ,route: 'healthcare'},
+        { icon: "/images/img_group_52.svg", name: "Legal & Immigration service",route: 'immigration' },
+        {
+          icon: "/images/img_thumbs_up_white_a700.svg",
+          name: "Cultural & Recreational Activities"
+          ,route: 'cultural'
+        },
+        { icon: "/images/img_settings_white_a700.svg", name: "Finance",route: 'finance' },
+        { icon: "/images/img_group_59.svg", name: "Social" ,route: 'social'},
+        { icon: "/images/img_group_57.svg", name: "Local Resource" ,route: 'investment'},
       ];
 
       const images = [
@@ -81,6 +101,7 @@ function Page1({ togglePage }: Page1Props){
         theme: "light",
         transition: Bounce,
       });
+      
     };
     return (
       <>
@@ -150,9 +171,19 @@ function Page1({ togglePage }: Page1Props){
            <div>About Us</div>
               <div>Our Services</div>
               <div>Contact Us</div>
-              <NavLink to="/auth/login">
-             <div className="text-white-A700">Login</div>
+              {loggedIn ? (  
+      <>
+        <NavLink to="/dashboard/welcome">
+            <div className="text-white-A700">Continue</div>
             </NavLink>
+  </>
+      ) : (
+
+        <NavLink to="/auth/login">
+        <div className="text-white-A700">Login</div>
+        </NavLink>
+      )}
+             
   
           </div>
             </div>
@@ -165,9 +196,19 @@ function Page1({ togglePage }: Page1Props){
               <div>About Us</div>
               <div>Our Services</div> 
               <div>Contact Us</div>
-              <NavLink to="/auth/login">
-            <div className="text-white-A700">Login</div>
+              {loggedIn ? (  
+      <>
+        <NavLink to="/dashboard/welcome">
+            <div className="text-white-A700">Continue</div>
             </NavLink>
+  </>
+      ) : (
+
+        <NavLink to="/auth/login">
+        <div className="text-white-A700">Login</div>
+        </NavLink>
+      )}
+            
             </div>
             
            
@@ -222,14 +263,29 @@ function Page1({ togglePage }: Page1Props){
                         <Text  as="p" className="my-10 text-center text-4xl md:text-xl sm:text-2xl !text-white-A700 md:p-5">
                           Let’s LinkedOrigins help you figure things out
                         </Text>
-                        <NavLink to="/auth/register">
-                        <Button
+                        {loggedIn ? (  
+      <>
+        <NavLink to="/dashboard/welcome">
+        <Button
+                            color="white_A700"
+                            className="rounded-[38px] font-inter font-semibold sm:px-5"
+                          >
+                            Continiue
+                          </Button>
+            </NavLink>
+  </>
+      ) : (
+
+        <NavLink to="/auth/register">
+      <Button
                             color="white_A700"
                             className="rounded-[38px] font-inter font-semibold sm:px-5"
                           >
                             Sign up
                           </Button>
-         </NavLink>
+        </NavLink>
+      )}
+         
                        
                       </div>
                     </div>
@@ -293,7 +349,23 @@ function Page1({ togglePage }: Page1Props){
                 goals in Canada.
               </>
             </Text>
-            <div className="my-4 w-full">
+            {loggedIn ? (  
+      <>
+       <div className="my-4 w-full">
+       <NavLink to="/dashboard/welcome">
+            <Button
+                color="blue_gray_400"
+                shape="round"
+                className="ml-32 md:ml-0  my-5 font-inter font-semibold sm:px-5"
+              >
+               Continue
+              </Button>
+              </NavLink>
+            </div>
+  </>
+      ) : (
+
+        <div className="my-4 w-full">
             <NavLink to="/auth/register">
             <Button
                 color="blue_gray_400"
@@ -304,23 +376,46 @@ function Page1({ togglePage }: Page1Props){
               </Button>
               </NavLink>
             </div>
+      )}
+            
         
              
               <div className=" md:hidden grid  grid-cols-3 md:grid-cols-1 bg-[url(/public/images/img_bg.svg)] bg-contain bg-no-repeat  gap-5 w-[80%] md:w-full ">
       {items.map(item => (
-        <div onClick={handlecategory} key={item.id} className=" w-full cursor-pointer  mb-10   rounded-[15px] bg-red-400_01 flex  flex-col items-center gap-[11px] py-10" >
+        <>
+           {loggedIn ? (  
+              <>
+             <div className="my-4 w-full">
+             <NavLink to={`/dashboard/category/${item.route}`}>
+
+                    <div  className=" w-full cursor-pointer  mb-10   rounded-[15px] bg-red-400_01 flex  flex-col items-center gap-[11px] py-10" >
             
             <Img src={item.icon} alt="government_one" className="h-14" />
                         <Heading  as="h2" className="text-2xl md:text-xl sm:text-base !font-inter !text-white-A700">
                           {item.name}
                         </Heading>
         </div>
+                      </NavLink>
+                    </div>
+          </>
+              ) : (        
+              <div onClick={handlecategory}  className=" w-full cursor-pointer  mb-10   rounded-[15px] bg-red-400_01 flex  flex-col items-center gap-[11px] py-10" >
+                          
+              <Img src={item.icon} alt="government_one" className="h-14" />
+                          <Heading  as="h2" className="text-2xl md:text-xl sm:text-base !font-inter !text-white-A700">
+                            {item.name}
+                          </Heading>
+              </div>
+              )}
+        </>
+         
+       
       ))}
      </div>
      <div className="hidden md:block  w-full my-6  items-center justify-center ">
      <Slider {...settings}>
      {items.map(item => (
-        <div onClick={handlecategory} key={item.id} className=" w-full cursor-pointer  mb-10   rounded-[15px] bg-red-400_01 flex  flex-col items-center gap-[11px] h-44" >
+        <div onClick={handlecategory}  className=" w-full cursor-pointer  mb-10   rounded-[15px] bg-red-400_01 flex  flex-col items-center gap-[11px] h-44" >
             <div  className=" w-full h-full   rounded-[15px] bg-red-400_01 flex  flex-col items-center justify-center gap-[11px]">
             <Img src={item.icon} alt="government_one" className="h-14" />
                         <Heading  as="h2" className="text-2xl md:text-xl sm:text-base !font-inter !text-white-A700">

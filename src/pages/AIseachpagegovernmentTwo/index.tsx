@@ -103,7 +103,7 @@ export default function AIseachpagegovernmentTwoPage() {
                     </div>
                     <div className="h-[2px] w-[48%] bg-red-900" />
                   </div>
-                  <div className="self-stretch rounded-[21px] border border-solid border-blue_gray-100_01 bg-white-A700 p-[9px]">
+                  <div className="self-stretch rounded-md border border-solid border-blue_gray-100_01 bg-white-A700 p-[9px]">
                     <div className="flex flex-col gap-[27px]">
                       <div className="flex items-start justify-between gap-5">
                         <Text size="xl" as="p" className="mt-[7px]">

@@ -189,7 +189,7 @@ useEffect(() => {
     const hasSpecial = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
   
     // Check if all required character types are present
-    return hasCapital && hasLowercase && hasSpecial && password.length >= 6;
+    return hasCapital && hasLowercase && !hasSpecial && password.length >= 6;
     };
   const [isMenuOpen, setMenuOpen] = useState(false);
   const navbarRef = useRef(null);

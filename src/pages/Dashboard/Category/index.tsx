@@ -31,11 +31,18 @@ const newsdata = [
 ];
 const NewsItem = ({ title, contents, image }) => {
   const [expanded, setExpanded] = useState(false);
-
+  const [loggedIn, setLoggedIn] = useState(false);
   const toggleExpanded = () => {
     setExpanded(!expanded);
   };
-
+  useEffect(() => {
+    // Check local storage for user data
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      // If user data is found, consider the user logged in
+      setLoggedIn(true);
+    }
+  }, []);
   const [userData, setUserData] = useState<UserData | null>(null);
   const navigate = useNavigate();
 
@@ -132,7 +139,13 @@ export default function CategoryPage() {
 
          </div>
             ) : (
-              <>
+              <> 
+                  <Heading
+           
+                    className="mt-20   md:text-2xl text-3xl self-start bg-gradient2 bg-clip-text !text-transparent !font-kumbhsans "
+                  >
+                    News Feeds 
+                  </Heading>
                  <NewsList news={news} />
                 {/* {news.map((item, index) => (
                   <div key={index} className="news-item">
@@ -164,13 +177,13 @@ export default function CategoryPage() {
        </Heading>
       )}
           {/* introduction text section */}
-          <Text className="mt-14 !font-kumbhsans md:text-sm text-[20px]">
+          <p className="mt-14 !font-kumbhsans font-normal text-lg md:text-base">
             <>
               Welcome to the Resource Directory, your comprehensive guide to essential services and support in your new
               country.
               Explore the categories below to discover a wealth of resources tailored to your needs:
             </>
-          </Text>
+          </p>
 
           {/* resource categories section */}
           <div className="mt-20 grid grid-cols-3 justify-center gap-[54px] md:grid-cols-2 sm:grid-cols-1">
@@ -178,7 +191,7 @@ export default function CategoryPage() {
                    <NavLink to={`/dashboard/category/${d.route}`}>
                        <div
              key={"category" + index}
-             className="flex w-full flex-col items-center gap-4 rounded-[15px] bg-red-400_01 p-9 sm:p-5 z-10 cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
+             className="flex w-full h-48 flex-col items-center gap-4 rounded-[15px] bg-red-400_01 p-9 sm:p-5 z-10 cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
            >
              <Img src={d.governmentone} alt="government_one" className="h-16" />
              <p  className="text-sm text-white-A700 text-center">

@@ -22,17 +22,17 @@ function Page2({ togglePage }: Page2Props) {
 
     const [fadeOut, setFadeOut] = useState(false);
 
-    useEffect(() => {
-      if (fadeOut) {
-        const timeout = setTimeout(() => {
-          togglePage();
-        }, 50); // Adjust the duration to match your CSS transition duration
-        return () => clearTimeout(timeout);
-      }
-    }, [fadeOut, togglePage]);
+    // useEffect(() => {
+    //   if (fadeOut) {
+    //     const timeout = setTimeout(() => {
+    //       togglePage();
+    //     }, 50); // Adjust the duration to match your CSS transition duration
+    //     return () => clearTimeout(timeout);
+    //   }
+    // }, [fadeOut, togglePage]);
   
     const handleToggle = () => {
-      setFadeOut(true);
+      togglePage();
     };
   
   return (
@@ -49,9 +49,9 @@ function Page2({ togglePage }: Page2Props) {
             className=" bottom-0 left-0 fixed"
           />
             
- <div className={`absolute w-full h-full flex flex-col items-center justify-center`}>
-      <div>
-      <nav className="flex self-stretch justify-between items-center  w-full z-10 gap-5 p-10 md:p-4  bg-white-A700 right-3 rounded-bl-[50px] md:rounded-bl-none rounded-br-[50px] md:rounded-br-none" ref={navbarRef}>
+ <div className={`absolute w-full  overflow-scroll flex flex-col items-center justify-center`}>
+      <div className='w-full h-20'>
+      <nav className="flex  self-stretch justify-between items-center  w-full z-20 gap-5 p-10 md:p-4  bg-white-A700 right-3 rounded-bl-[50px] md:rounded-bl-none rounded-br-[50px] md:rounded-br-none" ref={navbarRef}>
         <div className="container mx-auto flex  justify-between items-center">
         <Img src="/images/img_header_logo.svg" alt="headerlogo_one" className="h-8 md:h-6 " />
 
@@ -208,7 +208,7 @@ function Page2({ togglePage }: Page2Props) {
               
                 className="rounded-[38px] font-inter font-medium sm:px-5"
               >
-                Signup
+                Sign up
               </Button>
          </NavLink>
            

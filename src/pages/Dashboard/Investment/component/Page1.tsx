@@ -11,7 +11,20 @@ import AuthService from "services/authService";
 
 interface Page1Props {
   togglePage: () => void;
-  
+}
+
+interface Job {
+  title: string;
+  description: string;
+  company: string;
+  location: string;
+  redirectUrl: string;
+  created: string;
+}
+
+interface JobData {
+  count: number;
+  jobs: Job[];
 }
 
 function Page1({ togglePage }: Page1Props){
@@ -28,10 +41,10 @@ function Page1({ togglePage }: Page1Props){
       setMenuOpen(false);
     };
     const data = [
-      { image: "/images/img_istockphoto_113.png", wherecani: "Where can i find healthcare facilities?" },
-      { image: "/images/img_istockphoto_171.png", wherecani: "What are government policies in healthcare?" },
-      { image: "/images/img_istockphoto_143.png", wherecani: "What are government policies in healthcare?" },
-      { image: "/images/img_istockphoto_148.png", wherecani: "What are government policies in healthcare?" },
+      { image: "/images/img_istockphoto_113.png", wherecani: "Where can i find healthcare facilities?",subcategory:"immigration and citizenship", },
+      { image: "/images/img_istockphoto_171.png", wherecani: "Where can i find  social services?",subcategory:"social services & benefits", },
+      { image: "/images/img_istockphoto_143.png", wherecani: "Where service the best employment services?",subcategory:"employment Services", },
+      { image: "/images/img_istockphoto_148.png", wherecani: "Where can i get legal aids?",subcategory:"legal aids", },
     ];
     const [searchQuery, setSearchQuery] = useState('');
     const [submittedQuery, setSubmittedQuery] = useState<string>('');
@@ -49,7 +62,7 @@ function Page1({ togglePage }: Page1Props){
     
     try {
     
-      const chatResults = await AuthService.searchChat(searchQuery,'government');
+      const chatResults = await AuthService.searchGovtChat(searchQuery,'local resources','rentals');
       setSearchResult(chatResults);
       setSearchQuery('');
       setLoading(false);
@@ -60,7 +73,7 @@ function Page1({ togglePage }: Page1Props){
     }
     };
 
-    const handlequicklink = async (quicklinks: string) => {
+    const handlequicklink = async (quicklinks: string, subcategory: string) => {
       setisSearched(true);
       setSubmittedQuery(quicklinks);
       setLoading(true);
@@ -68,7 +81,7 @@ function Page1({ togglePage }: Page1Props){
    
   try {
   
-    const chatResults = await AuthService.searchChat(quicklinks,'government');
+    const chatResults = await AuthService.searchGovtChat(quicklinks,'local resources','rentals');
     setSearchResult(chatResults);
     setSearchQuery('');
     setLoading(false);
@@ -93,59 +106,95 @@ function Page1({ togglePage }: Page1Props){
             />
           </Helmet>
     
-          <div className=" bg-[url(/public/images/img_welcome_screen.svg)] bg-center bg-cover bg-no-repeat my-auto flex flex-col items-center">
+          <div className="  my-auto flex flex-col items-center">
               {/* header section */}
               <Header/>
-              <div className="relative mx-auto flex w-full items-start justify-between gap-5   md:h-auto md:flex-col md:p-5">
+              <div className="relative mx-auto flex w-full items-start justify-center gap-5   md:h-auto md:flex-col md:p-5">
               <Settings/>
-                {/* introductory section */}
-                <div className="mb-7  pt-20 md:pt-16 flex w-[70%] flex-col items-start gap-10 md:w-full md:gap-5 sm:gap-10 md:px-0 px-20 border-r border-gray-300 md:border-none">
-                  {/* questions list section */}
-                  <div className="flex w-full flex-col self-end md:w-full">
-                  <div className=" flex w-full md:h-auto md:my-5 h-14 md:m-auto items-center justify-center gap-2 md:ml-0 md:w-full sm:flex-col">
-                     <div className="flex md:flex-col flex-row h-14 w-[60%] md:w-full gap-2">
-                     <div className="flex  flex-row w-[40%] h-full items-center justify-center gap-[7px] rounded-[7px] bg-red-400_01 p-6 md:w-full sm:p-5">
-                     <Img src="/images/img_group_57.svg" alt="home_one" className="h-[23px] self-center" />
+              <div className="w-full flex flex-col items-center">
+              <div className="flex gap-5 justify-between md:flex-wrap w-full px-10 md:hidden">
+      <div className="flex flex-col self-start  pt-2 text-white rounded-lg bg-zinc-500 w-56">
+        <div className="text-xs font-medium text-center text-white-A700 px-2">
+          Click the dropdown to access other categories
+        </div>
+        <div className="flex z-10 gap-4 items-center justify-center py-2 mt-1.5  text-base font-semibold whitespace-nowrap bg-red-500 rounded-b-md md:pr-5">
+          <div className="flex gap-2">
+          <Img src="/images/img_group_57.svg" alt="home_one" className="h-[23px] self-center" />
                       <h1  className="text-base md:text-sm !font-kumbhsans md:ml-0 text-white-A700">
                       Local Resources 
                       </h1>
-                    </div>
-                      <h1  className="bg-gradient2 bg-clip-text font-bold !text-transparent text-[40px] md:text-base ">
-                        Mon - Ami
-                      </h1>
-                      </div> 
-                 
-                      <p  className=" w-[40%] md:mt-5 h-14 text-sm md:text-xs md:text-left flex items-center text-center  justify-center !font-kumbhsans sm:w-full">
-                        <>
-                        Get help with immigration, employment,healthcare, housing, and legal matters.
-                        </>
-                      </p>
-                    </div>
+          </div>
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/638602d87b5b93baef726d2e212ad2388a1428c3bcfb7407cac98eba03a21890?apiKey=40621ed5d4fd4492af4d4dffefbaaa2d&"
+            className="shrink-0 self-start mt-3 w-3.5 aspect-[1.75]"
+          />
+        </div>
+      </div>
+      <div className="flex flex-col px-5 text-center">
+        <div className="flex flex-col px-1.5 pt-2 pb-1.5 text-base font-semibold rounded-2xl bg-zinc-100">
+        <div className="justify-center text-xs text-white-A700 px-9 py-2 mt-2 text-white whitespace-nowrap bg-gray-700 rounded-xl max-md:px-5 cursor-pointer">
+        Ask Mon-Ami 
+          </div>
+          <div onClick={togglePage}  className="text-black text-xs cursor-pointer"> Search</div>
+          
+        </div>
+        <div className="mt-2.5 text-xs leading-4 text-stone-900">
+          Toggle to switch between <br />
+          Mon-Ami & search
+        </div>
+      </div>
+               </div>
+                <div className="mb-7   md:pt-4 flex w-[80%] flex-col items-start gap-10 md:w-full md:gap-5 sm:gap-10 md:px-0 px-20 ">
+                  {/* questions list section */}
+                  <div className="flex w-full flex-col self-end md:w-full">
+               
     
                     {/* healthcare questions section */}
                     <div className="flex flex-col md:flex-col-reverse">
                    
                    {!isSearched?(<div className="mt-20 md:mt-05 flex gap-5 md:flex-col">
-                      {data.map((d, index) => (
-                        <div onClick={() => handlequicklink(d.wherecani)}
-
-                        key={"listwherecani" + index} className="flex w-full flex-col items-center cursor-pointer">
-                          <div className="self-stretch rounded-[12px] bg-blue_gray-100">
-                            <Img
-                              src={d.image}
-                              alt="image"
-                              className="h-52 w-full rounded-[12px] object-cover md:h-52"
-                            />
-                          </div>
-                          <div className="relative mt-[-19px] flex w-[90%] justify-center p-1 md:rounded-b-md rounded-md bg-white-A700 md:w-full">
-                            <p  className="text-xs self-start">
-                              {d.wherecani}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
+                   <div className="flex flex-col w-full">
+          <p className=" md:text-2xl text-3xl self-start bg-gradient2 bg-clip-text !text-transparent !font-kumbhsans ">
+          Mon - Ami
+         </p>
+      <div className="mt-5 w-[50%]  text-sm text-black md:w-full">
+        Hi there! I'm Mon-Ami, your friendly guide to settling in Canada. How
+        can I help you today? Here are some options to get you started
+      </div>
+      <div className="mt-16 w-full md:mt-10 md:w-full">
+        <div className="flex gap-2 md:flex-col max-md:gap-0">
+          <div className="flex flex-col w-3/12 max-md:ml-0 md:w-full">
+            <div onClick={() => handlequicklink('Do you have questions about applying for visas or permanent residency','Immigration and Citizenship')} className="flex flex-col h-40  cursor-pointer items-center grow px-4 py-2 w-full bg-white rounded-xl border border-solid border-zinc-300 md:mt-4">
+              
+              <div className="mt-9 text-sm text-neutral-700">
+                Do you have questions about applying for visas or permanent
+                residency?
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col ml-5 w-3/12 md:ml-0 md:w-full">
+            <div onClick={() => handlequicklink('Need information on social assistance programs or employment insurance','Social Services & Benefits')} className="grow px-4 py-2 h-40 flex  cursor-pointer items-center w-full  bg-white rounded-xl text-sm border border-solid border-zinc-300 text-neutral-700 max-md:mt-7">
+            Need information on social assistance programs or employment insurance?
+              <br />
+            </div>
+          </div>
+          <div onClick={() => handlequicklink('Looking for help with your job search?','Employment Services')}  className="flex flex-col ml-5 w-3/12 md:ml-0 md:w-full">
+            <div className="grow px-4 py-2 h-40 flex  cursor-pointer items-center w-full text-sm bg-white rounded-xl border border-solid border-zinc-300 text-neutral-700 max-md:mt-7">
+            Looking for help with your job search?
+            </div>
+          </div>
+          <div onClick={() => handlequicklink('Are you looking for resources to find legal assistance','Legal Aid')} className="flex flex-col ml-5 w-3/12 md:ml-0 md:w-full">
+            <div className="grow px-4 py-2 h-40 flex  cursor-pointer  items-center w-full text-sm bg-white rounded-xl border border-solid border-zinc-300 text-neutral-700 max-md:mt-7">
+              Wondering if you qualify for child benefits?
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
                     </div> 
-                    ):(<div className="mt-20 md:mt-5">
+                    ):(<div className="mt-10 md:mt-5">
                        <div className="flex flex-row items-center gap-2 mt-5">
                       <div className="flex justify-center items-center text-xs text-center font-medium leading-4 text-black whitespace-nowrap bg-gray-400 rounded-full h-8 w-8">
                         Me
@@ -215,7 +264,7 @@ function Page1({ togglePage }: Page1Props){
                     </div>)}
     
                     
-                    <div className="mt-64 md:mt-10 flex flex-col items-end gap-[3px] mb-20 md:mb-5">
+                    <div className="mt-20 md:mt-10 flex flex-col items-end gap-[3px] mb-20 md:mb-5">
                     <div className="mr-7 flex w-[27%] flex-wrap justify-end gap-5 md:mr-0 md:w-full">
                           <Heading   className="cursor-pointer !text-gray-800 text-base md:text-sm border-b-2  border-red-500 ">
                             Ask Mon-Ami
@@ -225,21 +274,23 @@ function Page1({ togglePage }: Page1Props){
                           </Heading>
                         </div>
                        <div className="flex  flex-col items-end gap-2.5 self-stretch">
-                        <div className="self-stretch rounded-[21px] border border-solid border-blue_gray-100_01 bg-white-A700 p-[9px]">
+                        <div className="self-stretch rounded-md border border-solid border-blue_gray-100_01 bg-white-A700 p-[9px]">
                           <div className="flex flex-col gap-[27px]">
                             <div className="flex w-full items-start justify-between gap-5">
-        <form onSubmit={handleSubmit} className="w-full">
+        <form onSubmit={handleSubmit} className="w-full flex flex-row">
         <input
             type="text"
             placeholder=" Ask me anything"
             value={searchQuery}
             onChange={handleInputChange}
-            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => {
-              if (e.key === 'Enter') {
-                handleSubmit(e); // Pass the event to handleSubmit function
-              }
-            }}
+            // onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => {
+            //   if (e.key === 'Enter') {
+            //     handleSubmit(e); // Pass the event to handleSubmit function
+            //   }
+            // }}
           />
+            <button  type="submit"  className= "justify-center self-end  w-32 text-xs   hover:-translate-y-1 hover:scale-110 duration-300   sm:px-5 font-hankengrotesk text-white-A700 whitespace-nowrap bg-[#3864FF]  h-10  rounded-[23px]" > Ask Mon-ami
+                                </button>
       </form>
                               
                              
@@ -263,39 +314,12 @@ function Page1({ togglePage }: Page1Props){
     
             
                 </div>
-    
-    
-                {/* government services section */}
-                <div className="flex md:pt-5 pt-20 w-[30%] px-5  items-center justify-center md:hidden   flex-col gap-[29px] md:w-full">
-                  <div className="flex flex-col items-start gap-[21px]">
+
+              </div>
               
-                    <div className="self-stretch rounded-[10px] bg-gray-200 p-[18px]">
-                      <p className= "text-sm md:text-xs !text-blue_gray-900">
-                      Whether you need help navigating immigration applications, finding employment opportunities, accessing healthcare services, securing housing accommodations, or understanding your legal rights, government services are here to help you access public services that support you through the settlement process.                                      </p>
-                                  </div>
-                  </div>
     
-                  {/* quick links section */}
-                  <div className="flex flex-col gap-3 items-start w-full">
-                    <Text  as="p" className="text-sm md:text-xs !font-hankengrotesk ">
-                    Quick links
-                    </Text>
-                    <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                    Immigrant Support Groups 
-                    </button>
-                    <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                    Cultural Associations 
-                    </button>
-                    <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                    Refugee Assistance Organizations  
-                    </button>
-                     <button  color="light_green_100_2d_blue_50" className="text-sm md:text-xs w-full bg-gray-200 h-12 font-hankengrotesk sm:px-5">
-                     Language and Education Programs 
-                    </button>
-                    
-                 
-                  </div>
-                </div>
+    
+            
               </div>
           
     
